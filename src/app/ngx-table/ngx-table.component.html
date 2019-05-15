@@ -1,0 +1,8 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr ngx-table-header [headers]="headers" (order)="onOrder($event)"></tr>
+    </thead>
+    <tbody ngx-table-body [data]="data" [headers]="headers"></tbody>
+  </table>
+</div>

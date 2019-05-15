@@ -1,0 +1,4 @@
+<th *ngFor="let header of headers" (click)="onOrder(header)">
+  {{header}}
+  <span class="oi" [ngClass]="{'oi-caret-top': isAsc(header), 'oi-caret-bottom': isDesc(header)}"></span>
+</th>
