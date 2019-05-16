@@ -70,7 +70,7 @@ When order feature is enable, you can click a header to emit the order event.
 ```typescript
 // in your component .ts
 onOrder(order: NgxTableOrder) {
-    // your order logic
+    // update your data object with your order logic
 }
 ```
 
