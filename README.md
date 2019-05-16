@@ -2,7 +2,7 @@
 
 NgxTable is an angular component that shows your data in a table and allows you to control the most common events.
 
-## Events
+## Available Events
 
 - Order
 - Filter (WIP)
@@ -59,6 +59,19 @@ config: NgxTableConfig = {
 ## Order
 
 When order feature is enable, you can click a header to emit the order event.
+
+### Enable order in config object
+
+```typescript
+config: NgxTableConfig = {
+    ...
+    order: {
+        enable: false
+    }
+    ...
+};
+```
+
 
 ### Bind order event
 
