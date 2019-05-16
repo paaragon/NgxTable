@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators'
-import { NgxTableHeaders, NgxTableFilter, NgxTableConfig } from '../types';
+import { NgxTableHeaders, NgxTableFilter, NgxTableConfig, NgxTablePlaceholders } from '../types';
 
 @Component({
   selector: '[ngx-table-filter]',
@@ -16,9 +16,11 @@ export class NgxTableFilterComponent implements OnInit {
   errors: { [key: string]: { error: boolean, errorMsg: string } } = {};
 
   _config: NgxTableConfig;
+  placeholders: NgxTablePlaceholders;
   @Input('config')
   set config(config: NgxTableConfig) {
     this._config = config;
+    this.buildPlaceholders();
     this.subscribeDebounce();
   }
 
@@ -55,15 +57,20 @@ export class NgxTableFilterComponent implements OnInit {
       }
     }
     if (!this.validateFilters(f)) {
-      console.log('not valid');
       return;
     }
     this.debouncer.next(f);
   }
 
+  hasValidationError(header: string) {
+    return this.errors && this.errors[header] && this.errors[header].error;
+  }
+
   private validateFilters(f: NgxTableFilter): boolean {
 
+    this.errors = {};
     const validations = this._config.filter.validations;
+
     if (Object.keys(validations).length === 0) {
       return true;
     }
@@ -77,6 +84,12 @@ export class NgxTableFilterComponent implements OnInit {
       const regex = new RegExp(validations[attr].regex);
 
       if (!regex.test(text)) {
+        console.log('error');
+        this.errors[attr] = {
+          error: true,
+          errorMsg: validations[attr].errorMsg
+        }
+        console.log(this.errors, attr);
         return false;
       }
     }
@@ -87,7 +100,6 @@ export class NgxTableFilterComponent implements OnInit {
     if (this.filters && Object.keys(this.filters).length > 0) {
       return;
     }
-    console.log('init filters');
     for (let i = 0; i < this._headers.length; i++) {
       this.filters[this._headers[i]] = {
         operator: null,
@@ -97,7 +109,6 @@ export class NgxTableFilterComponent implements OnInit {
   }
 
   private subscribeDebounce() {
-    console.log('subscribing');
     if (this.sub) {
       this.sub.unsubscribe();
     }
@@ -107,6 +118,14 @@ export class NgxTableFilterComponent implements OnInit {
         console.log(val);
         this.onFilterEmitter.emit(val);
       });
+  }
+
+  private buildPlaceholders() {
+    if (this._config.placeholders) {
+      this.placeholders = this._config.placeholders;
+    } else {
+      this.placeholders = this.headers;
+    }
   }
 
 }

@@ -37,6 +37,7 @@ export class NgxTableComponent implements OnInit {
    * Config of the table
    */
   _configBK: NgxTableConfig = {
+    placeholders: [],
     order: {
       enable: false
     },

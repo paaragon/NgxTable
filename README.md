@@ -40,42 +40,6 @@ const exampleData: any[] = [
 
 ![simple table](./doc-assets/simple-table.PNG)
 
-## Config
-
-This component manage a configuration object with the following structure (WIP):
-
-```typescript
-export type NgxTableConfig = {
-    order?: {
-        enable?: boolean 
-    },
-    filter?: {
-        enable?: boolean,
-        debounceTime?: number,
-        validations?: {
-            [key: string]: {
-                regex: string,
-                errorMsg: string
-            }
-        } 
-    }
-};
-```
-
-Default config
-
-```typescript
-config: NgxTableConfig = {
-    order: {
-        enable: false
-    },
-    filter: {
-        enable: false,
-        debounceTime: 1000
-    }
-};
-```
-
 ## Order
 
 When order feature is enable, you can click a header to fire the order event.
@@ -96,7 +60,7 @@ config: NgxTableConfig = {
 
 ```html
 <!-- in your html -->
-<ngx-table [data]="exampleData" (order)="onOrder($event)"></ngx-table>
+<ngx-table [data]="exampleData" [config]="config" (order)="onOrder($event)"></ngx-table>
 ```
 
 ```typescript
@@ -130,7 +94,7 @@ config: NgxTableConfig = {
     ...
     filter: {
         enable: false,
-        debounceTime: 200
+        ...
     }
     ...
 };
@@ -140,7 +104,7 @@ config: NgxTableConfig = {
 
 ```html
 <!-- in your html -->
-<ngx-table [data]="exampleData" (filter)="onFilter($event)"></ngx-table>
+<ngx-table [data]="exampleData" [config]="config" (filter)="onFilter($event)"></ngx-table>
 ```
 
 ```typescript
@@ -153,7 +117,7 @@ onOrder(filter: NgxTableFilter) {
 ### NgxTableFilter type
 
 ```typescript
-export type NgxTableOrder = { 
+export type NgxTableFilter { 
     [key: string]: {
         operator: string,
         value: string
@@ -163,3 +127,43 @@ export type NgxTableOrder = {
 - **key**: field name to filter
 - **operator**: the operator user has select
 - **value**: the value of the filter
+
+## Config
+
+
+This component manage a configuration object with the following structure (WIP):
+
+```typescript
+export type NgxTableConfig = {
+    placeholders?: NgxTablePlaceholders,
+    order?: {
+        enable?: boolean
+    },
+    filter?: {
+        enable?: boolean,
+        debounceTime?: number,
+        validations?: {
+            [key: string]: {
+                regex: string,
+                errorMsg: string
+            }
+        }
+    }
+};
+```
+
+Default config
+
+```typescript
+config: NgxTableConfig = {
+    placeholders: [],
+    order: {
+        enable: false
+    },
+    filter: {
+        enable: false,
+        debounceTime: 500,
+        validations: { }
+    }
+};
+```
