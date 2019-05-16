@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NgxConfig, NgxHeaders, NgxOrder } from './types';
+import { NgxTableOrder, NgxTableHeaders, NgxTableConfig } from './types';
 
 @Component({
   selector: 'ngx-table',
@@ -25,30 +25,36 @@ export class NgxTableComponent implements OnInit {
   }
 
   @Input('headers')
-  headers: NgxHeaders;
+  headers: NgxTableHeaders;
 
   /**
    * Config of the table
    */
   @Input('config')
-  config: NgxConfig = {
-    editable: false
+  config: NgxTableConfig = {
+    editable: false,
+    order: {
+      enable: false
+    },
+    filter: {
+      enable: false
+    }
   };
 
 
   @Output('order')
-  orderEmitter: EventEmitter<NgxOrder[]> = new EventEmitter<NgxOrder[]>();
+  orderEmitter: EventEmitter<NgxTableOrder[]> = new EventEmitter<NgxTableOrder[]>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onOrder(order: NgxOrder[]) {
+  onOrder(order: NgxTableOrder[]) {
     this.orderEmitter.emit(order);
   }
 
-  private getHeadersFromData(data: any[]): NgxHeaders {
+  private getHeadersFromData(data: any[]): NgxTableHeaders {
     return Object.keys(data[0]);
   }
 

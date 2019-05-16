@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgxHeaders } from '../types';
+import { NgxTableHeaders } from '../types';
 
 @Component({
   selector: '[ngx-table-body]',
@@ -12,7 +12,7 @@ export class NgxTableBodyComponent implements OnInit {
   data: any[] = [];
 
   @Input('headers')
-  headers: NgxHeaders;
+  headers: NgxTableHeaders;
 
   constructor() { }
 

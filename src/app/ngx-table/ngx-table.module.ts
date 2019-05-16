@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { NgxTableComponent } from './ngx-table.component';
 import { NgxTableHeaderComponent } from './ngx-table-header/ngx-table-header.component';
 import { NgxTableBodyComponent } from './ngx-table-body/ngx-table-body.component';
+import { NgxTableFilterComponent } from './ngx-table-filter/ngx-table-filter.component';
 
 @NgModule({
-  declarations: [NgxTableComponent, NgxTableHeaderComponent, NgxTableBodyComponent],
+  declarations: [NgxTableComponent, NgxTableHeaderComponent, NgxTableBodyComponent, NgxTableFilterComponent],
   imports: [
     CommonModule
   ],

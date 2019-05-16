@@ -1,6 +1,11 @@
 th {
-  cursor: pointer;
-  span{
-      font-size: 0.7rem;
+  &.orderable {
+    cursor: pointer;
+  }
+
+  vertical-align: middle !important;
+
+  span {
+    font-size: 0.7rem;
   }
 }

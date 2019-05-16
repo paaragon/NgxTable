@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import mock, { MockObj } from './mock/table.mock';
-import { NgxOrder } from './ngx-table/types';
+import { NgxTableOrder, NgxTableConfig } from './ngx-table/types';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,17 @@ export class AppComponent {
   // backup data
   dataBK: MockObj[] = this.data.map(row => row);
 
-  onOrder(order: NgxOrder) {
+  config: NgxTableConfig = {
+    order: {
+      enable: false
+    }
+  };
+
+  /**
+   * This method handles the order event
+   * @param order 
+   */
+  onOrder(order: NgxTableOrder) {
     // restore data
     if (!order) {
       this.data = this.dataBK.map(row => row);

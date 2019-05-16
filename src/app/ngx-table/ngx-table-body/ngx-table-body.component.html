@@ -1,3 +1,4 @@
-<tr *ngFor="let row of data">
+<tr *ngFor="let row of data; let i = index">
+  <td class="first-cell">{{i + 1}}</td>
   <td *ngFor="let header of headers">{{row[header]}}</td>
 </tr>

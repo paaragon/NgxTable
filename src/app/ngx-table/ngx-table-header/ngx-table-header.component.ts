@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NgxHeaders, NgxOrder } from '../types';
+import { NgxTableHeaders, NgxTableOrder, NgxTableConfig } from '../types';
 
 @Component({
   selector: '[ngx-table-header]',
@@ -8,27 +8,36 @@ import { NgxHeaders, NgxOrder } from '../types';
 })
 export class NgxTableHeaderComponent implements OnInit {
 
-  order: NgxOrder;
+  order: NgxTableOrder;
 
-  headers: NgxHeaders = [];
+  headers: NgxTableHeaders = [];
   @Input('headers')
-  set setHeaders(headers: NgxHeaders) {
+  set setHeaders(headers: NgxTableHeaders) {
     this.headers = headers;
   }
 
-  get getHeaders(): NgxHeaders {
+  get getHeaders(): NgxTableHeaders {
     return this.headers;
   }
 
+  @Input('config')
+  config: NgxTableConfig;
+
   @Output('order')
-  orderEmitter: EventEmitter<NgxOrder> = new EventEmitter<NgxOrder>();
+  orderEmitter: EventEmitter<NgxTableOrder> = new EventEmitter<NgxTableOrder>();
 
   constructor() { }
 
   ngOnInit() {
+    if (this.config) {
+
+    }
   }
 
   onOrder(header: string) {
+    if (!this.config.order.enable) {
+      return;
+    }
     if (this.order && this.order.field === header && this.order.direction === 1) {
       this.order = {
         field: header,
@@ -52,6 +61,10 @@ export class NgxTableHeaderComponent implements OnInit {
 
   isDesc(header: string) {
     return this.order && this.order.field === header && this.order.direction === -1;
+  }
+
+  isOrderable() {
+    return this.config && this.config.order && this.config.order.enable;
   }
 
 }
