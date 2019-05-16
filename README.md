@@ -42,7 +42,7 @@ const exampleData: any[] = [
 
 ## Order
 
-When order feature is enable, you can click a header to fire the order event.
+When order feature is enable, you can **click a header** to fire the order event.
 
 ### Enable order in config object
 
@@ -85,7 +85,7 @@ export type NgxTableOrder = {
 
 ## Filter
 
-When filter feature is enable, you can fill the filter row to fire the fiter event.
+When filter feature is enable, you can **fill the filter row** to fire the fiter event.
 
 ### Enable filter in config object
 
