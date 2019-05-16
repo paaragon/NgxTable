@@ -51,7 +51,13 @@ export type NgxTableConfig = {
     },
     filter?: {
         enable?: boolean,
-        debounceTime?: number
+        debounceTime?: number,
+        validations?: {
+            [key: string]: {
+                regex: string,
+                errorMsg: string
+            }
+        } 
     }
 };
 ```
@@ -109,7 +115,9 @@ export type NgxTableOrder = {
 };
 ```
 - **field**: column name to order
-- **direction**: 1 = ASC, -1 = DESC
+- **direction**:
+    - 1: ascending
+    - -1: descending
 
 ## Filter
 

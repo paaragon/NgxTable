@@ -1,12 +1,12 @@
 <th class="first-cell"><span class="fas fa-hashtag"></span></th>
 <ng-container *ngIf="!config.order.enable">
-  <th *ngFor="let header of _headers">
+  <th *ngFor="let header of humanHeaders">
     {{header}}
   </th>
 </ng-container>
 <ng-container *ngIf="config.order.enable">
-  <th #orderableHeader *ngFor="let header of _headers" (click)="onOrder(header)" class="orderable">
-    {{header}}
+  <th #orderableHeader *ngFor="let header of _headers; let i = index" (click)="onOrder(header)" class="orderable">
+    {{humanHeaders[i]}}
     <span class="fas" [ngClass]="{'fa-caret-up': isAsc(header), 'fa-caret-down': isDesc(header)}"></span>
   </th>
 </ng-container>

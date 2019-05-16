@@ -13,6 +13,7 @@ export class NgxTableFilterComponent implements OnInit {
   sub = null;
 
   filters: NgxTableFilter = {};
+  errors: { [key: string]: { error: boolean, errorMsg: string } } = {};
 
   _config: NgxTableConfig;
   @Input('config')
@@ -53,10 +54,40 @@ export class NgxTableFilterComponent implements OnInit {
         f[attr] = this.filters[attr];
       }
     }
+    if (!this.validateFilters(f)) {
+      console.log('not valid');
+      return;
+    }
     this.debouncer.next(f);
   }
 
+  private validateFilters(f: NgxTableFilter): boolean {
+
+    const validations = this._config.filter.validations;
+    if (Object.keys(validations).length === 0) {
+      return true;
+    }
+
+    for (let attr in f) {
+      if (!validations[attr]) {
+        continue;
+      }
+      const text = f[attr].value;
+
+      const regex = new RegExp(validations[attr].regex);
+
+      if (!regex.test(text)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   private initFilters() {
+    if (this.filters && Object.keys(this.filters).length > 0) {
+      return;
+    }
+    console.log('init filters');
     for (let i = 0; i < this._headers.length; i++) {
       this.filters[this._headers[i]] = {
         operator: null,
@@ -66,12 +97,16 @@ export class NgxTableFilterComponent implements OnInit {
   }
 
   private subscribeDebounce() {
+    console.log('subscribing');
     if (this.sub) {
       this.sub.unsubscribe();
     }
     this.sub = this.debouncer
       .pipe(debounceTime(this._config.filter.debounceTime))
-      .subscribe((val) => this.onFilterEmitter.emit(val));
+      .subscribe((val) => {
+        console.log(val);
+        this.onFilterEmitter.emit(val);
+      });
   }
 
 }

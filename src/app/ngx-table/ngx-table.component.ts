@@ -9,6 +9,11 @@ import DeepMerge from '../utils/DeepMerge';
 })
 export class NgxTableComponent implements OnInit {
 
+  @Input('headers')
+  humanHeaders: NgxTableHeaders;
+
+  headers: NgxTableHeaders;
+
   /**
    * Data of the table. Array of content
    */
@@ -16,17 +21,17 @@ export class NgxTableComponent implements OnInit {
   @Input('data')
   set data(data: any[]) {
     this._data = data;
-    if (this._data && this._data.length > 0 && !this.headers) {
+    if (this._data && this._data.length > 0) {
       this.headers = this.getHeadersFromData(this._data);
+      if (!this.humanHeaders) {
+        this.humanHeaders = this.headers;
+      }
     }
   }
 
   get data(): any[] {
     return this._data;
   }
-
-  @Input('headers')
-  headers: NgxTableHeaders;
 
   /**
    * Config of the table
@@ -37,7 +42,8 @@ export class NgxTableComponent implements OnInit {
     },
     filter: {
       enable: false,
-      debounceTime: 200
+      debounceTime: 200,
+      validations: {}
     }
   };
 
@@ -69,6 +75,14 @@ export class NgxTableComponent implements OnInit {
 
   onFilter(filter: NgxTableFilter) {
     this.filterEmitter.emit(filter);
+  }
+
+  enableFilter() {
+    return this._config.filter.enable;
+  }
+
+  enableBody() {
+    return this._data && this._data.length > 0;
   }
 
   private getHeadersFromData(data: any[]): NgxTableHeaders {

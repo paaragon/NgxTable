@@ -20,6 +20,9 @@ export class NgxTableHeaderComponent implements OnInit {
     return this._headers;
   }
 
+  @Input('human-headers')
+  humanHeaders: NgxTableHeaders;
+
   @Input('config')
   config: NgxTableConfig;
 

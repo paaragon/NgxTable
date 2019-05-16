@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import mock, { MockObj } from './mock/table.mock';
-import { NgxTableOrder, NgxTableConfig, NgxTableFilter } from './ngx-table/types';
+import { NgxTableOrder, NgxTableConfig, NgxTableFilter, NgxTableHeaders } from './ngx-table/types';
 
 @Component({
   selector: 'app-root',
@@ -11,18 +11,25 @@ export class AppComponent {
   title = 'ngx-table';
 
   data: MockObj[] = mock;
-  // backup data
-  dataBK: MockObj[] = this.data.map(row => row);
+
+  dataBK: MockObj[] = Object.assign([], this.data);
 
   orderObj: NgxTableOrder;
   filterObj: NgxTableFilter;
+  headers: NgxTableHeaders = ['Name', 'Last Name', 'Birth Date', 'Company', 'Salary'];
 
   config: NgxTableConfig = {
     order: {
       enable: true
     },
     filter: {
-      enable: true
+      enable: true,
+      validations: {
+        salary: {
+          regex: '^\\d+$',
+          errorMsg: 'Salary must be a number'
+        }
+      }
     }
   };
 
@@ -37,14 +44,19 @@ export class AppComponent {
   }
 
   refresh() {
-    const dataTmp = this.filter(this.dataBK);
+    const dataTmp = this.filter(Object.assign([], this.dataBK));
     this.data = this.sort(dataTmp);
   }
 
   filter(data: any[]): any[] {
+    if (!this.filterObj) {
+      return data;
+    }
     return data.filter(data =>
       Object.keys(data).every(key =>
-        !this.filterObj[key] || data[key].toLowerCase().indexOf(this.filterObj[key].value.toLowerCase()) !== -1)
+        !this.filterObj[key] ||
+        data[key].toString().toLowerCase()
+          .indexOf(this.filterObj[key].value.toString().toLowerCase()) !== -1)
     );
   }
 
