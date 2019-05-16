@@ -12,7 +12,7 @@ export class NgxTableFilterComponent implements OnInit {
 
   sub = null;
 
-  filters: { [key: string]: NgxTableFilter } = {};
+  filters: NgxTableFilter = {};
 
   _config: NgxTableConfig;
   @Input('config')
@@ -37,8 +37,8 @@ export class NgxTableFilterComponent implements OnInit {
   }
 
   @Output('filter')
-  onFilterEmitter: EventEmitter<NgxTableFilter[]> = new EventEmitter<NgxTableFilter[]>();
-  debouncer: Subject<NgxTableFilter[]> = new Subject<NgxTableFilter[]>();
+  onFilterEmitter: EventEmitter<NgxTableFilter> = new EventEmitter<NgxTableFilter>();
+  debouncer: Subject<NgxTableFilter> = new Subject<NgxTableFilter>();
 
   constructor() {
   }
@@ -47,14 +47,18 @@ export class NgxTableFilterComponent implements OnInit {
   }
 
   onFilter() {
-    const f = Object.keys(this.filters).filter(f => this.filters[f].value).map(f => this.filters[f]);
+    const f: NgxTableFilter = {};
+    for (let attr in this.filters) {
+      if (this.filters[attr].value) {
+        f[attr] = this.filters[attr];
+      }
+    }
     this.debouncer.next(f);
   }
 
   private initFilters() {
     for (let i = 0; i < this._headers.length; i++) {
       this.filters[this._headers[i]] = {
-        field: this._headers[i],
         operator: null,
         value: null
       }

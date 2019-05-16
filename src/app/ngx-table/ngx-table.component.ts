@@ -12,17 +12,17 @@ export class NgxTableComponent implements OnInit {
   /**
    * Data of the table. Array of content
    */
-  data: any[];
+  _data: any[];
   @Input('data')
-  set setData(data: any[]) {
-    this.data = data;
-    if (this.data && this.data.length > 0 && !this.headers) {
-      this.headers = this.getHeadersFromData(this.data);
+  set data(data: any[]) {
+    this._data = data;
+    if (this._data && this._data.length > 0 && !this.headers) {
+      this.headers = this.getHeadersFromData(this._data);
     }
   }
 
-  get getData(): any[] {
-    return this.data;
+  get data(): any[] {
+    return this._data;
   }
 
   @Input('headers')
@@ -53,21 +53,21 @@ export class NgxTableComponent implements OnInit {
   }
 
   @Output('order')
-  orderEmitter: EventEmitter<NgxTableOrder[]> = new EventEmitter<NgxTableOrder[]>();
+  orderEmitter: EventEmitter<NgxTableOrder> = new EventEmitter<NgxTableOrder>();
 
   @Output('filter')
-  filterEmitter: EventEmitter<NgxTableFilter[]> = new EventEmitter<NgxTableFilter[]>();
+  filterEmitter: EventEmitter<NgxTableFilter> = new EventEmitter<NgxTableFilter>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onOrder(order: NgxTableOrder[]) {
+  onOrder(order: NgxTableOrder) {
     this.orderEmitter.emit(order);
   }
 
-  onFilter(filter: NgxTableFilter[]) {
+  onFilter(filter: NgxTableFilter) {
     this.filterEmitter.emit(filter);
   }
 

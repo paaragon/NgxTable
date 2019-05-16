@@ -14,6 +14,9 @@ export class AppComponent {
   // backup data
   dataBK: MockObj[] = this.data.map(row => row);
 
+  orderObj: NgxTableOrder;
+  filterObj: NgxTableFilter;
+
   config: NgxTableConfig = {
     order: {
       enable: true
@@ -23,30 +26,41 @@ export class AppComponent {
     }
   };
 
-  /**
-   * This method handles the order event
-   * @param order 
-   */
   onOrder(order: NgxTableOrder) {
-    // restore data
-    if (!order) {
-      this.data = this.dataBK.map(row => row);
-      return;
+    this.orderObj = order;
+    this.refresh();
+  }
+
+  onFilter(filter: NgxTableFilter) {
+    this.filterObj = filter;
+    this.refresh();
+  }
+
+  refresh() {
+    const dataTmp = this.filter(this.dataBK);
+    this.data = this.sort(dataTmp);
+  }
+
+  filter(data: any[]): any[] {
+    return data.filter(data =>
+      Object.keys(data).every(key =>
+        !this.filterObj[key] || data[key].toLowerCase().indexOf(this.filterObj[key].value.toLowerCase()) !== -1)
+    );
+  }
+
+  sort(data: any[]): any[] {
+    if (!this.orderObj) {
+      return data;
     }
-    // sort data
-    this.data.sort((row1, row2) => {
-      if (row1[order.field] < row2[order.field]) {
-        return order.direction * -1;
+    return data.sort((row1, row2) => {
+      if (row1[this.orderObj.field] < row2[this.orderObj.field]) {
+        return this.orderObj.direction * -1;
       }
-      if (row1[order.field] > row2[order.field]) {
-        return order.direction;
+      if (row1[this.orderObj.field] > row2[this.orderObj.field]) {
+        return this.orderObj.direction;
       }
 
       return 0;
     });
-  }
-
-  onFilter(filter: NgxTableFilter) {
-    console.log(filter);
   }
 }
