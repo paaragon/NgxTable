@@ -10,7 +10,7 @@ NgxTable is an angular component that shows your data in a table and allows you 
 - Delete (WIP)
 - Edit (WIP)
 
-# Usage
+## Usage
 
 In the basic usage you just have to pass your data as a component input
 
@@ -27,3 +27,47 @@ const exampleData: any[] = [
 ```
 
 ![simple table](./doc-assets/simple-table.PNG)
+
+## Config
+
+This component manage a configuration object with the following structure (WIP):
+
+```typescript
+export type NgxTableConfig = {
+    order?: {
+        enable?: boolean 
+    },
+    filter?: {
+        enable?: boolean
+    }
+};
+```
+
+## Order
+
+When order feature is enable, you can click a header to emit the order event.
+
+### Bind order event
+
+```html
+<!-- in your html -->
+<ngx-table [data]="exampleData" (order)="onOrder($event)"></ngx-table>
+```
+
+```typescript
+// in your component .ts
+onOrder(order: NgxTableOrder) {
+    // your order logic
+}
+```
+
+### NgxTableOrder type
+
+```typescript
+export type NgxTableOrder = {
+    field: string,
+    direction: 1 | -1
+};
+```
+- **field**: column name to order
+- **direction**: 1 = ASC, -1 = DESC

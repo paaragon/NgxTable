@@ -32,7 +32,6 @@ export class NgxTableComponent implements OnInit {
    */
   @Input('config')
   config: NgxTableConfig = {
-    editable: false,
     order: {
       enable: false
     },
