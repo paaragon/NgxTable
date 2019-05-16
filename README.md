@@ -72,7 +72,7 @@ config: NgxTableConfig = {
 
 ## Order
 
-When order feature is enable, you can click a header to emit the order event.
+When order feature is enable, you can click a header to fire the order event.
 
 ### Enable order in config object
 
@@ -85,7 +85,6 @@ config: NgxTableConfig = {
     ...
 };
 ```
-
 
 ### Bind order event
 
@@ -111,3 +110,48 @@ export type NgxTableOrder = {
 ```
 - **field**: column name to order
 - **direction**: 1 = ASC, -1 = DESC
+
+## Filter
+
+When filter feature is enable, you can fill the filter row to fire the fiter event.
+
+### Enable filter in config object
+
+```typescript
+config: NgxTableConfig = {
+    ...
+    filter: {
+        enable: false,
+        debounceTime: 200
+    }
+    ...
+};
+```
+
+### Bind filter event
+
+```html
+<!-- in your html -->
+<ngx-table [data]="exampleData" (filter)="onFilter($event)"></ngx-table>
+```
+
+```typescript
+// in your component .ts
+onOrder(filter: NgxTableFilter) {
+    // update your data object with your filter logic
+}
+```
+
+### NgxTableFilter type
+
+```typescript
+export type NgxTableOrder = { 
+    [key: string]: {
+        operator: string,
+        value: string
+    }
+};
+```
+- **key**: field name to filter
+- **operator**: the operator user has select
+- **value**: the value of the filter
