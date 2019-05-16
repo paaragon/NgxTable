@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NgxTableOrder, NgxTableHeaders, NgxTableConfig } from './types';
+import { NgxTableOrder, NgxTableHeaders, NgxTableConfig, NgxTableFilter } from './types';
+import DeepMerge from '../utils/DeepMerge';
 
 @Component({
   selector: 'ngx-table',
@@ -20,7 +21,7 @@ export class NgxTableComponent implements OnInit {
     }
   }
 
-  get getData() {
+  get getData(): any[] {
     return this.data;
   }
 
@@ -30,19 +31,32 @@ export class NgxTableComponent implements OnInit {
   /**
    * Config of the table
    */
-  @Input('config')
-  config: NgxTableConfig = {
+  _configBK: NgxTableConfig = {
     order: {
       enable: false
     },
     filter: {
-      enable: false
+      enable: false,
+      debounceTime: 200
     }
   };
 
+  _config: NgxTableConfig;
+
+  @Input('config')
+  set config(conf: NgxTableConfig) {
+    this._config = DeepMerge.deepmerge(this._configBK, conf);
+  }
+
+  get config(): NgxTableConfig {
+    return this._config;
+  }
 
   @Output('order')
   orderEmitter: EventEmitter<NgxTableOrder[]> = new EventEmitter<NgxTableOrder[]>();
+
+  @Output('filter')
+  filterEmitter: EventEmitter<NgxTableFilter[]> = new EventEmitter<NgxTableFilter[]>();
 
   constructor() { }
 
@@ -51,6 +65,10 @@ export class NgxTableComponent implements OnInit {
 
   onOrder(order: NgxTableOrder[]) {
     this.orderEmitter.emit(order);
+  }
+
+  onFilter(filter: NgxTableFilter[]) {
+    this.filterEmitter.emit(filter);
   }
 
   private getHeadersFromData(data: any[]): NgxTableHeaders {

@@ -10,14 +10,14 @@ export class NgxTableHeaderComponent implements OnInit {
 
   order: NgxTableOrder;
 
-  headers: NgxTableHeaders = [];
+  _headers: NgxTableHeaders = [];
   @Input('headers')
-  set setHeaders(headers: NgxTableHeaders) {
-    this.headers = headers;
+  set headers(headers: NgxTableHeaders) {
+    this._headers = headers;
   }
 
-  get getHeaders(): NgxTableHeaders {
-    return this.headers;
+  get headers(): NgxTableHeaders {
+    return this._headers;
   }
 
   @Input('config')
@@ -62,9 +62,4 @@ export class NgxTableHeaderComponent implements OnInit {
   isDesc(header: string) {
     return this.order && this.order.field === header && this.order.direction === -1;
   }
-
-  isOrderable() {
-    return this.config && this.config.order && this.config.order.enable;
-  }
-
 }

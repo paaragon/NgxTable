@@ -1,11 +1,11 @@
 <th class="first-cell"><span class="fas fa-hashtag"></span></th>
-<ng-container *ngIf="!isOrderable()">
-  <th *ngFor="let header of headers">
+<ng-container *ngIf="!config.order.enable">
+  <th *ngFor="let header of _headers">
     {{header}}
   </th>
 </ng-container>
-<ng-container *ngIf="isOrderable()">
-  <th #orderableHeader *ngFor="let header of headers" (click)="onOrder(header)" class="orderable">
+<ng-container *ngIf="config.order.enable">
+  <th #orderableHeader *ngFor="let header of _headers" (click)="onOrder(header)" class="orderable">
     {{header}}
     <span class="fas" [ngClass]="{'fa-caret-up': isAsc(header), 'fa-caret-down': isDesc(header)}"></span>
   </th>

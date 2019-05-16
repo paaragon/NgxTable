@@ -50,7 +50,8 @@ export type NgxTableConfig = {
         enable?: boolean 
     },
     filter?: {
-        enable?: boolean
+        enable?: boolean,
+        debounceTime?: number
     }
 };
 ```
@@ -63,7 +64,8 @@ config: NgxTableConfig = {
         enable: false
     },
     filter: {
-        enable: false
+        enable: false,
+        debounceTime: 1000
     }
 };
 ```

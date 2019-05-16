@@ -1,8 +1,8 @@
 <div class="table-responsive">
   <table class="table">
     <thead>
-      <tr ngx-table-header [headers]="headers" (order)="onOrder($event)" [config]="config"></tr>
-      <tr ngx-table-filter [headers]="headers" *ngIf="config?.filter?.enable"></tr>
+      <tr ngx-table-header [headers]="headers" (order)="onOrder($event)" [config]="_config"></tr>
+      <tr ngx-table-filter *ngIf="_config.filter.enable" [headers]="headers" [config]="_config" (filter)="onFilter($event)"></tr>
     </thead>
     <tbody ngx-table-body [data]="data" [headers]="headers"></tbody>
   </table>

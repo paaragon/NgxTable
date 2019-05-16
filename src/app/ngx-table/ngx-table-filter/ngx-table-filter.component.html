@@ -1,2 +1,2 @@
 <th class="first-cell"><span class="fas fa-filter"></span></th>
-<th *ngFor="let header of headers"><input class="form-control" placeholder="{{header}}"></th>
+<th *ngFor="let header of headers"><input class="form-control" placeholder="{{header}}" (keyup)="onFilter($event)" [(ngModel)]="filters[header].value"></th>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import mock, { MockObj } from './mock/table.mock';
-import { NgxTableOrder, NgxTableConfig } from './ngx-table/types';
+import { NgxTableOrder, NgxTableConfig, NgxTableFilter } from './ngx-table/types';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,10 @@ export class AppComponent {
 
   config: NgxTableConfig = {
     order: {
-      enable: false
+      enable: true
+    },
+    filter: {
+      enable: true
     }
   };
 
@@ -41,5 +44,9 @@ export class AppComponent {
 
       return 0;
     });
+  }
+
+  onFilter(filter: NgxTableFilter) {
+    console.log(filter);
   }
 }
