@@ -9,14 +9,14 @@ NgxTable is an angular component that shows your data in a table and allows you 
 ## Dependencies
 
 - [Bootstrap 4](https://getbootstrap.com/): `npm install bootstrap --save`
-- [FontAwesome](https://fontawesome.com/): `npm install --save-dev @fortawesome/fontawesome-free`
+- [FontAwesome](https://fontawesome.com/): `npm install @fortawesome/fontawesome-free --save`
 
 ## Features
 
 - **Show data**: this component shows an array of objects in a table.
 - **Custom headers**: you can specify custom headers names.
 - **Order event**: this component fires an order event everytime user click on a table header.
-- **Filter event**: this component shows a filter row. Everytime you write in those headers an event is fired with filter informacion. [WIP]
+- **Filter event**: this component shows a filter row. Everytime you write in those headers an event is fired with filter informacion.
 - **Create event**: this component shows a create row. Users can fill it an then press "Create". An event will be fired with creation info. [WIP]
 - **Delete event**: this component shows a delete column per each row. when user click on it, an event will be fired with the delete info. [WIP]
 - **Edit event**: each cell can be clicked to edit them. After edition, an edit button can be clicked and an event will be fired with the edition info. [WIP] 
