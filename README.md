@@ -43,6 +43,19 @@ export type NgxTableConfig = {
 };
 ```
 
+Default config
+
+```typescript
+config: NgxTableConfig = {
+    order: {
+        enable: false
+    },
+    filter: {
+        enable: false
+    }
+};
+```
+
 ## Order
 
 When order feature is enable, you can click a header to emit the order event.
