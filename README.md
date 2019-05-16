@@ -10,7 +10,7 @@ NgxTable is an angular component that shows your data in a table and allows you 
 - Delete (WIP)
 - Edit (WIP)
 
-# Use
+# Usage
 
 In the basic usage you just have to pass your data as a component input
 
