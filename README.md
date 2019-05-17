@@ -148,6 +148,9 @@ export type NgxTableConfig = {
                 errorMsg: string
             }
         }
+    },
+    create?: {
+        enable: boolean
     }
 };
 ```
@@ -155,15 +158,18 @@ export type NgxTableConfig = {
 Default config
 
 ```typescript
-config: NgxTableConfig = {
+ config: NgxTableConfig = {
     placeholders: [],
     order: {
-        enable: false
+      enable: false
     },
     filter: {
-        enable: false,
-        debounceTime: 500,
-        validations: { }
+      enable: false,
+      debounceTime: 200,
+      validations: {}
+    },
+    create: {
+      enable: false
     }
-};
+  };
 ```

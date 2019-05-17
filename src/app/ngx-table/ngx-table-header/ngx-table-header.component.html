@@ -10,3 +10,4 @@
     <span class="fas" [ngClass]="{'fa-caret-up': isAsc(_headers[i]), 'fa-caret-down': isDesc(_headers[i])}"></span>
   </th>
 </ng-container>
+<th *ngIf="showLastColumn()"></th>

@@ -4,3 +4,4 @@
     (keyup)="onFilter($event)" [(ngModel)]="filters[header].value">
     <p class="validation-error text-danger" *ngIf="errors[header]?.error">{{errors[header]?.errorMsg}}</p>
 </th>
+<th><button type="button" class="btn btn-warning" (click)="cleanFilters()">Clean filters</button></th>

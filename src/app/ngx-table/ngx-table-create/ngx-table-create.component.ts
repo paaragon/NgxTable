@@ -39,6 +39,10 @@ export class NgxTableCreateComponent implements OnInit {
     return this.errors && this.errors[header] && this.errors[header].error;
   }
 
+  create() {
+
+  }
+
   private buildPlaceholders() {
     if (this._config.placeholders) {
       this.placeholders = this._config.placeholders.map(p => `New ${p}`);

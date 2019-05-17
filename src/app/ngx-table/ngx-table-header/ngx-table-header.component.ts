@@ -65,4 +65,8 @@ export class NgxTableHeaderComponent implements OnInit {
   isDesc(header: string) {
     return this.order && this.order.field === header && this.order.direction === -1;
   }
+
+  showLastColumn(){
+    return this.config.create.enable || this.config.filter.enable;
+  }
 }

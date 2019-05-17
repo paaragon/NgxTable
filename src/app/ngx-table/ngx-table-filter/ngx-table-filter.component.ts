@@ -66,6 +66,13 @@ export class NgxTableFilterComponent implements OnInit {
     return this.errors && this.errors[header] && this.errors[header].error;
   }
 
+  cleanFilters() {
+    for (let attr in this.filters) {
+      this.filters[attr].value = null;
+    }
+    this.onFilter();
+  }
+
   private validateFilters(f: NgxTableFilter): boolean {
 
     this.errors = {};
@@ -84,12 +91,10 @@ export class NgxTableFilterComponent implements OnInit {
       const regex = new RegExp(validations[attr].regex);
 
       if (!regex.test(text)) {
-        console.log('error');
         this.errors[attr] = {
           error: true,
           errorMsg: validations[attr].errorMsg
         }
-        console.log(this.errors, attr);
         return false;
       }
     }

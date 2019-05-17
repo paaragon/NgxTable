@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgxTableHeaders } from '../types';
+import { NgxTableHeaders, NgxTableConfig } from '../types';
 
 @Component({
   selector: '[ngx-table-body]',
@@ -7,6 +7,9 @@ import { NgxTableHeaders } from '../types';
   styleUrls: ['./ngx-table-body.component.scss']
 })
 export class NgxTableBodyComponent implements OnInit {
+
+  @Input('config')
+  config: NgxTableConfig;
 
   @Input('data')
   data: any[] = [];
@@ -19,4 +22,7 @@ export class NgxTableBodyComponent implements OnInit {
   ngOnInit() {
   }
 
+  showLastColumn(){
+    return this.config.create.enable || this.config.filter.enable;
+  }
 }

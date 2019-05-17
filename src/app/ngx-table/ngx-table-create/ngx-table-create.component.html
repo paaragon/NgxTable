@@ -4,3 +4,4 @@
     (keyup)="validate($event)" [(ngModel)]="newObj[headers[i]]">
     <p class="validation-error text-danger" *ngIf="errors[headers[i]]?.error">{{errors[header]?.errorMsg}}</p>
 </th>
+<th><button type="button" class="btn btn-success" (click)="create()">Create</button></th>
