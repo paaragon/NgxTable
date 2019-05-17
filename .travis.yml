@@ -6,7 +6,6 @@ node_js:
 - node
 script:
 - npm run lint-ci
-- npm run test-ci
 - npm run build-ci
 before_deploy:  
 - cd dist/paaragon/ngx-table
