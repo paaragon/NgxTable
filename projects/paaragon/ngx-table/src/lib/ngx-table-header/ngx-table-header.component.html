@@ -7,10 +7,10 @@
   </th>
 </ng-container>
 <ng-container *ngIf="config.order.enable">
-  <th #orderableHeader *ngFor="let header of humanHeaders; let i = index" (click)="onOrder(_headers[i])" class="orderable">
+  <th #orderableHeader *ngFor="let header of humanHeaders; let i = index" (click)="onOrder(headers[i])" class="orderable">
     {{humanHeaders[i]}}
-    <fa-icon [icon]="faCaretUp" *ngIf="isAsc(_headers[i])"></fa-icon>
-    <fa-icon [icon]="faCaretDown" *ngIf="isDesc(_headers[i])"></fa-icon>
+    <fa-icon [icon]="faCaretUp" *ngIf="isAsc(headers[i])"></fa-icon>
+    <fa-icon [icon]="faCaretDown" *ngIf="isDesc(headers[i])"></fa-icon>
   </th>
 </ng-container>
 <th *ngIf="showLastColumn()"></th>
