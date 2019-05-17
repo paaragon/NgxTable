@@ -1,0 +1,6 @@
+<th class="first-cell"><span class="fas fa-filter"></span></th>
+<th *ngFor="let placeholders of placeholders">
+  <input class="form-control" [ngClass]="{'is-invalid': hasValidationError(header)}" placeholder="{{placeholder}}"
+    (keyup)="onFilter($event)" [(ngModel)]="filters[header].value">
+    <p class="validation-error text-danger">{{errors[header]?.errorMsg}}</p>
+</th>

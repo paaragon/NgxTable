@@ -32,6 +32,9 @@ export class AppComponent {
           errorMsg: 'Salary must be a number'
         }
       }
+    },
+    create: {
+      enable: true
     }
   };
 

@@ -16,5 +16,8 @@ export type NgxTableConfig = {
                 errorMsg: string
             }
         }
+    },
+    create?: {
+        enable: boolean
     }
 };
