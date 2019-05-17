@@ -3,6 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+<<<<<<< HEAD
     "ngx-table": {
       "root": "",
       "sourceRoot": "src",
@@ -70,11 +71,25 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "ngx-table:build"
+=======
+    "NgxTable": {
+      "root": "projects/ngx-table",
+      "sourceRoot": "projects/ngx-table/src",
+      "projectType": "library",
+      "prefix": "Ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-table/tsconfig.lib.json",
+            "project": "projects/ngx-table/ng-package.json"
+>>>>>>> f2b04c4d0fffaba4219703b0822f5dd133cc779f
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+<<<<<<< HEAD
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
@@ -87,14 +102,24 @@
               "src/favicon.ico",
               "src/assets"
             ]
+=======
+            "main": "projects/ngx-table/src/test.ts",
+            "tsConfig": "projects/ngx-table/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-table/karma.conf.js"
+>>>>>>> f2b04c4d0fffaba4219703b0822f5dd133cc779f
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
+<<<<<<< HEAD
               "src/tsconfig.app.json",
               "src/tsconfig.spec.json"
+=======
+              "projects/ngx-table/tsconfig.lib.json",
+              "projects/ngx-table/tsconfig.spec.json"
+>>>>>>> f2b04c4d0fffaba4219703b0822f5dd133cc779f
             ],
             "exclude": [
               "**/node_modules/**"
@@ -103,6 +128,7 @@
         }
       }
     },
+<<<<<<< HEAD
     "ngx-table-e2e": {
       "root": "e2e/",
       "projectType": "application",
@@ -131,6 +157,8 @@
         }
       }
     },
+=======
+>>>>>>> f2b04c4d0fffaba4219703b0822f5dd133cc779f
     "@paaragon/ngx-table": {
       "root": "projects/paaragon/ngx-table",
       "sourceRoot": "projects/paaragon/ngx-table/src",
@@ -168,4 +196,8 @@
     }
   },
   "defaultProject": "ngx-table"
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f2b04c4d0fffaba4219703b0822f5dd133cc779f

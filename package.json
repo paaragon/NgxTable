@@ -71,8 +71,12 @@
     "tsickle": ">=0.34.0",
     "tslib": "^1.9.0",
     "tslint": "~5.11.0",
+<<<<<<< HEAD
     "typescript": "~3.2.2",
     "bootstrap": "^4.3.1",
     "@fortawesome/fontawesome-free": "^5.8.2"
+=======
+    "typescript": "~3.2.2"
+>>>>>>> f2b04c4d0fffaba4219703b0822f5dd133cc779f
   }
 }
