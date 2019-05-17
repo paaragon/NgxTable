@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import mock, { MockObj } from './mock/table.mock';
-import { NgxTableOrder, NgxTableConfig, NgxTableFilter, NgxTableHeaders } from './ngx-table/types';
+import { NgxTableOrder, NgxTableConfig, NgxTableFilter, NgxTableHeaders } from 'projects/paaragon/ngx-table/src/lib/ngx-table.types';
 
 @Component({
   selector: 'app-root',

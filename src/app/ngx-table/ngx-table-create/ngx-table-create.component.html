@@ -1,7 +1,0 @@
-<th class="first-cell"><span class="fas fa-plus"></span></th>
-<th *ngFor="let placeholder of placeholders;let i = index">
-  <input class="form-control" [ngClass]="{'is-invalid': hasValidationError(headers[i])}" placeholder="{{placeholder}}"
-    (keyup)="validate($event)" [(ngModel)]="newObj[headers[i]]">
-    <p class="validation-error text-danger" *ngIf="hasValidationError(headers[i])">{{errors[headers[i]]?.errorMsg}}</p>
-</th>
-<th><button type="button" class="btn btn-success" (click)="create()" [disabled]="!buttonEnable">Create</button></th>

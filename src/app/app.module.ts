@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgxTableModule } from './ngx-table/ngx-table.module';
+import { NgxTableModule } from 'projects/ngx-table/src/public-api';
 
 @NgModule({
   declarations: [

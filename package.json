@@ -1,6 +1,27 @@
 {
   "name": "ngx-table",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "An Angular component that shows your data in a table and allows you to control the most common events",
+  "author": "Pablo Aragon Moreno",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paaragon/NgxTable.git"
+  },
+  "bugs": {
+    "url": "https://github.com/paaragon/NgxTable/issues"
+  },
+  "homepage": "https://github.com/paaragon/NgxTable",
+  "keywords": [
+    "angular",
+    "javascript",
+    "typescript",
+    "table",
+    "dynamic",
+    "directive",
+    "bootstrap",
+    "font-awesome"
+  ],
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,7 +30,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~7.2.0",
     "@angular/common": "~7.2.0",
@@ -30,6 +50,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
+    "@angular-devkit/build-ng-packagr": "~0.13.0",
     "@angular/cli": "~7.3.8",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
@@ -44,8 +65,11 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "ng-packagr": "^4.2.0",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
+    "tsickle": ">=0.34.0",
+    "tslib": "^1.9.0",
     "tslint": "~5.11.0",
     "typescript": "~3.2.2"
   }
