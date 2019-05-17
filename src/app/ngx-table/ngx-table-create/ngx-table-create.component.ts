@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgxTableConfig, NgxTablePlaceholders, NgxTableHeaders } from '../types';
+import { NgxTableConfig, NgxTablePlaceholders, NgxTableHeaders, NgxTableNew } from '../types';
 
 @Component({
   selector: '[ngx-table-create]',
@@ -9,6 +9,7 @@ import { NgxTableConfig, NgxTablePlaceholders, NgxTableHeaders } from '../types'
 export class NgxTableCreateComponent implements OnInit {
 
   errors: { [key: string]: { error: boolean, errorMsg: string } } = {};
+  newObj: NgxTableNew = {};
 
   @Input('headers')
   headers: NgxTableHeaders;
@@ -28,6 +29,14 @@ export class NgxTableCreateComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  validate() {
+    return true;
+  }
+
+  hasValidationError(header: string) {
+    return this.errors && this.errors[header] && this.errors[header].error;
   }
 
   private buildPlaceholders() {

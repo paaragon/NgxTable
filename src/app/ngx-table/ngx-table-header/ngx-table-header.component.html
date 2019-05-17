@@ -5,8 +5,8 @@
   </th>
 </ng-container>
 <ng-container *ngIf="config.order.enable">
-  <th #orderableHeader *ngFor="let header of _headers; let i = index" (click)="onOrder(header)" class="orderable">
+  <th #orderableHeader *ngFor="let header of humanHeaders; let i = index" (click)="onOrder(_headers[i])" class="orderable">
     {{humanHeaders[i]}}
-    <span class="fas" [ngClass]="{'fa-caret-up': isAsc(header), 'fa-caret-down': isDesc(header)}"></span>
+    <span class="fas" [ngClass]="{'fa-caret-up': isAsc(_headers[i]), 'fa-caret-down': isDesc(_headers[i])}"></span>
   </th>
 </ng-container>

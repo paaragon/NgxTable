@@ -45,6 +45,9 @@ export class NgxTableComponent implements OnInit {
       enable: false,
       debounceTime: 200,
       validations: {}
+    },
+    create: {
+      enable: false
     }
   };
 
@@ -80,6 +83,10 @@ export class NgxTableComponent implements OnInit {
 
   enableFilter() {
     return this._config.filter.enable;
+  }
+
+  enableCreate() {
+    return this._config.create.enable;
   }
 
   enableBody() {

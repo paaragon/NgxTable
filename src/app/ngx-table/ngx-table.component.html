@@ -4,7 +4,7 @@
       <tr ngx-table-header [human-headers]="humanHeaders" [headers]="headers" (order)="onOrder($event)" [config]="_config"></tr>
       <tr ngx-table-filter *ngIf="enableFilter()" [headers]="headers" [config]="_config" (filter)="onFilter($event)">
       </tr>
-      <tr ngx-table-create *ngIf="enableFilter()" [headers]="headers" [config]="_config">
+      <tr ngx-table-create *ngIf="enableCreate()" [headers]="headers" [config]="_config">
       </tr>
     </thead>
     <tbody ngx-table-body [data]="_data" [headers]="headers" *ngIf="enableBody()"></tbody>

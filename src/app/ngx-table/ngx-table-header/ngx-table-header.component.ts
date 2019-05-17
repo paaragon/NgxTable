@@ -38,7 +38,7 @@ export class NgxTableHeaderComponent implements OnInit {
   }
 
   onOrder(header: string) {
-    if (!this.config.order.enable) {
+    if (!header || !this.config.order.enable) {
       return;
     }
     if (this.order && this.order.field === header && this.order.direction === 1) {

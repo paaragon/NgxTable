@@ -2,5 +2,5 @@
 <th *ngFor="let header of headers; let i = index">
   <input class="form-control" [ngClass]="{'is-invalid': hasValidationError(header)}" placeholder="{{placeholders[i]}}"
     (keyup)="onFilter($event)" [(ngModel)]="filters[header].value">
-    <p class="validation-error text-danger">{{errors[header]?.errorMsg}}</p>
+    <p class="validation-error text-danger" *ngIf="errors[header]?.error">{{errors[header]?.errorMsg}}</p>
 </th>
