@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgxTableHeaders, NgxTableOrder, NgxTableConfig } from '../ngx-table.types';
+import { faHashtag, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: '[ngx-table-header]',
@@ -9,6 +10,10 @@ import { NgxTableHeaders, NgxTableOrder, NgxTableConfig } from '../ngx-table.typ
 export class NgxTableHeaderComponent implements OnInit {
 
   order: NgxTableOrder;
+
+  faHashtag = faHashtag;
+  faCaretDown = faCaretDown;
+  faCaretUp = faCaretUp;
 
   _headers: NgxTableHeaders = [];
   @Input('headers')
@@ -66,7 +71,7 @@ export class NgxTableHeaderComponent implements OnInit {
     return this.order && this.order.field === header && this.order.direction === -1;
   }
 
-  showLastColumn(){
+  showLastColumn() {
     return this.config.create.enable || this.config.filter.enable;
   }
 }

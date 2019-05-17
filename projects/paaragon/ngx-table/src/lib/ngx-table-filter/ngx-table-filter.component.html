@@ -1,4 +1,6 @@
-<th class="first-cell"><span class="fas fa-filter"></span></th>
+<th class="first-cell">
+    <fa-icon [icon]="faFilter"></fa-icon>
+</th>
 <th *ngFor="let header of headers; let i = index">
   <input class="form-control" [ngClass]="{'is-invalid': hasValidationError(header)}" placeholder="{{placeholders[i]}}"
     (keyup)="onFilter()" [(ngModel)]="filters[header].value">

@@ -12,7 +12,8 @@ import { NgxTableModule } from '@paaragon/ngx-table';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxTableModule
+    NgxTableModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

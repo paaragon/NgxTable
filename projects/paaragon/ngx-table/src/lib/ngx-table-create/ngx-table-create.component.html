@@ -1,4 +1,6 @@
-<th class="first-cell"><span class="fas fa-plus"></span></th>
+<th class="first-cell">
+    <fa-icon [icon]="faPlus"></fa-icon>
+</th>
 <th *ngFor="let placeholder of placeholders;let i = index">
   <input class="form-control" [ngClass]="{'is-invalid': hasValidationError(headers[i])}" placeholder="{{placeholder}}"
     (keyup)="validate()" [(ngModel)]="newObj[headers[i]]">
