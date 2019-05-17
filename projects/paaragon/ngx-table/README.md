@@ -4,7 +4,7 @@ NgxTable is an angular component that shows your data in a table and allows you 
 
 ## Install
 
-[WIP]
+`npm install --save @paaragon/ngx-table`
 
 ## Dependencies
 

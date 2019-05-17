@@ -1,12 +1,10 @@
-> when the project is more advanced I will make a component available by npm
-
 # NgxTable
 
 NgxTable is an angular component that shows your data in a table and allows you to control the most common events.
 
 ## Install
 
-[WIP]
+`npm install --save @paaragon/ngx-table`
 
 ## Dependencies
 
