@@ -128,6 +128,10 @@ export type NgxTableFilter {
 - **operator**: the operator user has select
 - **value**: the value of the filter
 
+## Create
+
+Coming soon
+
 ## Config
 
 
