@@ -11,6 +11,8 @@ export class NgxTableCreateComponent implements OnInit {
   errors: { [key: string]: { error: boolean, errorMsg: string } } = {};
   newObj: NgxTableNew = {};
 
+  buttonEnable: boolean = true;
+
   @Input('headers')
   headers: NgxTableHeaders;
 
@@ -32,6 +34,26 @@ export class NgxTableCreateComponent implements OnInit {
   }
 
   validate() {
+    this.errors = {};
+    this.buttonEnable = true;
+    if (!this.config.create.validations) {
+      return true;
+    }
+    for (let attr in this.newObj) {
+      const validation = this.config.create.validations[attr];
+      if (!validation || !this.newObj[attr]) {
+        continue;
+      }
+      const reg = new RegExp(validation.regex);
+      if (!reg.test(this.newObj[attr])) {
+        this.errors[attr] = {
+          error: true,
+          errorMsg: validation.errorMsg
+        }
+        this.buttonEnable = false;
+        return false;
+      }
+    }
     return true;
   }
 
@@ -40,7 +62,10 @@ export class NgxTableCreateComponent implements OnInit {
   }
 
   create() {
-
+    if (!this.validate()) {
+      console.log('NOOOOpe');
+      return;
+    }
   }
 
   private buildPlaceholders() {

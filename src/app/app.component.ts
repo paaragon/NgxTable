@@ -34,7 +34,13 @@ export class AppComponent {
       }
     },
     create: {
-      enable: true
+      enable: true,
+      validations: {
+        salary: {
+          regex: '^\\d+$',
+          errorMsg: 'Salary must be a number'
+        }
+      }
     }
   };
 

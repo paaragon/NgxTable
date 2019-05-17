@@ -2,6 +2,6 @@
 <th *ngFor="let placeholder of placeholders;let i = index">
   <input class="form-control" [ngClass]="{'is-invalid': hasValidationError(headers[i])}" placeholder="{{placeholder}}"
     (keyup)="validate($event)" [(ngModel)]="newObj[headers[i]]">
-    <p class="validation-error text-danger" *ngIf="errors[headers[i]]?.error">{{errors[header]?.errorMsg}}</p>
+    <p class="validation-error text-danger" *ngIf="hasValidationError(headers[i])">{{errors[headers[i]]?.errorMsg}}</p>
 </th>
-<th><button type="button" class="btn btn-success" (click)="create()">Create</button></th>
+<th><button type="button" class="btn btn-success" (click)="create()" [disabled]="!buttonEnable">Create</button></th>

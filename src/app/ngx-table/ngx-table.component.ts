@@ -47,7 +47,8 @@ export class NgxTableComponent implements OnInit {
       validations: {}
     },
     create: {
-      enable: false
+      enable: false,
+      validations: {}
     }
   };
 

@@ -19,6 +19,12 @@ export type NgxTableConfig = {
         }
     },
     create?: {
-        enable: boolean
+        enable: boolean,
+        validations?: {
+            [key: string]: {
+                regex: string,
+                errorMsg: string
+            }
+        }
     }
 };
