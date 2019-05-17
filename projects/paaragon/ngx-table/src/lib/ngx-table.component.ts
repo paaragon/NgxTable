@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { NgxTableOrder, NgxTableHeaders, NgxTableConfig, NgxTableFilter } from './ngx-table.types';
 import DeepMerge from './utils/DeepMerge';
+import { NgxTableHeaders, NgxTableConfig, NgxTableOrder, NgxTableFilter, NgxTableNew } from './ngx-table.types';
 
 @Component({
   selector: 'ngx-table',
@@ -70,6 +70,9 @@ export class NgxTableComponent implements OnInit {
   @Output('filter')
   filterEmitter: EventEmitter<NgxTableFilter> = new EventEmitter<NgxTableFilter>();
 
+  @Output('create')
+  createEmitter: EventEmitter<NgxTableNew> = new EventEmitter<NgxTableNew>();
+
   constructor() { }
 
   ngOnInit() {
@@ -81,6 +84,10 @@ export class NgxTableComponent implements OnInit {
 
   onFilter(filter: NgxTableFilter) {
     this.filterEmitter.emit(filter);
+  }
+
+  onCreate(newObj: NgxTableNew) {
+    this.createEmitter.emit(newObj);
   }
 
   enableFilter() {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import mock, { MockObj } from './mock/table.mock';
-import { NgxTableOrder, NgxTableConfig, NgxTableFilter, NgxTableHeaders } from '@paaragon/ngx-table';
+import { NgxTableOrder, NgxTableFilter, NgxTableHeaders, NgxTableConfig, NgxTableNew } from 'projects/paaragon/ngx-table/src/projects';
 
 @Component({
   selector: 'app-root',
@@ -51,6 +51,11 @@ export class AppComponent {
 
   onFilter(filter: NgxTableFilter) {
     this.filterObj = filter;
+    this.refresh();
+  }
+
+  onCreate(newObj: NgxTableNew) {
+    this.dataBK.push(newObj as MockObj);
     this.refresh();
   }
 

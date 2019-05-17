@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgxTableConfig, NgxTablePlaceholders, NgxTableHeaders, NgxTableNew } from '../ngx-table.types';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -26,6 +26,9 @@ export class NgxTableCreateComponent implements OnInit {
     this._config = config;
     this.buildPlaceholders();
   }
+
+  @Output('create')
+  createEmitter: EventEmitter<NgxTableNew> = new EventEmitter<NgxTableNew>();
 
   get config() {
     return this._config;
@@ -69,6 +72,9 @@ export class NgxTableCreateComponent implements OnInit {
       console.log('NOOOOpe');
       return;
     }
+
+    this.createEmitter.emit(this.newObj);
+    this.newObj = {};
   }
 
   private buildPlaceholders() {
