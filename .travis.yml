@@ -1,0 +1,22 @@
+sudo: required
+addons:
+  chrome: stable
+language: node_js
+node_js:
+- node
+script:
+- npm run lint-ci
+- npm run test-ci
+- npm run build-ci
+before_deploy:  
+- cd dist/paaragon/ngx-table
+deploy:
+  provider: npm
+  email: pablo.aragon22@gmail.com
+  skip_cleanup: true
+  api_key:
+    secure: cjVWhI9zSTt00AEAbdBKybWW3udNKU/DVXwaYeqNoc8SoHkQmLSLAgw4lbudR1YrtfGMBvoeEGxYuV/T/BXUb3v3+aKQHY5hoq+cfqGu5c/NEQQumEdOgM7kG0P/SrT7xj60KiUWYQWHD/0Nbq9gT+yIC468HzwBr+oON8Lm2R6mXVx/16ceOBEHkVbeImiOXNDe57KKdahQJUsvKf08nTUoX/ScoN+MlYDfb9wl6wb2DUwpttw/khtCsAHcJZpQvcMVtlAPpR6spNp4olJ/Yu3vm+Vp+RHXBtJ6zXXzhUUTU+AHrtJU/0jXVpBsK8nZs0Wu73PkN3RWAusvfx4uxjr8+/xk0qPI6VvCZ+1bRbN3oO3IRtE0IiESBjmXhvJA1AzeYBbABzBA+Vr6X0dnjZkH/s8CUqnXWq+UGdBPhSeiGjNqsRiIk1+xluWNaXxbUj0nHtOTZt4H2y+haau2Gt80ckL0gAxPyBhg2RwFvJCUUgbfKFzp2ivn/5suwbYQo6BuLCVJF+V97pqcDYgYG96dRal9fr5CKR3dbu3Ttwyy6Biq71MTcm9/2LLzeAkh9oP04z7lu3doqUF3lH5g/LxwpyJOzEfIFl02e9ICwRB3gVJvUjX6su1d05QjDwkWJsH84Q1jaERTGjOq90fvlk85OhR6WXG0cdCGRwdmY9w=
+  on:
+    tags: true
+    branch: master
+    repo: paaragon/NgxTable

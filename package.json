@@ -28,7 +28,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "lint-ci": "ng lint @paaragon/ngx-table",
+    "test-ci": "ng test @paaragon/ngx-table",
+    "build-ci": "ng build @paaragon/ngx-table"
   },
   "dependencies": {
     "@angular/animations": "~7.2.0",

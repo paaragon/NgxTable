@@ -68,10 +68,10 @@ export class AppComponent {
     if (!this.filterObj) {
       return data;
     }
-    return data.filter(data =>
-      Object.keys(data).every(key =>
+    return data.filter(row =>
+      Object.keys(row).every(key =>
         !this.filterObj[key] ||
-        data[key].toString().toLowerCase()
+        row[key].toString().toLowerCase()
           .indexOf(this.filterObj[key].value.toString().toLowerCase()) !== -1)
     );
   }

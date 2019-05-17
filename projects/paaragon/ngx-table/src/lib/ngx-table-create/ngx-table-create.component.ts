@@ -14,25 +14,25 @@ export class NgxTableCreateComponent implements OnInit {
   errors: { [key: string]: { error: boolean, errorMsg: string } } = {};
   newObj: NgxTableNew = {};
 
-  buttonEnable: boolean = true;
+  buttonEnable = true;
 
-  @Input('headers')
-  headers: NgxTableHeaders;
+  @Input() headers: NgxTableHeaders;
 
-  _config: NgxTableConfig;
   placeholders: NgxTablePlaceholders;
-  @Input('config')
+
+  configBK: NgxTableConfig;
+  @Input()
   set config(config: NgxTableConfig) {
-    this._config = config;
+    this.configBK = config;
     this.buildPlaceholders();
   }
 
-  @Output('create')
-  createEmitter: EventEmitter<NgxTableNew> = new EventEmitter<NgxTableNew>();
-
   get config() {
-    return this._config;
+    return this.configBK;
   }
+
+  @Output()
+  create: EventEmitter<NgxTableNew> = new EventEmitter<NgxTableNew>();
 
   constructor() { }
 
@@ -45,9 +45,12 @@ export class NgxTableCreateComponent implements OnInit {
     if (!this.config.create.validations) {
       return true;
     }
-    for (let attr in this.newObj) {
+    for (const attr in this.newObj) {
+      if (!this.newObj[attr]) {
+        continue;
+      }
       const validation = this.config.create.validations[attr];
-      if (!validation || !this.newObj[attr]) {
+      if (!validation) {
         continue;
       }
       const reg = new RegExp(validation.regex);
@@ -55,7 +58,7 @@ export class NgxTableCreateComponent implements OnInit {
         this.errors[attr] = {
           error: true,
           errorMsg: validation.errorMsg
-        }
+        };
         this.buttonEnable = false;
         return false;
       }
@@ -67,19 +70,18 @@ export class NgxTableCreateComponent implements OnInit {
     return this.errors && this.errors[header] && this.errors[header].error;
   }
 
-  create() {
+  onCreate() {
     if (!this.validate()) {
-      console.log('NOOOOpe');
       return;
     }
 
-    this.createEmitter.emit(this.newObj);
+    this.create.emit(this.newObj);
     this.newObj = {};
   }
 
   private buildPlaceholders() {
-    if (this._config.placeholders) {
-      this.placeholders = this._config.placeholders.map(p => `New ${p}`);
+    if (this.config.placeholders) {
+      this.placeholders = this.config.placeholders.map(p => `New ${p}`);
     } else {
       this.placeholders = this.headers.map(h => `New ${h}`);
     }

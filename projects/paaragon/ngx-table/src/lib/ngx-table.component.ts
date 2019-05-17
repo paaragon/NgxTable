@@ -10,7 +10,7 @@ import { NgxTableHeaders, NgxTableConfig, NgxTableOrder, NgxTableFilter, NgxTabl
 })
 export class NgxTableComponent implements OnInit {
 
-  @Input('headers')
+  @Input()
   humanHeaders: NgxTableHeaders;
 
   headers: NgxTableHeaders;
@@ -18,12 +18,12 @@ export class NgxTableComponent implements OnInit {
   /**
    * Data of the table. Array of content
    */
-  _data: any[];
+  content: any[];
   @Input('data')
   set data(data: any[]) {
-    this._data = data;
-    if (this._data && this._data.length > 0) {
-      this.headers = this.getHeadersFromData(this._data);
+    this.content = data;
+    if (this.content && this.content.length > 0) {
+      this.headers = this.getHeadersFromData(this.content);
       if (!this.humanHeaders) {
         this.humanHeaders = this.headers;
       }
@@ -31,13 +31,13 @@ export class NgxTableComponent implements OnInit {
   }
 
   get data(): any[] {
-    return this._data;
+    return this.content;
   }
 
   /**
    * Config of the table
    */
-  _configBK: NgxTableConfig = {
+  configBK: NgxTableConfig = {
     placeholders: [],
     order: {
       enable: false
@@ -53,53 +53,50 @@ export class NgxTableComponent implements OnInit {
     }
   };
 
-  _config: NgxTableConfig;
+  mergedConfig: NgxTableConfig;
 
   @Input('config')
   set config(conf: NgxTableConfig) {
-    this._config = DeepMerge.deepmerge(this._configBK, conf);
+    this.mergedConfig = DeepMerge.deepmerge(this.configBK, conf);
   }
 
   get config(): NgxTableConfig {
-    return this._config;
+    return this.mergedConfig;
   }
 
-  @Output('order')
-  orderEmitter: EventEmitter<NgxTableOrder> = new EventEmitter<NgxTableOrder>();
+  @Output() order: EventEmitter<NgxTableOrder> = new EventEmitter<NgxTableOrder>();
 
-  @Output('filter')
-  filterEmitter: EventEmitter<NgxTableFilter> = new EventEmitter<NgxTableFilter>();
+  @Output() filter: EventEmitter<NgxTableFilter> = new EventEmitter<NgxTableFilter>();
 
-  @Output('create')
-  createEmitter: EventEmitter<NgxTableNew> = new EventEmitter<NgxTableNew>();
+  @Output() create: EventEmitter<NgxTableNew> = new EventEmitter<NgxTableNew>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onOrder(order: NgxTableOrder) {
-    this.orderEmitter.emit(order);
+  onOrder(orderObj: NgxTableOrder) {
+    this.order.emit(orderObj);
   }
 
-  onFilter(filter: NgxTableFilter) {
-    this.filterEmitter.emit(filter);
+  onFilter(filterObj: NgxTableFilter) {
+    this.filter.emit(filterObj);
   }
 
   onCreate(newObj: NgxTableNew) {
-    this.createEmitter.emit(newObj);
+    this.create.emit(newObj);
   }
 
   enableFilter() {
-    return this._config.filter.enable;
+    return this.mergedConfig.filter.enable;
   }
 
   enableCreate() {
-    return this._config.create.enable;
+    return this.mergedConfig.create.enable;
   }
 
   enableBody() {
-    return this._data && this._data.length > 0;
+    return this.content && this.content.length > 0;
   }
 
   private getHeadersFromData(data: any[]): NgxTableHeaders {

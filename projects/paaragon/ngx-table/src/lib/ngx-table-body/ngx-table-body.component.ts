@@ -8,13 +8,13 @@ import { NgxTableHeaders, NgxTableConfig } from '../ngx-table.types';
 })
 export class NgxTableBodyComponent implements OnInit {
 
-  @Input('config')
+  @Input()
   config: NgxTableConfig;
 
-  @Input('data')
+  @Input()
   data: any[] = [];
 
-  @Input('headers')
+  @Input()
   headers: NgxTableHeaders;
 
   constructor() { }
@@ -22,7 +22,7 @@ export class NgxTableBodyComponent implements OnInit {
   ngOnInit() {
   }
 
-  showLastColumn(){
+  showLastColumn() {
     return this.config.create.enable || this.config.filter.enable;
   }
 }

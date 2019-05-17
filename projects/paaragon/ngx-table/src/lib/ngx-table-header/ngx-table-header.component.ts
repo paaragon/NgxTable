@@ -9,30 +9,19 @@ import { faHashtag, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-i
 })
 export class NgxTableHeaderComponent implements OnInit {
 
-  order: NgxTableOrder;
+  orderObj: NgxTableOrder;
 
   faHashtag = faHashtag;
   faCaretDown = faCaretDown;
   faCaretUp = faCaretUp;
 
-  _headers: NgxTableHeaders = [];
-  @Input('headers')
-  set headers(headers: NgxTableHeaders) {
-    this._headers = headers;
-  }
+  @Input() headers: NgxTableHeaders = [];
 
-  get headers(): NgxTableHeaders {
-    return this._headers;
-  }
+  @Input() humanHeaders: NgxTableHeaders;
 
-  @Input('human-headers')
-  humanHeaders: NgxTableHeaders;
+  @Input() config: NgxTableConfig;
 
-  @Input('config')
-  config: NgxTableConfig;
-
-  @Output('order')
-  orderEmitter: EventEmitter<NgxTableOrder> = new EventEmitter<NgxTableOrder>();
+  @Output() order: EventEmitter<NgxTableOrder> = new EventEmitter<NgxTableOrder>();
 
   constructor() { }
 
@@ -46,29 +35,29 @@ export class NgxTableHeaderComponent implements OnInit {
     if (!header || !this.config.order.enable) {
       return;
     }
-    if (this.order && this.order.field === header && this.order.direction === 1) {
-      this.order = {
+    if (this.order && this.orderObj.field === header && this.orderObj.direction === 1) {
+      this.orderObj = {
         field: header,
         direction: -1
       };
-    } else if (this.order && this.order.field === header && this.order.direction === -1) {
+    } else if (this.order && this.orderObj.field === header && this.orderObj.direction === -1) {
       this.order = null;
     } else {
-      this.order = {
+      this.orderObj = {
         field: header,
         direction: 1
       };
     }
 
-    this.orderEmitter.emit(this.order);
+    this.order.emit(this.orderObj);
   }
 
   isAsc(header: string) {
-    return this.order && this.order.field === header && this.order.direction === 1;
+    return this.order && this.orderObj.field === header && this.orderObj.direction === 1;
   }
 
   isDesc(header: string) {
-    return this.order && this.order.field === header && this.order.direction === -1;
+    return this.order && this.orderObj.field === header && this.orderObj.direction === -1;
   }
 
   showLastColumn() {

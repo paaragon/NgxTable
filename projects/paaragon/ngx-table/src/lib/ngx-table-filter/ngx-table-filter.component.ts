@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators'
+import { debounceTime } from 'rxjs/operators';
 import { NgxTableHeaders, NgxTableFilter, NgxTableConfig, NgxTablePlaceholders } from '../ngx-table.types';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,39 +11,39 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons';
 })
 export class NgxTableFilterComponent implements OnInit {
 
-  faFilter = faFilter
+  faFilter = faFilter;
 
   sub = null;
 
   filters: NgxTableFilter = {};
   errors: { [key: string]: { error: boolean, errorMsg: string } } = {};
 
-  _config: NgxTableConfig;
+  configBK: NgxTableConfig;
   placeholders: NgxTablePlaceholders;
-  @Input('config')
+  @Input()
   set config(config: NgxTableConfig) {
-    this._config = config;
+    this.configBK = config;
     this.buildPlaceholders();
     this.subscribeDebounce();
   }
 
   get config() {
-    return this._config;
+    return this.configBK;
   }
 
-  _headers: NgxTableHeaders;
-  @Input('headers')
+  private headersBK;
+
+  @Input()
   set headers(headers: NgxTableHeaders) {
-    this._headers = headers;
+    this.headersBK = headers;
     this.initFilters();
   }
 
-  get headers() {
-    return this._headers;
+  get headers(): NgxTableHeaders {
+    return this.headersBK;
   }
 
-  @Output('filter')
-  onFilterEmitter: EventEmitter<NgxTableFilter> = new EventEmitter<NgxTableFilter>();
+  @Output() filter: EventEmitter<NgxTableFilter> = new EventEmitter<NgxTableFilter>();
   debouncer: Subject<NgxTableFilter> = new Subject<NgxTableFilter>();
 
   constructor() {
@@ -54,7 +54,7 @@ export class NgxTableFilterComponent implements OnInit {
 
   onFilter() {
     const f: NgxTableFilter = {};
-    for (let attr in this.filters) {
+    for (const attr in this.filters) {
       if (this.filters[attr].value) {
         f[attr] = this.filters[attr];
       }
@@ -70,8 +70,10 @@ export class NgxTableFilterComponent implements OnInit {
   }
 
   cleanFilters() {
-    for (let attr in this.filters) {
-      this.filters[attr].value = null;
+    for (const attr in this.filters) {
+      if (this.filters[attr]) {
+        this.filters[attr].value = null;
+      }
     }
     this.onFilter();
   }
@@ -79,13 +81,13 @@ export class NgxTableFilterComponent implements OnInit {
   private validateFilters(f: NgxTableFilter): boolean {
 
     this.errors = {};
-    const validations = this._config.filter.validations;
+    const validations = this.config.filter.validations;
 
     if (Object.keys(validations).length === 0) {
       return true;
     }
 
-    for (let attr in f) {
+    for (const attr in f) {
       if (!validations[attr]) {
         continue;
       }
@@ -97,7 +99,7 @@ export class NgxTableFilterComponent implements OnInit {
         this.errors[attr] = {
           error: true,
           errorMsg: validations[attr].errorMsg
-        }
+        };
         return false;
       }
     }
@@ -108,11 +110,11 @@ export class NgxTableFilterComponent implements OnInit {
     if (this.filters && Object.keys(this.filters).length > 0) {
       return;
     }
-    for (let i = 0; i < this._headers.length; i++) {
-      this.filters[this._headers[i]] = {
+    for (const header of this.headers) {
+      this.filters[header] = {
         operator: null,
         value: null
-      }
+      };
     }
   }
 
@@ -121,16 +123,16 @@ export class NgxTableFilterComponent implements OnInit {
       this.sub.unsubscribe();
     }
     this.sub = this.debouncer
-      .pipe(debounceTime(this._config.filter.debounceTime))
+      .pipe(debounceTime(this.config.filter.debounceTime))
       .subscribe((val) => {
         console.log(val);
-        this.onFilterEmitter.emit(val);
+        this.filter.emit(val);
       });
   }
 
   private buildPlaceholders() {
-    if (this._config.placeholders) {
-      this.placeholders = this._config.placeholders;
+    if (this.config.placeholders) {
+      this.placeholders = this.config.placeholders;
     } else {
       this.placeholders = this.headers;
     }
