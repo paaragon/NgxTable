@@ -1,5 +1,7 @@
 # NgxTable
 
+[!build status](https://api.travis-ci.org/paaragon/NgxTable.svg?branch=master)
+
 NgxTable is an angular component that shows your data in a table and allows you to control the most common events.
 
 ## Install
