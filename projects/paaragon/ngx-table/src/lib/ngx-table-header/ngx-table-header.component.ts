@@ -26,22 +26,19 @@ export class NgxTableHeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (this.config) {
-
-    }
   }
 
   onOrder(header: string) {
     if (!header || !this.config.order.enable) {
       return;
     }
-    if (this.order && this.orderObj.field === header && this.orderObj.direction === 1) {
+    if (this.orderObj && this.orderObj.field === header && this.orderObj.direction === 1) {
       this.orderObj = {
         field: header,
         direction: -1
       };
-    } else if (this.order && this.orderObj.field === header && this.orderObj.direction === -1) {
-      this.order = null;
+    } else if (this.orderObj && this.orderObj.field === header && this.orderObj.direction === -1) {
+      this.orderObj = null;
     } else {
       this.orderObj = {
         field: header,
@@ -53,11 +50,11 @@ export class NgxTableHeaderComponent implements OnInit {
   }
 
   isAsc(header: string) {
-    return this.order && this.orderObj.field === header && this.orderObj.direction === 1;
+    return this.orderObj && this.orderObj.field === header && this.orderObj.direction === 1;
   }
 
   isDesc(header: string) {
-    return this.order && this.orderObj.field === header && this.orderObj.direction === -1;
+    return this.orderObj && this.orderObj.field === header && this.orderObj.direction === -1;
   }
 
   showLastColumn() {

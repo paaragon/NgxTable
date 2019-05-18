@@ -11,36 +11,49 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons';
 })
 export class NgxTableFilterComponent implements OnInit {
 
+  /**
+   * Icon
+   */
   faFilter = faFilter;
 
+  /**
+   * Filter debounce subscription
+   */
   sub = null;
 
   filters: NgxTableFilter = {};
   errors: { [key: string]: { error: boolean, errorMsg: string } } = {};
-
-  configBK: NgxTableConfig;
   placeholders: NgxTablePlaceholders;
-  @Input()
-  set config(config: NgxTableConfig) {
-    this.configBK = config;
-    this.buildPlaceholders();
+
+  private configCopy: NgxTableConfig;
+  @Input() set config(config: NgxTableConfig) {
+    this.configCopy = config;
     this.subscribeDebounce();
   }
 
   get config() {
-    return this.configBK;
+    return this.configCopy;
   }
 
   private headersBK;
-
-  @Input()
-  set headers(headers: NgxTableHeaders) {
+  @Input() set headers(headers: NgxTableHeaders) {
     this.headersBK = headers;
-    this.initFilters();
+    if (this.headersBK) {
+      this.initFilters();
+      this.buildPlaceholders();
+    }
   }
 
   get headers(): NgxTableHeaders {
     return this.headersBK;
+  }
+
+  @Input() set humanHeaders(headers: NgxTableHeaders) {
+    this.placeholders = headers;
+  }
+
+  get humanHeaders() {
+    return this.placeholders;
   }
 
   @Output() filter: EventEmitter<NgxTableFilter> = new EventEmitter<NgxTableFilter>();
@@ -78,6 +91,10 @@ export class NgxTableFilterComponent implements OnInit {
     this.onFilter();
   }
 
+  getPlaceHolder(idx: number) {
+    return this.placeholders ? this.placeholders[idx] : null;
+  }
+
   private validateFilters(f: NgxTableFilter): boolean {
 
     this.errors = {};
@@ -107,10 +124,10 @@ export class NgxTableFilterComponent implements OnInit {
   }
 
   private initFilters() {
-    if (this.filters && Object.keys(this.filters).length > 0) {
-      return;
-    }
     for (const header of this.headers) {
+      if (this.filters[header]) {
+        continue;
+      }
       this.filters[header] = {
         operator: null,
         value: null
@@ -124,18 +141,12 @@ export class NgxTableFilterComponent implements OnInit {
     }
     this.sub = this.debouncer
       .pipe(debounceTime(this.config.filter.debounceTime))
-      .subscribe((val) => {
-        console.log(val);
-        this.filter.emit(val);
-      });
+      .subscribe((val) => this.filter.emit(val));
   }
 
   private buildPlaceholders() {
-    if (this.config.placeholders) {
-      this.placeholders = this.config.placeholders;
-    } else {
+    if (!this.placeholders && this.headers) {
       this.placeholders = this.headers;
     }
   }
-
 }

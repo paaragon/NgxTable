@@ -10,53 +10,23 @@ import { NgxTableHeaders, NgxTableConfig, NgxTableOrder, NgxTableFilter, NgxTabl
 })
 export class NgxTableComponent implements OnInit {
 
-  @Input()
-  humanHeaders: NgxTableHeaders;
-
-  headers: NgxTableHeaders;
+  @Input() humanHeaders: NgxTableHeaders;
 
   /**
    * Data of the table. Array of content
    */
-  content: any[];
-  @Input('data')
-  set data(data: any[]) {
-    this.content = data;
-    if (this.content && this.content.length > 0) {
-      this.headers = this.getHeadersFromData(this.content);
-      if (!this.humanHeaders) {
-        this.humanHeaders = this.headers;
-      }
-    }
+  dataCopy: any[];
+  @Input() set data(data: any[]) {
+    this.dataCopy = data;
+    this.initHeaders();
   }
 
   get data(): any[] {
-    return this.content;
+    return this.dataCopy;
   }
 
-  /**
-   * Config of the table
-   */
-  configBK: NgxTableConfig = {
-    placeholders: [],
-    order: {
-      enable: false
-    },
-    filter: {
-      enable: false,
-      debounceTime: 200,
-      validations: {}
-    },
-    create: {
-      enable: false,
-      validations: {}
-    }
-  };
-
   mergedConfig: NgxTableConfig;
-
-  @Input('config')
-  set config(conf: NgxTableConfig) {
+  @Input() set config(conf: NgxTableConfig) {
     this.mergedConfig = DeepMerge.deepmerge(this.configBK, conf);
   }
 
@@ -69,6 +39,27 @@ export class NgxTableComponent implements OnInit {
   @Output() filter: EventEmitter<NgxTableFilter> = new EventEmitter<NgxTableFilter>();
 
   @Output() create: EventEmitter<NgxTableNew> = new EventEmitter<NgxTableNew>();
+
+  headers: NgxTableHeaders;
+
+  /**
+   * Config of the table
+   */
+  configBK: NgxTableConfig = {
+    placeholders: null,
+    order: {
+      enable: false
+    },
+    filter: {
+      enable: false,
+      debounceTime: 200,
+      validations: null
+    },
+    create: {
+      enable: false,
+      validations: null
+    }
+  };
 
   constructor() { }
 
@@ -88,19 +79,27 @@ export class NgxTableComponent implements OnInit {
   }
 
   enableFilter() {
-    return this.mergedConfig.filter.enable;
+    return this.headers && this.config.filter.enable;
   }
 
   enableCreate() {
-    return this.mergedConfig.create.enable;
+    return this.headers && this.config.create.enable;
   }
 
   enableBody() {
-    return this.content && this.content.length > 0;
+    return this.data && this.data.length > 0;
+  }
+
+  private initHeaders() {
+    if (this.data && this.data.length > 0) {
+      this.headers = this.getHeadersFromData(this.dataCopy);
+    }
+    if (!this.humanHeaders) {
+      this.humanHeaders = this.headers;
+    }
   }
 
   private getHeadersFromData(data: any[]): NgxTableHeaders {
     return Object.keys(data[0]);
   }
-
 }

@@ -2,7 +2,7 @@
     <fa-icon [icon]="faFilter"></fa-icon>
 </th>
 <th *ngFor="let header of headers; let i = index">
-  <input class="form-control" [ngClass]="{'is-invalid': hasValidationError(header)}" placeholder="{{placeholders[i]}}"
+  <input class="form-control" [ngClass]="{'is-invalid': hasValidationError(header)}" placeholder="{{getPlaceHolder(i)}}"
     (keyup)="onFilter()" [(ngModel)]="filters[header].value">
     <p class="validation-error text-danger" *ngIf="errors[header]?.error">{{errors[header]?.errorMsg}}</p>
 </th>

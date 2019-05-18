@@ -16,17 +16,29 @@ export class NgxTableCreateComponent implements OnInit {
 
   buttonEnable = true;
 
-  @Input() headers: NgxTableHeaders;
-
-  placeholders: NgxTablePlaceholders;
-
-  configBK: NgxTableConfig;
-  @Input()
-  set config(config: NgxTableConfig) {
-    this.configBK = config;
+  headersCopy: NgxTableHeaders;
+  @Input() set headers(headers: NgxTableHeaders) {
+    this.headersCopy = headers;
     this.buildPlaceholders();
   }
 
+  get headers() {
+    return this.headersCopy;
+  }
+
+  placeholders: NgxTablePlaceholders;
+  @Input() set humanHeaders(headers: NgxTableHeaders) {
+    this.placeholders = headers.map(p => `New ${p}`);
+  }
+
+  get humanHeaders() {
+    return this.placeholders;
+  }
+
+  configBK: NgxTableConfig;
+  @Input() set config(config: NgxTableConfig) {
+    this.configBK = config;
+  }
   get config() {
     return this.configBK;
   }
@@ -79,12 +91,13 @@ export class NgxTableCreateComponent implements OnInit {
     this.newObj = {};
   }
 
+  getPlaceHolder(idx: number) {
+    return this.placeholders ? this.placeholders[idx] : null;
+  }
+
   private buildPlaceholders() {
-    if (this.config.placeholders) {
-      this.placeholders = this.config.placeholders.map(p => `New ${p}`);
-    } else {
+    if (!this.placeholders && this.headers) {
       this.placeholders = this.headers.map(h => `New ${h}`);
     }
   }
-
 }

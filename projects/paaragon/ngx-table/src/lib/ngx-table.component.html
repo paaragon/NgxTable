@@ -1,13 +1,13 @@
 <div class="table-responsive">
   <table class="table">
     <thead>
-      <tr ngx-table-header [humanHeaders]="humanHeaders" [headers]="headers" (order)="onOrder($event)" [config]="mergedConfig"></tr>
-      <tr ngx-table-filter *ngIf="enableFilter()" [headers]="headers" [config]="mergedConfig" (filter)="onFilter($event)">
+      <tr ngx-table-header [humanHeaders]="humanHeaders" [headers]="headers" (order)="onOrder($event)" [config]="config"></tr>
+      <tr ngx-table-filter *ngIf="enableFilter()" [humanHeaders]="humanHeaders" [headers]="headers" [config]="config" (filter)="onFilter($event)">
       </tr>
-      <tr ngx-table-create *ngIf="enableCreate()" [headers]="headers" [config]="mergedConfig" (create)="onCreate($event)">
+      <tr ngx-table-create *ngIf="enableCreate()" [humanHeaders]="humanHeaders" [headers]="headers" [config]="config" (create)="onCreate($event)">
       </tr>
     </thead>
-    <tbody ngx-table-body [data]="content" [headers]="headers" *ngIf="enableBody()" [config]="mergedConfig"></tbody>
+    <tbody ngx-table-body [data]="data" [headers]="headers" *ngIf="enableBody()" [config]="config"></tbody>
   </table>
 </div>
 <div class="row" *ngIf="!enableBody()">

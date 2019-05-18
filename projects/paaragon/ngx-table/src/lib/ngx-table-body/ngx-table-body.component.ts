@@ -8,14 +8,11 @@ import { NgxTableHeaders, NgxTableConfig } from '../ngx-table.types';
 })
 export class NgxTableBodyComponent implements OnInit {
 
-  @Input()
-  config: NgxTableConfig;
+  @Input() config: NgxTableConfig;
 
-  @Input()
-  data: any[] = [];
+  @Input() data: any[];
 
-  @Input()
-  headers: NgxTableHeaders;
+  @Input() headers: NgxTableHeaders;
 
   constructor() { }
 
