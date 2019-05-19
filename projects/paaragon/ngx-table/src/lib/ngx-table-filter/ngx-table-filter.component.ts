@@ -110,7 +110,7 @@ export class NgxTableFilterComponent implements OnInit {
   getPlaceHolder(idx: number) {
     return this.placeholders ? this.placeholders[idx] : null;
   }
-  
+
   setOperator(header: string, operator: NgxTableOperator) {
     this.filters[header].operator = operator;
     this.closeDropdown(header);

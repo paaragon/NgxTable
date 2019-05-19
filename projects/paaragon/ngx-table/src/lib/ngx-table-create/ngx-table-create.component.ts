@@ -95,7 +95,7 @@ export class NgxTableCreateComponent implements OnInit {
     return this.placeholders ? this.placeholders[idx] : null;
   }
 
-  isLockedColumn(header: string){
+  isLockedColumn(header: string) {
     return this.config && this.config.create.lock && this.config.create.lock.indexOf(header) !== -1;
   }
 
