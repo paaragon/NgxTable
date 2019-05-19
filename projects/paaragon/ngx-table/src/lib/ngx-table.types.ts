@@ -9,8 +9,8 @@ export interface NgxTableOrder {
     direction: 1 | -1;
 }
 export interface NgxTableOperator {
-    name: string,
-    symbol: string
+    name: string;
+    symbol: string;
 }
 export interface NgxTableFilter {
     [key: string]: { operator: NgxTableOperator, value: string };

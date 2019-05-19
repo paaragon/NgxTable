@@ -91,7 +91,7 @@ export class NgxTableFilterComponent implements OnInit {
       !this.isLocked(key) &&
       this.filters &&
       this.filters[key] &&
-      this.filters[key].operator
+      this.filters[key].operator;
   }
 
   isLocked(header: string) {
@@ -167,7 +167,7 @@ export class NgxTableFilterComponent implements OnInit {
         operator = this.config.filter.operators[0];
       }
       this.filters[header] = {
-        operator: operator,
+        operator,
         value: null
       };
     }
