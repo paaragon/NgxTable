@@ -20,7 +20,7 @@ export class AppComponent {
   placeholders: NgxTableHeaders = ['Name', 'Last Name', 'Birth Date (dd/mm/yyyy)', 'Company', 'Salary'];
 
   config: NgxTableConfig = {
-    order: {
+    sort: {
       enable: true
     },
     filter: {
@@ -47,7 +47,7 @@ export class AppComponent {
     }
   };
 
-  onOrder(order: NgxTableOrder) {
+  onSort(order: NgxTableOrder) {
     this.orderObj = order;
     this.refresh();
   }
@@ -63,7 +63,11 @@ export class AppComponent {
   }
 
   onDelete(index: number) {
-    this.dataBK.splice(index, 1);
+    const row = this.data[index];
+    const rowBKIndex = this.dataBK.findIndex(r =>
+      Object.keys(r).every(key => r[key] === row[key])
+    );
+    this.dataBK.splice(rowBKIndex, 1);
     this.refresh();
   }
 

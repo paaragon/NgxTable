@@ -1,13 +1,13 @@
 <th class="first-cell">
   <fa-icon [icon]="faHashtag"></fa-icon>
 </th>
-<ng-container *ngIf="!config.order.enable">
+<ng-container *ngIf="!config.sort.enable">
   <th *ngFor="let header of humanHeaders">
     {{header}}
   </th>
 </ng-container>
-<ng-container *ngIf="config.order.enable">
-  <th #orderableHeader *ngFor="let header of headers; let i = index" (click)="onOrder(header)" class="orderable">
+<ng-container *ngIf="config.sort.enable">
+  <th *ngFor="let header of headers; let i = index" (click)="onSort(header)" class="sortable">
     {{humanHeaders[i]}}
     <fa-icon [icon]="faCaretUp" *ngIf="isAsc(header)"></fa-icon>
     <fa-icon [icon]="faCaretDown" *ngIf="isDesc(header)"></fa-icon>

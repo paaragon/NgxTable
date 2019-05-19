@@ -16,7 +16,7 @@ export interface NgxTableNew {
 }
 export interface NgxTableConfig {
     placeholders?: NgxTablePlaceholders;
-    order?: {
+    sort?: {
         enable?: boolean
     };
     filter?: {

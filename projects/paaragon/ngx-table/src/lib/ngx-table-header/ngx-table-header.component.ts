@@ -21,15 +21,15 @@ export class NgxTableHeaderComponent implements OnInit {
 
   @Input() config: NgxTableConfig;
 
-  @Output() order: EventEmitter<NgxTableOrder> = new EventEmitter<NgxTableOrder>();
+  @Output() sort: EventEmitter<NgxTableOrder> = new EventEmitter<NgxTableOrder>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onOrder(header: string) {
-    if (!header || !this.config.order.enable) {
+  onSort(header: string) {
+    if (!header || !this.config.sort.enable) {
       return;
     }
     if (this.orderObj && this.orderObj.field === header && this.orderObj.direction === 1) {
@@ -46,7 +46,7 @@ export class NgxTableHeaderComponent implements OnInit {
       };
     }
 
-    this.order.emit(this.orderObj);
+    this.sort.emit(this.orderObj);
   }
 
   isAsc(header: string) {
