@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgxTableHeaders, NgxTableConfig } from '../ngx-table.types';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: '[ngx-table-body]',
@@ -8,11 +9,15 @@ import { NgxTableHeaders, NgxTableConfig } from '../ngx-table.types';
 })
 export class NgxTableBodyComponent implements OnInit {
 
+  faTrash = faTrash;
+
   @Input() config: NgxTableConfig;
 
   @Input() data: any[];
 
   @Input() headers: NgxTableHeaders;
+
+  @Output() delete: EventEmitter<number> = new EventEmitter<number>();
 
   constructor() { }
 
@@ -21,5 +26,9 @@ export class NgxTableBodyComponent implements OnInit {
 
   showLastColumn() {
     return this.config.create.enable || this.config.filter.enable;
+  }
+
+  onDelete(index: number) {
+    this.delete.emit(index);
   }
 }

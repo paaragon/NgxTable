@@ -40,6 +40,8 @@ export class NgxTableComponent implements OnInit {
 
   @Output() create: EventEmitter<NgxTableNew> = new EventEmitter<NgxTableNew>();
 
+  @Output() delete: EventEmitter<number> = new EventEmitter<number>();
+
   headers: NgxTableHeaders;
 
   /**
@@ -58,6 +60,9 @@ export class NgxTableComponent implements OnInit {
     create: {
       enable: false,
       validations: null
+    },
+    delete: {
+      enable: false
     }
   };
 
@@ -76,6 +81,10 @@ export class NgxTableComponent implements OnInit {
 
   onCreate(newObj: NgxTableNew) {
     this.create.emit(newObj);
+  }
+
+  onDelete(index: number) {
+    this.delete.emit(index);
   }
 
   enableFilter() {

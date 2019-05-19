@@ -59,6 +59,12 @@ export class AppComponent {
     this.refresh();
   }
 
+  onDelete(index: number) {
+    console.log(index);
+    this.dataBK.splice(index, 1);
+    this.refresh();
+  }
+
   refresh() {
     const dataTmp = this.filter(Object.assign([], this.dataBK));
     this.data = this.sort(dataTmp);

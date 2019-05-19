@@ -1,5 +1,9 @@
 <tr *ngFor="let row of data; let i = index">
   <td class="first-cell">{{i + 1}}</td>
   <td *ngFor="let header of headers">{{row[header]}}</td>
-  <td *ngIf="showLastColumn()"></td>
+  <td *ngIf="showLastColumn()">
+    <button type="button" class="btn btn-danger" (click)="onDelete(i)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+    </button>
+  </td>
 </tr>

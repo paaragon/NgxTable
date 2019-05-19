@@ -16,7 +16,7 @@ export interface NgxTableConfig {
         enable?: boolean
     };
     filter?: {
-        enable?: boolean,
+        enable: boolean,
         debounceTime?: number,
         validations?: {
             [key: string]: {
@@ -33,5 +33,8 @@ export interface NgxTableConfig {
                 errorMsg: string
             }
         }
+    };
+    delete?: {
+        enable: boolean
     };
 }

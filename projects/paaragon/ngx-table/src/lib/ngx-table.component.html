@@ -7,7 +7,7 @@
       <tr ngx-table-create *ngIf="enableCreate()" [humanHeaders]="humanHeaders" [headers]="headers" [config]="config" (create)="onCreate($event)">
       </tr>
     </thead>
-    <tbody ngx-table-body [data]="data" [headers]="headers" *ngIf="enableBody()" [config]="config"></tbody>
+    <tbody ngx-table-body [data]="data" [headers]="headers" *ngIf="enableBody()" [config]="config" (delete)="onDelete($event)"></tbody>
   </table>
 </div>
 <div class="row" *ngIf="!enableBody()">
