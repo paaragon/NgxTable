@@ -58,7 +58,7 @@ export class NgxTableRowComponent implements OnInit {
     return this.config.edit.enable && this.editions && Object.keys(this.editions).some(key => this.editions[key]);
   }
 
-  isLongContent(value: any){
+  isLongContent(value: any) {
     return value.toString().length > this.config.edit.longContent;
   }
 
