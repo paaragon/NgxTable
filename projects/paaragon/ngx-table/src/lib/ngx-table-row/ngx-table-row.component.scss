@@ -1,0 +1,28 @@
+td.last-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    width: 100%;
+
+    &:first-of-type {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+button {
+  font-size: 0.75rem;
+}
+
+td.cell {
+  &>span {
+    display: flex;
+    align-items: center;
+  }
+
+  input {
+    font-size: 0.75rem;
+  }
+}

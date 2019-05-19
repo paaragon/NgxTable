@@ -1,5 +1,9 @@
 export type NgxTableHeaders = string[];
 export type NgxTablePlaceholders = string[];
+export interface NgxTableEdition {
+    index: number;
+    row: any;
+}
 export interface NgxTableOrder {
     field: string;
     direction: 1 | -1;
@@ -35,6 +39,9 @@ export interface NgxTableConfig {
         }
     };
     delete?: {
+        enable: boolean
+    };
+    edit?: {
         enable: boolean
     };
 }

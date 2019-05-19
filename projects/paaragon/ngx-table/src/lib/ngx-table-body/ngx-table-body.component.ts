@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NgxTableHeaders, NgxTableConfig } from '../ngx-table.types';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, Input, Output, EventEmitter, QueryList, ViewChildren } from '@angular/core';
+import { NgxTableHeaders, NgxTableConfig, NgxTableEdition } from '../ngx-table.types';
 
 @Component({
   selector: '[ngx-table-body]',
@@ -9,26 +8,41 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 })
 export class NgxTableBodyComponent implements OnInit {
 
-  faTrash = faTrash;
+  showBody = true;
 
   @Input() config: NgxTableConfig;
 
-  @Input() data: any[];
+  dataBK: any[];
+  @Input() set data(data: any[]) {
+    this.dataBK = data;
+    this.reloadBody();
+  }
+
+  get data() {
+    return this.dataBK;
+  }
 
   @Input() headers: NgxTableHeaders;
 
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
+
+  @Output() edit: EventEmitter<NgxTableEdition> = new EventEmitter<NgxTableEdition>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  showLastColumn() {
-    return this.config.create.enable || this.config.filter.enable;
-  }
-
   onDelete(index: number) {
     this.delete.emit(index);
+  }
+
+  onEdit(i, row: any) {
+    this.edit.emit({ index: i, row });
+  }
+
+  reloadBody() {
+    this.showBody = false;
+    setTimeout(() => this.showBody = true);
   }
 }

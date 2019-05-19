@@ -58,6 +58,6 @@ export class NgxTableHeaderComponent implements OnInit {
   }
 
   showLastColumn() {
-    return this.config.create.enable || this.config.filter.enable;
+    return this.config.create.enable || this.config.filter.enable || this.config.delete.enable;
   }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import mock, { MockObj } from './mock/table.mock';
-import { NgxTableOrder, NgxTableFilter, NgxTableHeaders, NgxTableConfig, NgxTableNew } from 'projects/paaragon/ngx-table/src/projects';
+import { NgxTableOrder, NgxTableFilter, NgxTableHeaders, NgxTableConfig, NgxTableNew, NgxTableEdition } from 'projects/paaragon/ngx-table/src/projects';
 
 @Component({
   selector: 'app-root',
@@ -41,6 +41,9 @@ export class AppComponent {
           errorMsg: 'Salary must be a number'
         }
       }
+    },
+    edit: {
+      enable: true
     }
   };
 
@@ -60,8 +63,12 @@ export class AppComponent {
   }
 
   onDelete(index: number) {
-    console.log(index);
     this.dataBK.splice(index, 1);
+    this.refresh();
+  }
+
+  onEdit(edition: NgxTableEdition) {
+    this.dataBK[edition.index] = edition.row;
     this.refresh();
   }
 

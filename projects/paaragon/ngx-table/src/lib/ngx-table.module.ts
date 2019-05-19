@@ -6,10 +6,17 @@ import { NgxTableHeaderComponent } from './ngx-table-header/ngx-table-header.com
 import { NgxTableBodyComponent } from './ngx-table-body/ngx-table-body.component';
 import { NgxTableFilterComponent } from './ngx-table-filter/ngx-table-filter.component';
 import { NgxTableCreateComponent } from './ngx-table-create/ngx-table-create.component';
+import { NgxTableRowComponent } from './ngx-table-row/ngx-table-row.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-  declarations: [NgxTableComponent, NgxTableHeaderComponent, NgxTableBodyComponent, NgxTableFilterComponent, NgxTableCreateComponent],
+  declarations: [
+    NgxTableComponent,
+    NgxTableHeaderComponent,
+    NgxTableBodyComponent,
+    NgxTableFilterComponent,
+    NgxTableCreateComponent,
+    NgxTableRowComponent],
   imports: [
     CommonModule,
     FormsModule,

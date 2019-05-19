@@ -1,0 +1,26 @@
+<td class="first-cell">{{index + 1}}</td>
+<td *ngFor="let header of headers" class="cell">
+  <span>
+    <ng-container *ngIf="!isEditionEnabled(header)">
+      <span (click)="enableEdition(header)">{{row[header]}}</span>
+    </ng-container>
+    <ng-container *ngIf="isEditionEnabled(header)">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="{{rowBK[header]}}" [(ngModel)]="row[header]">
+        <div class="input-group-append">
+          <button type="button" class="btn btn-outline-secondary" (click)="cancelEdition(header)">
+            <fa-icon [icon]="faTimes"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </span>
+</td>
+<td *ngIf="showLastColumn()" class="last-cell">
+  <button type="button" class="btn btn-warning" (click)="onEdit()" *ngIf="isRowEditting()">
+    <fa-icon [icon]="faSave"></fa-icon>
+  </button>
+  <button type="button" class="btn btn-danger" (click)="onDelete()">
+    <fa-icon [icon]="faTrash"></fa-icon>
+  </button>
+</td>
