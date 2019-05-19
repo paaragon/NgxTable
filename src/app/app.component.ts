@@ -20,7 +20,6 @@ export class AppComponent {
   placeholders: NgxTableHeaders = ['Name', 'Last Name', 'Birth Date (dd/mm/yyyy)', 'Company', 'Salary'];
 
   config: NgxTableConfig = {
-    // placeholders: this.placeholders,
     order: {
       enable: true
     },
@@ -43,7 +42,8 @@ export class AppComponent {
       }
     },
     edit: {
-      enable: true
+      enable: true,
+      longContent: 10
     }
   };
 

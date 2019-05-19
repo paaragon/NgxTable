@@ -43,6 +43,6 @@ export interface NgxTableConfig {
     };
     edit?: {
         enable: boolean,
-        longContent?: 20
+        longContent?: number
     };
 }
