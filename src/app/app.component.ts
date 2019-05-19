@@ -31,7 +31,11 @@ export class AppComponent {
           errorMsg: 'Salary must be a number'
         }
       },
-      lock: ['name']
+      lock: ['name'],
+      operators: [
+        { name: 'like', symbol: '*' },
+        { name: 'eq', symbol: '=' }
+      ]
     },
     create: {
       enable: true,
@@ -56,6 +60,7 @@ export class AppComponent {
   }
 
   onFilter(filter: NgxTableFilter) {
+    console.log(filter);
     this.filterObj = filter;
     this.refresh();
   }

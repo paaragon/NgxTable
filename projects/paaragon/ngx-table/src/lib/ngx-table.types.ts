@@ -8,8 +8,12 @@ export interface NgxTableOrder {
     field: string;
     direction: 1 | -1;
 }
+export interface NgxTableOperator {
+    name: string,
+    symbol: string
+}
 export interface NgxTableFilter {
-    [key: string]: { operator: string, value: string };
+    [key: string]: { operator: NgxTableOperator, value: string };
 }
 export interface NgxTableNew {
     [key: string]: any;
@@ -28,7 +32,8 @@ export interface NgxTableConfig {
                 errorMsg: string
             }
         },
-        lock?: string[]
+        lock?: string[],
+        operators?: NgxTableOperator[]
     };
     create?: {
         enable: boolean,

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { NgxTableHeaders, NgxTableFilter, NgxTableConfig, NgxTablePlaceholders } from '../ngx-table.types';
+import { NgxTableHeaders, NgxTableFilter, NgxTableConfig, NgxTablePlaceholders, NgxTableOperator } from '../ngx-table.types';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -59,6 +59,8 @@ export class NgxTableFilterComponent implements OnInit {
   @Output() filter: EventEmitter<NgxTableFilter> = new EventEmitter<NgxTableFilter>();
   debouncer: Subject<NgxTableFilter> = new Subject<NgxTableFilter>();
 
+  dropdowns = {};
+
   constructor() {
   }
 
@@ -82,6 +84,15 @@ export class NgxTableFilterComponent implements OnInit {
     return this.errors && this.errors[header] && this.errors[header].error;
   }
 
+  hasOperator(key: string) {
+    return this.config &&
+      this.config.filter.operators &&
+      !this.isLocked(key) &&
+      this.filters &&
+      this.filters[key] &&
+      this.filters[key].operator
+  }
+
   isLocked(header: string) {
     return this.config && this.config.filter.lock && this.config.filter.lock.indexOf(header) !== -1;
   }
@@ -97,6 +108,24 @@ export class NgxTableFilterComponent implements OnInit {
 
   getPlaceHolder(idx: number) {
     return this.placeholders ? this.placeholders[idx] : null;
+  }
+  
+  setOperator(header: string, operator: NgxTableOperator) {
+    this.filters[header].operator = operator;
+    this.closeDropdown(header);
+    this.onFilter();
+  }
+
+  openDropdown(header: string) {
+    this.dropdowns[header] = true;
+  }
+
+  closeDropdown(header: string) {
+    this.dropdowns[header] = false;
+  }
+
+  isDropdownOpen(header: string) {
+    return this.dropdowns[header];
   }
 
   private validateFilters(f: NgxTableFilter): boolean {
@@ -132,8 +161,12 @@ export class NgxTableFilterComponent implements OnInit {
       if (this.filters[header]) {
         continue;
       }
+      let operator = null;
+      if (this.config && this.config.filter.operators && this.config.filter.operators.length > 0) {
+        operator = this.config.filter.operators[0];
+      }
       this.filters[header] = {
-        operator: null,
+        operator: operator,
         value: null
       };
     }

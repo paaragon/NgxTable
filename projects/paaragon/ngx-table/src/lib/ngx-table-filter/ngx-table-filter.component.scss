@@ -24,3 +24,13 @@ th {
 input {
   font-size: 0.75rem;
 }
+
+.dropdown-menu {
+  left: auto !important;
+  right: 0 !important;
+  min-width: 0;
+
+  &.show {
+    display: block !important;
+  }
+}

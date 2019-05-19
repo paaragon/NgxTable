@@ -1,9 +1,24 @@
 <th class="first-cell">
-    <fa-icon [icon]="faFilter"></fa-icon>
+  <fa-icon [icon]="faFilter"></fa-icon>
 </th>
 <th *ngFor="let header of headers; let i = index">
-  <input class="form-control" [ngClass]="{'is-invalid': hasValidationError(header)}" placeholder="{{getPlaceHolder(i)}}"
-    (keyup)="onFilter()" [(ngModel)]="filters[header].value" [disabled]="isLocked(header)">
-    <p class="validation-error text-danger" *ngIf="errors[header]?.error">{{errors[header]?.errorMsg}}</p>
+  <div class="input-group">
+    <input class="form-control" [ngClass]="{'is-invalid': hasValidationError(header)}"
+      placeholder="{{getPlaceHolder(i)}}" (keyup)="onFilter()" [(ngModel)]="filters[header].value"
+      [disabled]="isLocked(header)">
+    <div class="input-group-append" *ngIf="hasOperator(header)" (mouseenter)="openDropdown(header)"
+      (mouseleave)="closeDropdown(header)">
+      <button type="button" class="btn btn-outline-secondary" disabled>{{filters[header].operator.symbol}}</button>
+      <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="true"><span class="sr-only">Toggle Dropdown</span></button>
+      <div class="dropdown-menu" [ngClass]="{'show': isDropdownOpen(header)}">
+        <span *ngFor="let operator of config.filter.operators" class="dropdown-item" href="#"
+          (click)="setOperator(header, operator)">
+          {{operator.symbol}}
+        </span>
+      </div>
+    </div>
+  </div>
+  <p class="validation-error text-danger" *ngIf="errors[header]?.error">{{errors[header]?.errorMsg}}</p>
 </th>
 <th><button type="button" class="btn btn-warning" (click)="cleanFilters()">Clean filters</button></th>
