@@ -59,7 +59,7 @@ export class NgxTableComponent implements OnInit {
       enable: false,
       debounceTime: 200,
       validations: null,
-      locked: null
+      lock: null
     },
     create: {
       enable: false,
@@ -70,7 +70,8 @@ export class NgxTableComponent implements OnInit {
     },
     edit: {
       enable: false,
-      longContent: 20
+      longContent: 20,
+      lock: null
     }
   };
 

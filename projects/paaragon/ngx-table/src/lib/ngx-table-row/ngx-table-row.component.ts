@@ -50,8 +50,16 @@ export class NgxTableRowComponent implements OnInit {
     this.edit.emit(this.row);
   }
 
-  isEditionEnabled(key: string) {
+  isCellEditable(key: string) {
+    return this.config && this.config.edit.enable && !this.isLockedColumn(key);
+  }
+
+  showInput(key: string) {
     return this.config.edit.enable && this.editions && this.editions[key] === true;
+  }
+
+  isLockedColumn(key: string) {
+    return this.config && this.config.edit.lock && this.config.edit.lock.indexOf(key) !== -1;
   }
 
   isRowEditting() {
@@ -72,7 +80,9 @@ export class NgxTableRowComponent implements OnInit {
   }
 
   enableEdition(key: string) {
-    this.editions[key] = true;
+    if (!this.isLockedColumn(key)) {
+      this.editions[key] = true;
+    }
   }
 
   cancelEdition(key: string) {

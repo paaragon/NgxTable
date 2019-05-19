@@ -17,6 +17,11 @@ button {
 }
 
 td.cell {
+
+  &>span>span.editable {
+    cursor: pointer;
+  }
+
   &>span {
     display: flex;
     align-items: center;

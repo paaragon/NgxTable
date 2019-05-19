@@ -1,10 +1,10 @@
 <td class="first-cell">{{index + 1}}</td>
 <td *ngFor="let header of headers" class="cell">
   <span>
-    <ng-container *ngIf="!isEditionEnabled(header)">
-      <span (click)="enableEdition(header)">{{row[header]}}</span>
+    <ng-container *ngIf="!showInput(header)">
+      <span (click)="enableEdition(header)" [ngClass]="{'editable': isCellEditable(header)}">{{row[header]}}</span>
     </ng-container>
-    <ng-container *ngIf="isEditionEnabled(header)">
+    <ng-container *ngIf="showInput(header)">
       <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="{{rowBK[header]}}" [(ngModel)]="row[header]" *ngIf="!isLongContent(row[header])">
         <textarea class="form-control" placeholder="{{rowBK[header]}}" [(ngModel)]="row[header]" *ngIf="isLongContent(row[header])"></textarea>

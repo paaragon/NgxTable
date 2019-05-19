@@ -31,7 +31,7 @@ export class AppComponent {
           errorMsg: 'Salary must be a number'
         }
       },
-      locked: ['name']
+      lock: ['name']
     },
     create: {
       enable: true,
@@ -44,7 +44,8 @@ export class AppComponent {
     },
     edit: {
       enable: true,
-      longContent: 10
+      longContent: 30,
+      lock: ['salary']
     }
   };
 

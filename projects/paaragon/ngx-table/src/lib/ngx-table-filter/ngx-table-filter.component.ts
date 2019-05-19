@@ -83,7 +83,7 @@ export class NgxTableFilterComponent implements OnInit {
   }
 
   isLocked(header: string) {
-    return this.config && this.config.filter.locked && this.config.filter.locked.indexOf(header) !== -1;
+    return this.config && this.config.filter.lock && this.config.filter.lock.indexOf(header) !== -1;
   }
 
   cleanFilters() {

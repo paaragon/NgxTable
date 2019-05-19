@@ -28,7 +28,7 @@ export interface NgxTableConfig {
                 errorMsg: string
             }
         },
-        locked?: string[]
+        lock?: string[]
     };
     create?: {
         enable: boolean,
@@ -44,6 +44,7 @@ export interface NgxTableConfig {
     };
     edit?: {
         enable: boolean,
-        longContent?: number
+        longContent?: number,
+        lock?: string[] 
     };
 }
