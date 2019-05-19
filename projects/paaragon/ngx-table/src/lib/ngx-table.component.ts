@@ -58,7 +58,8 @@ export class NgxTableComponent implements OnInit {
     filter: {
       enable: false,
       debounceTime: 200,
-      validations: null
+      validations: null,
+      locked: null
     },
     create: {
       enable: false,

@@ -27,7 +27,8 @@ export interface NgxTableConfig {
                 regex: string,
                 errorMsg: string
             }
-        }
+        },
+        locked?: string[]
     };
     create?: {
         enable: boolean,

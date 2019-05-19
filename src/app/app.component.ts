@@ -30,7 +30,8 @@ export class AppComponent {
           regex: '^\\d+$',
           errorMsg: 'Salary must be a number'
         }
-      }
+      },
+      locked: ['name']
     },
     create: {
       enable: true,
