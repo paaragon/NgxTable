@@ -2,7 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { NgxTableHeaders, NgxTableFilter, NgxTableConfig, NgxTablePlaceholders, NgxTableOperator } from '../ngx-table.types';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faBroom } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: '[ngx-table-filter]',
@@ -15,6 +15,7 @@ export class NgxTableFilterComponent implements OnInit {
    * Icon
    */
   faFilter = faFilter;
+  faBroom = faBroom;
 
   /**
    * Filter debounce subscription

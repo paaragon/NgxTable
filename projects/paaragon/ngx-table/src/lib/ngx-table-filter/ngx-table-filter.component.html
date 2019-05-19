@@ -21,4 +21,4 @@
   </div>
   <p class="validation-error text-danger" *ngIf="errors[header]?.error">{{errors[header]?.errorMsg}}</p>
 </th>
-<th><button type="button" class="btn btn-warning" (click)="cleanFilters()">Clean filters</button></th>
+<th><button type="button" class="btn btn-warning" (click)="cleanFilters()"><fa-icon [icon]="faBroom"></fa-icon></button></th>

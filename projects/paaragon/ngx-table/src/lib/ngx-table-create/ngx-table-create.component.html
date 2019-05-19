@@ -6,4 +6,4 @@
     (keyup)="validate()" [(ngModel)]="newObj[header]" [disabled]="isLockedColumn(header)">
     <p class="validation-error text-danger" *ngIf="hasValidationError(header)">{{errors[header]?.errorMsg}}</p>
 </th>
-<th><button type="button" class="btn btn-success" (click)="onCreate()" [disabled]="!buttonEnable">Create</button></th>
+<th><button type="button" class="btn btn-success" (click)="onCreate()" [disabled]="!buttonEnable"><fa-icon [icon]="faPlus"></fa-icon></button></th>

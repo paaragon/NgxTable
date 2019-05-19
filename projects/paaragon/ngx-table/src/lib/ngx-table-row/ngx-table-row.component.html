@@ -18,7 +18,7 @@
   </span>
 </td>
 <td *ngIf="showLastColumn()" class="last-cell">
-  <button type="button" class="btn btn-warning" (click)="onEdit()" *ngIf="isRowEditting()">
+  <button type="button" class="btn btn-warning save" (click)="onEdit()" *ngIf="isRowEditting()">
     <fa-icon [icon]="faSave"></fa-icon>
   </button>
   <button type="button" class="btn btn-danger" (click)="onDelete()">
