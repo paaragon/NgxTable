@@ -63,7 +63,8 @@ export class NgxTableComponent implements OnInit {
     },
     create: {
       enable: false,
-      validations: null
+      validations: null,
+      lock: null
     },
     delete: {
       enable: false

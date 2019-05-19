@@ -5,6 +5,7 @@ const mock = [];
 
 for (let i = 0; i < size; i++) {
     const obj: MockObj = {
+        id: faker.random.number({ min: 100, max: 1000 }),
         name: faker.name.firstName(),
         lastname: faker.name.lastName(),
         birthdate: faker.date.past(),
@@ -14,5 +15,5 @@ for (let i = 0; i < size; i++) {
     mock.push(obj);
 }
 
-export interface MockObj { name: string; lastname: string; birthdate: Date; company: string; salary: number; }
+export interface MockObj { id: number, name: string; lastname: string; birthdate: Date; company: string; salary: number; }
 export default mock;

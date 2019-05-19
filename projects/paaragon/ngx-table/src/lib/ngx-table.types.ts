@@ -37,7 +37,8 @@ export interface NgxTableConfig {
                 regex: string,
                 errorMsg: string
             }
-        }
+        },
+        lock?: string[]
     };
     delete?: {
         enable: boolean
@@ -45,6 +46,6 @@ export interface NgxTableConfig {
     edit?: {
         enable: boolean,
         longContent?: number,
-        lock?: string[] 
+        lock?: string[]
     };
 }

@@ -16,8 +16,8 @@ export class AppComponent {
 
   orderObj: NgxTableOrder;
   filterObj: NgxTableFilter;
-  headers: NgxTableHeaders = ['Name', 'Last Name', 'Birth Date', 'Company', 'Salary'];
-  placeholders: NgxTableHeaders = ['Name', 'Last Name', 'Birth Date (dd/mm/yyyy)', 'Company', 'Salary'];
+  headers: NgxTableHeaders = ['Id', 'Name', 'Last Name', 'Birth Date', 'Company', 'Salary'];
+  placeholders: NgxTableHeaders = ['Id', 'Name', 'Last Name', 'Birth Date (dd/mm/yyyy)', 'Company', 'Salary'];
 
   config: NgxTableConfig = {
     sort: {
@@ -40,7 +40,8 @@ export class AppComponent {
           regex: '^\\d+$',
           errorMsg: 'Salary must be a number'
         }
-      }
+      },
+      lock: ['id']
     },
     edit: {
       enable: true,
