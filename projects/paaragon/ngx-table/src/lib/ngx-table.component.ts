@@ -67,7 +67,8 @@ export class NgxTableComponent implements OnInit {
       enable: false
     },
     edit: {
-      enable: false
+      enable: false,
+      longContent: 20
     }
   };
 

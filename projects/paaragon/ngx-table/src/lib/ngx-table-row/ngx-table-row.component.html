@@ -6,7 +6,8 @@
     </ng-container>
     <ng-container *ngIf="isEditionEnabled(header)">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="{{rowBK[header]}}" [(ngModel)]="row[header]">
+        <input type="text" class="form-control" placeholder="{{rowBK[header]}}" [(ngModel)]="row[header]" *ngIf="!isLongContent(row[header])">
+        <textarea class="form-control" placeholder="{{rowBK[header]}}" [(ngModel)]="row[header]" *ngIf="isLongContent(row[header])"></textarea>
         <div class="input-group-append">
           <button type="button" class="btn btn-outline-secondary" (click)="cancelEdition(header)">
             <fa-icon [icon]="faTimes"></fa-icon>
