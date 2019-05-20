@@ -12,10 +12,10 @@
       <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="true"><span class="sr-only">Toggle Dropdown</span></button>
       <div class="dropdown-menu" [ngClass]="{'show': isDropdownOpen(header)}">
-        <span *ngFor="let operator of config.filter.operators" class="dropdown-item" href="#"
+        <a *ngFor="let operator of config.filter.operators" class="dropdown-item" href="#"
           (click)="setOperator(header, operator)">
           {{operator.symbol}}
-        </span>
+        </a>
       </div>
     </div>
   </div>
