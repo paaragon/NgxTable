@@ -53,4 +53,9 @@ export interface NgxTableConfig {
         longContent?: number,
         lock?: string[]
     };
+    paginator?: {
+        enable: boolean,
+        elementsPerPage?: number,
+        visiblePages?: number
+    }
 }

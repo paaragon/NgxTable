@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import mock, { MockObj } from './mock/table.mock';
 import { NgxTableOrder, NgxTableFilter, NgxTableHeaders, NgxTableConfig, NgxTableNew, NgxTableEdition } from 'projects/paaragon/ngx-table/src/projects';
 
@@ -7,12 +7,19 @@ import { NgxTableOrder, NgxTableFilter, NgxTableHeaders, NgxTableConfig, NgxTabl
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
   title = 'ngx-table';
 
   data: MockObj[] = mock;
 
   dataBK: MockObj[] = Object.assign([], this.data);
+
+  elementsPerPage = 20;
+
+  ngOnInit(): void {
+    this.data = this.dataBK.splice(0, this.elementsPerPage);
+  }
 
   orderObj: NgxTableOrder;
   filterObj: NgxTableFilter;
@@ -51,6 +58,9 @@ export class AppComponent {
       enable: true,
       longContent: 30,
       lock: ['salary']
+    },
+    paginator: {
+      enable: true
     }
   };
 
@@ -82,6 +92,10 @@ export class AppComponent {
   onEdit(edition: NgxTableEdition) {
     this.dataBK[edition.index] = edition.row;
     this.refresh();
+  }
+
+  goToPage(page: number) {
+    console.log('gotopage', page);
   }
 
   refresh() {

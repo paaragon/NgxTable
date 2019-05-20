@@ -19,3 +19,6 @@
     </div>
   </div>
 </div>
+<div *ngIf="enablePaginator()">
+  <ngx-table-paginator [totalElements]="totalElements" [elementsPerPage]="config.paginator.elementsPerPage" [config]="config" (page)="goToPage($event)"></ngx-table-paginator>
+</div>

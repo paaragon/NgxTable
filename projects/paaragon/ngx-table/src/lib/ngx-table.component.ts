@@ -35,6 +35,8 @@ export class NgxTableComponent implements OnInit {
     return this.mergedConfig;
   }
 
+  @Input() totalElements: number;
+
   @Output() sort: EventEmitter<NgxTableOrder> = new EventEmitter<NgxTableOrder>();
 
   @Output() filter: EventEmitter<NgxTableFilter> = new EventEmitter<NgxTableFilter>();
@@ -44,6 +46,8 @@ export class NgxTableComponent implements OnInit {
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
 
   @Output() edit: EventEmitter<NgxTableEdition> = new EventEmitter<NgxTableEdition>();
+
+  @Output() page: EventEmitter<number> = new EventEmitter<number>();
 
   headers: NgxTableHeaders;
 
@@ -74,13 +78,17 @@ export class NgxTableComponent implements OnInit {
       enable: false,
       longContent: 20,
       lock: null
+    },
+    paginator: {
+      enable: false,
+      elementsPerPage: 10,
+      visiblePages: 5
     }
   };
 
   orderObj: NgxTableOrder;
 
   constructor(
-    private tableService: NgxTableService
   ) { }
 
   ngOnInit() {
@@ -107,6 +115,10 @@ export class NgxTableComponent implements OnInit {
     this.edit.emit(edition);
   }
 
+  goToPage(page: number) {
+    this.page.emit(page);
+  }
+
   enableFilter() {
     return this.headers && this.config.filter.enable;
   }
@@ -117,6 +129,10 @@ export class NgxTableComponent implements OnInit {
 
   enableBody() {
     return this.data && this.data.length > 0;
+  }
+
+  enablePaginator() {
+    return this.config && this.config.paginator.enable && this.data && this.data.length > 0;
   }
 
   private initHeaders() {
