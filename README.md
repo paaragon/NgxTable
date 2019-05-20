@@ -200,4 +200,4 @@ interface NgxTableConfig {
 }
 ```
 
-[Complete documentation](https://github.com/paaragon/NgxTable/wiki/Delete)
+[Complete documentation](https://github.com/paaragon/NgxTable/wiki/Config)
