@@ -8,12 +8,12 @@ This table handles different events that can be implemented by the developers th
 
 The events are the following:
 
-- [Sort](Sort)
-- [Filter](Filter)
-- [Create](Create)
-- [Edit](Edit)
-- [Delete](Delete)
-- [Pagination](Pagination)
+- [Sort](https://github.com/paaragon/NgxTable/wiki/Sort)
+- [Filter](https://github.com/paaragon/NgxTable/wiki/Filter)
+- [Create](https://github.com/paaragon/NgxTable/wiki/Create)
+- [Edit](https://github.com/paaragon/NgxTable/wiki/Edit)
+- [Delete](https://github.com/paaragon/NgxTable/wiki/Delete)
+- [Pagination](https://github.com/paaragon/NgxTable/wiki/Pagination)
 
 ## Instalation
 
@@ -62,7 +62,7 @@ interface NgxTableOrder {
 }
 ```
 
-[Complete documentation](Sort)
+[Complete documentation](https://github.com/paaragon/NgxTable/wiki/Sort)
 
 #### Filter
 
@@ -84,7 +84,7 @@ interface NgxTableFilter {
 }
 ```
 
-[Complete documentation](filter)
+[Complete documentation](https://github.com/paaragon/NgxTable/wiki/Filter)
 
 #### Create
 
@@ -106,7 +106,7 @@ interface NgxTableNew {
 }
 ```
 
-[Complete documentation](Create)
+[Complete documentation](https://github.com/paaragon/NgxTable/wiki/https://github.com/paaragon/NgxTable/wiki/Create)
 
 #### Edit
 
@@ -129,7 +129,7 @@ interface NgxTableEdition {
 }
 ```
 
-[Complete documentation](Edit)
+[Complete documentation](https://github.com/paaragon/NgxTable/wiki/Edit)
 
 #### Delete
 
@@ -145,7 +145,7 @@ onSort(index: number) {
 }
 ```
 
-[Complete documentation](Delete)
+[Complete documentation](https://github.com/paaragon/NgxTable/wiki/Delete)
 
 #### Pagination
 
@@ -200,4 +200,4 @@ interface NgxTableConfig {
 }
 ```
 
-[Complete documentation](Delete)
+[Complete documentation](https://github.com/paaragon/NgxTable/wiki/Delete)
