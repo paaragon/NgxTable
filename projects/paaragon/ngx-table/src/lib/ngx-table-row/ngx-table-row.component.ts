@@ -33,8 +33,6 @@ export class NgxTableRowComponent implements OnInit {
 
   @Input() headers: NgxTableHeaders;
 
-  @Input() lockedRow: boolean;
-
   @Output() delete: EventEmitter<void> = new EventEmitter<void>();
 
   @Output() edit: EventEmitter<any> = new EventEmitter<any>();
