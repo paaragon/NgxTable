@@ -33,6 +33,8 @@ export class NgxTableRowComponent implements OnInit {
 
   @Input() headers: NgxTableHeaders;
 
+  @Input() lockedRow: boolean;
+
   @Output() delete: EventEmitter<void> = new EventEmitter<void>();
 
   @Output() edit: EventEmitter<any> = new EventEmitter<any>();
@@ -71,6 +73,9 @@ export class NgxTableRowComponent implements OnInit {
   }
 
   initEditions() {
+    if (this.editions) {
+      return;
+    }
     this.editions = {};
     for (const key in this.row) {
       if (this.editions[key]) {

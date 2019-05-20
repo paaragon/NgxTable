@@ -1,6 +1,6 @@
 <ng-container *ngIf="showBody">
   <ng-container *ngFor="let row of dataBK; let i = index">
-    <tr ngx-table-row [config]="config" [row]="row" [headers]="headers" [index]="i" (delete)="onDelete(i)"
+    <tr ngx-table-row [config]="config" [row]="row" [headers]="headers" [index]="i" (delete)="onDelete(i)" [lockedRow]="locke"
       (edit)="onEdit(i, $event)"></tr>
   </ng-container>
 </ng-container>
