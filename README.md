@@ -62,7 +62,7 @@ interface NgxTableOrder {
 }
 ```
 
-[Complete documentation](https://github.com/paaragon/NgxTable/wiki/Sort)
+[Sort documentation](https://github.com/paaragon/NgxTable/wiki/Sort)
 
 #### Filter
 
@@ -84,7 +84,7 @@ interface NgxTableFilter {
 }
 ```
 
-[Complete documentation](https://github.com/paaragon/NgxTable/wiki/Filter)
+[Filter documentation](https://github.com/paaragon/NgxTable/wiki/Filter)
 
 #### Create
 
@@ -106,7 +106,7 @@ interface NgxTableNew {
 }
 ```
 
-[Complete documentation](https://github.com/paaragon/NgxTable/wiki/https://github.com/paaragon/NgxTable/wiki/Create)
+[Create documentation](https://github.com/paaragon/NgxTable/wiki/https://github.com/paaragon/NgxTable/wiki/Create)
 
 #### Edit
 
@@ -129,7 +129,7 @@ interface NgxTableEdition {
 }
 ```
 
-[Complete documentation](https://github.com/paaragon/NgxTable/wiki/Edit)
+[Edit documentation](https://github.com/paaragon/NgxTable/wiki/Edit)
 
 #### Delete
 
@@ -145,7 +145,7 @@ onSort(index: number) {
 }
 ```
 
-[Complete documentation](https://github.com/paaragon/NgxTable/wiki/Delete)
+[Delete documentation](https://github.com/paaragon/NgxTable/wiki/Delete)
 
 #### Pagination
 
@@ -200,4 +200,4 @@ interface NgxTableConfig {
 }
 ```
 
-[Complete documentation](https://github.com/paaragon/NgxTable/wiki/Config)
+[Config documentation](https://github.com/paaragon/NgxTable/wiki/Config)
