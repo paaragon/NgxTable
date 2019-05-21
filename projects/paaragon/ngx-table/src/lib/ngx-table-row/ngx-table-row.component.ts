@@ -107,7 +107,7 @@ export class NgxTableRowComponent implements OnInit {
     return this.errors && this.errors[header] && this.errors[header].error;
   }
 
-  private validate() {
+  validate() {
     this.errors = {};
     this.buttonEnable = true;
     if (!this.config.create.validations) {
