@@ -40,7 +40,8 @@ export interface NgxTableConfig {
         validations?: {
             [key: string]: {
                 regex: string,
-                errorMsg: string
+                errorMsg: string,
+                optional: boolean
             }
         },
         lock?: string[]

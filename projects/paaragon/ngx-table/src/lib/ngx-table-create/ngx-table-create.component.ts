@@ -57,13 +57,16 @@ export class NgxTableCreateComponent implements OnInit {
     if (!this.config.create.validations) {
       return true;
     }
-    for (const attr in this.newObj) {
-      if (!this.newObj[attr]) {
-        continue;
-      }
+    for (const attr in this.config.create.validations) {
       const validation = this.config.create.validations[attr];
-      if (!validation) {
-        continue;
+      const value = this.newObj[attr];
+      if (validation.optional === false && !value) {
+        this.errors[attr] = {
+          error: true,
+          errorMsg: 'Field cannot be empty'
+        };
+        this.buttonEnable = false;
+        return false;
       }
       const reg = new RegExp(validation.regex);
       if (!reg.test(this.newObj[attr])) {
@@ -84,8 +87,11 @@ export class NgxTableCreateComponent implements OnInit {
 
   onCreate() {
     if (!this.validate()) {
+      console.log('NO VALIDA');
       return;
     }
+
+    console.log('SI VALIDA');
 
     this.create.emit(this.newObj);
     this.newObj = {};

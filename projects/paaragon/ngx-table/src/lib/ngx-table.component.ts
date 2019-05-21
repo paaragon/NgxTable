@@ -111,7 +111,6 @@ export class NgxTableComponent implements OnInit {
   }
 
   onDelete(index: number) {
-    console.log(index);
     this.delete.emit(index);
   }
 

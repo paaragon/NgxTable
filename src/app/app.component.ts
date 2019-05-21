@@ -51,7 +51,8 @@ export class AppComponent implements OnInit {
       validations: {
         salary: {
           regex: '^\\d+$',
-          errorMsg: 'Salary must be a number'
+          errorMsg: 'Salary must be a number',
+          optional: false
         }
       },
       lock: ['id']
