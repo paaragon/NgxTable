@@ -2,33 +2,31 @@
 
 ![build status](https://api.travis-ci.org/paaragon/NgxTable.svg?branch=master)
 
-NgxTable is an angular component that shows your data in a table and allows you to control the most common events.
+This library offers an Angular component that allows you to display your data in a table.
 
-## Install
+This table handles different events that can be implemented by the developers that use it.
+
+The events are the following:
+
+- [Sort](https://github.com/paaragon/NgxTable/wiki/Sort)
+- [Filter](https://github.com/paaragon/NgxTable/wiki/Filter)
+- [Create](https://github.com/paaragon/NgxTable/wiki/Create)
+- [Edit](https://github.com/paaragon/NgxTable/wiki/Edit)
+- [Delete](https://github.com/paaragon/NgxTable/wiki/Delete)
+- [Pagination](https://github.com/paaragon/NgxTable/wiki/Pagination)
+
+## Instalation
 
 `npm install --save @paaragon/ngx-table`
 
 ## Dependencies
 
-- [Bootstrap 4](https://getbootstrap.com/): `npm install bootstrap --save`
-- [FontAwesome](https://fontawesome.com/): `npm install @fortawesome/fontawesome-free --save`
-
-## Features
-
-- **Show data**: this component shows an array of objects in a table.
-- **Custom headers**: you can specify custom headers names.
-- **Order event**: this component fires an order event everytime user click on a table header.
-- **Filter event**: this component shows a filter row. Everytime you write in those headers an event is fired with filter informacion.
-- **Create event**: this component shows a create row. Users can fill it an then press "Create". An event will be fired with creation info. [WIP]
-- **Delete event**: this component shows a delete column per each row. when user click on it, an event will be fired with the delete info. [WIP]
-- **Edit event**: each cell can be clicked to edit them. After edition, an edit button can be clicked and an event will be fired with the edition info. [WIP] 
-- **Pagination**: you can specify the elements per page and a paginator component will be shown at the bottom of the table. When each button in the paginator is clicked, an event with the pagination info will be fired. [WIP]
+[WIP]
 
 ## Usage
 
-In the basic usage you just have to pass your data as a component input
-
 ```typescript
+// component.ts
 const exampleData: any[] = [
     { name: 'Delbert', lastname: 'Keeling', birthdate: new Date(1990, 1, 21), company: 'Gislason, Braun and Kerluke', salary: 30432 },
     { name: 'Karine', lastname: 'Rice', birthdate: new Date(1982, 3, 1), company: 'Thiel - Connelly', salary: 29188 },
@@ -37,124 +35,150 @@ const exampleData: any[] = [
 ];
 ```
 ```html
+<!-- component.html -->
 <ngx-table [data]="exampleData"></ngx-table>
 ```
 
-![simple table](./doc-assets/simple-table.PNG)
+### Events
 
-## Order
-
-When order feature is enable, you can **click a header** to fire the order event.
-
-### Enable order in config object
-
-```typescript
-config: NgxTableConfig = {
-    ...
-    order: {
-        enable: false
-    }
-    ...
-};
-```
-
-### Bind order event
+#### Sort
 
 ```html
-<!-- in your html -->
-<ngx-table [data]="exampleData" [config]="config" (order)="onOrder($event)"></ngx-table>
+<!-- your component.html -->
+<ngx-table [data]="exampleData" (sort)="onSort($event)"></ngx-table>
 ```
 
 ```typescript
-// in your component .ts
-onOrder(order: NgxTableOrder) {
-    // update your data object with your order logic
+// your component.ts
+onSort(order: NgxTableOrder) {
+ // your sort logic
 }
 ```
 
-### NgxTableOrder type
-
 ```typescript
-export type NgxTableOrder = {
-    field: string,
-    direction: 1 | -1
-};
-```
-- **field**: column name to order
-- **direction**:
-    - 1: ascending
-    - -1: descending
-
-## Filter
-
-When filter feature is enable, you can **fill the filter row** to fire the fiter event.
-
-### Enable filter in config object
-
-```typescript
-config: NgxTableConfig = {
-    ...
-    filter: {
-        enable: false,
-        ...
-    }
-    ...
-};
-```
-
-### Bind filter event
-
-```html
-<!-- in your html -->
-<ngx-table [data]="exampleData" [config]="config" (filter)="onFilter($event)"></ngx-table>
-```
-
-```typescript
-// in your component .ts
-onOrder(filter: NgxTableFilter) {
-    // update your data object with your filter logic
+interface NgxTableOrder {
+    field: string;
+    direction: 1 | -1;
 }
 ```
 
-### NgxTableFilter type
+[Sort documentation](https://github.com/paaragon/NgxTable/wiki/Sort)
+
+#### Filter
+
+```html
+<!-- your component.html -->
+<ngx-table [data]="exampleData" (filter)="onFilter($event)"></ngx-table>
+```
 
 ```typescript
-export type NgxTableFilter { 
-    [key: string]: {
-        operator: string,
-        value: string
-    }
-};
+// your component.ts
+onSort(order: NgxTableFilter ) {
+ // your filter logic
+}
 ```
-- **key**: field name to filter
-- **operator**: the operator user has select
-- **value**: the value of the filter
 
-## Create
+```typescript
+interface NgxTableFilter {
+    [key: string]: { operator: NgxTableOperator, value: string };
+}
+```
 
-Coming soon
+[Filter documentation](https://github.com/paaragon/NgxTable/wiki/Filter)
+
+#### Create
+
+```html
+<!-- your component.html -->
+<ngx-table [data]="exampleData" (create)="onCreate($event)"></ngx-table>
+```
+
+```typescript
+// your component.ts
+onSort(order: NgxTableNew) {
+ // your create logic
+}
+```
+
+```typescript
+interface NgxTableNew {
+    [key: string]: any;
+}
+```
+
+[Create documentation](https://github.com/paaragon/NgxTable/wiki/https://github.com/paaragon/NgxTable/wiki/Create)
+
+#### Edit
+
+```html
+<!-- your component.html -->
+<ngx-table [data]="exampleData" (edit)="onEdit($event)"></ngx-table>
+```
+
+```typescript
+// your component.ts
+onSort(order: NgxTableEdition) {
+ // your edition logic
+}
+```
+
+```typescript
+interface NgxTableEdition {
+    index: number;
+    row: any;
+}
+```
+
+[Edit documentation](https://github.com/paaragon/NgxTable/wiki/Edit)
+
+#### Delete
+
+```html
+<!-- your component.html -->
+<ngx-table [data]="exampleData" (delete)="onDelete($event)"></ngx-table>
+```
+
+```typescript
+// your component.ts
+onSort(index: number) {
+ // your delete logic
+}
+```
+
+[Delete documentation](https://github.com/paaragon/NgxTable/wiki/Delete)
+
+#### Pagination
+
+[WIP]
 
 ## Config
 
+You can provide a config object to customize your table.
 
-This component manage a configuration object with the following structure (WIP):
+```html
+<!-- your component.html -->
+<ngx-table [data]="exampleData" [config]="config"></ngx-table>
+```
 
 ```typescript
-export type NgxTableConfig = {
-    placeholders?: NgxTablePlaceholders,
-    order?: {
+// Config interface
+interface NgxTableConfig {
+    placeholders?: NgxTablePlaceholders;
+    sort?: {
         enable?: boolean
-    },
+    };
     filter?: {
-        enable?: boolean,
+        enable: boolean,
         debounceTime?: number,
         validations?: {
             [key: string]: {
                 regex: string,
                 errorMsg: string
             }
-        }
-    },
+        },
+        lock?: string[],
+        operators?: NgxTableOperator[]
+    };
     create?: {
         enable: boolean,
         validations?: {
@@ -162,27 +186,18 @@ export type NgxTableConfig = {
                 regex: string,
                 errorMsg: string
             }
-        }
-    }
-};
+        },
+        lock?: string[]
+    };
+    delete?: {
+        enable: boolean
+    };
+    edit?: {
+        enable: boolean,
+        longContent?: number,
+        lock?: string[]
+    };
+}
 ```
 
-Default config
-
-```typescript
-config: NgxTableConfig = {
-    placeholders: [],
-    order: {
-        enable: false
-    },
-    filter: {
-        enable: false,
-        debounceTime: 200,
-        validations: {}
-    },
-    create: {
-        enable: false,
-        validations: {}
-    }
-};
-```
+[Config documentation](https://github.com/paaragon/NgxTable/wiki/Config)
