@@ -19,6 +19,7 @@ export class NgxTableCreateComponent implements OnInit {
   headersCopy: NgxTableHeaders;
   @Input() set headers(headers: NgxTableHeaders) {
     this.headersCopy = headers;
+    this.buildNewObj();
     this.buildPlaceholders();
   }
 
@@ -58,6 +59,9 @@ export class NgxTableCreateComponent implements OnInit {
       return true;
     }
     for (const attr in this.config.create.validations) {
+      if (!this.config.create.validations[attr]) {
+        continue;
+      }
       const validation = this.config.create.validations[attr];
       const value = this.newObj[attr];
       if (validation.optional === false && !value) {
@@ -87,11 +91,8 @@ export class NgxTableCreateComponent implements OnInit {
 
   onCreate() {
     if (!this.validate()) {
-      console.log('NO VALIDA');
       return;
     }
-
-    console.log('SI VALIDA');
 
     this.create.emit(this.newObj);
     this.newObj = {};
@@ -103,6 +104,12 @@ export class NgxTableCreateComponent implements OnInit {
 
   isLockedColumn(header: string) {
     return this.config && this.config.create.lock && this.config.create.lock.indexOf(header) !== -1;
+  }
+
+  private buildNewObj() {
+    for (const header of this.headers) {
+      this.newObj[header] = null;
+    }
   }
 
   private buildPlaceholders() {

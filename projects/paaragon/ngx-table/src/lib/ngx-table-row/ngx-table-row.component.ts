@@ -114,6 +114,9 @@ export class NgxTableRowComponent implements OnInit {
       return true;
     }
     for (const attr in this.config.create.validations) {
+      if (!this.config.create.validations[attr]) {
+        continue;
+      }
       const validation = this.config.create.validations[attr];
       const value = this.row[attr];
       if (validation.optional === false && !value) {

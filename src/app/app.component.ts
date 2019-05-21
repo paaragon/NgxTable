@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 
   elementsPerPage = 5;
 
-  currentPage;
+  currentPage = 0;
 
   ngOnInit(): void {
     this.data = this.dataBK;
@@ -86,6 +86,7 @@ export class AppComponent implements OnInit {
   }
 
   onCreate(newObj: NgxTableNew) {
+    console.log(newObj);
     this.dataBK.push(newObj as MockObj);
     this.refresh();
   }
