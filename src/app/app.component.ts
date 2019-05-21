@@ -15,10 +15,12 @@ export class AppComponent implements OnInit {
 
   dataBK: MockObj[] = Object.assign([], this.data);
 
-  elementsPerPage = 20;
+  elementsPerPage = 5;
+
+  currentPage;
 
   ngOnInit(): void {
-    this.data = this.dataBK.splice(0, this.elementsPerPage);
+    this.data = this.dataBK;
   }
 
   orderObj: NgxTableOrder;
@@ -60,7 +62,8 @@ export class AppComponent implements OnInit {
       lock: ['salary']
     },
     paginator: {
-      enable: true
+      enable: true,
+      elementsPerPage: this.elementsPerPage
     }
   };
 
@@ -70,7 +73,6 @@ export class AppComponent implements OnInit {
   }
 
   onFilter(filter: NgxTableFilter) {
-    console.log(filter);
     this.filterObj = filter;
     this.refresh();
   }
@@ -94,13 +96,15 @@ export class AppComponent implements OnInit {
     this.refresh();
   }
 
-  goToPage(page: number) {
-    console.log('gotopage', page);
+  onPage(page: number) {
+    this.currentPage = page;
+    this.refresh();
   }
 
   refresh() {
-    const dataTmp = this.filter(Object.assign([], this.dataBK));
-    this.data = this.sort(dataTmp);
+    let dataTmp = this.filter(Object.assign([], this.dataBK));
+    dataTmp = this.sort(dataTmp);
+    this.data = this.goToPage(dataTmp, this.currentPage);
   }
 
   filter(data: any[]): any[] {
@@ -129,5 +133,11 @@ export class AppComponent implements OnInit {
 
       return 0;
     });
+  }
+
+  goToPage(data, page: number): any[] {
+    const firstElement = page * this.elementsPerPage;
+    const lastElement = firstElement + this.elementsPerPage;
+    return data.slice(firstElement, lastElement);
   }
 }

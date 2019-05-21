@@ -17,8 +17,10 @@ export class NgxTableComponent implements OnInit {
    * Data of the table. Array of content
    */
   dataCopy: any[];
+  dataBK: any[];
   @Input() set data(data: any[]) {
     this.dataCopy = data;
+    this.dataBK = Object.assign([], data);
     this.initHeaders();
   }
 
@@ -29,6 +31,7 @@ export class NgxTableComponent implements OnInit {
   mergedConfig: NgxTableConfig;
   @Input() set config(conf: NgxTableConfig) {
     this.mergedConfig = DeepMerge.deepmerge(this.configBK, conf);
+    this.goToPage(0);
   }
 
   get config(): NgxTableConfig {
@@ -89,6 +92,7 @@ export class NgxTableComponent implements OnInit {
   orderObj: NgxTableOrder;
 
   constructor(
+    private service: NgxTableService
   ) { }
 
   ngOnInit() {
@@ -115,8 +119,18 @@ export class NgxTableComponent implements OnInit {
     this.edit.emit(edition);
   }
 
-  goToPage(page: number) {
+  onPage(page: number) {
+    if (this.page.observers.length === 0) {
+      console.log('nosotros llevamos la paginacion');
+      this.goToPage(page);
+    }
     this.page.emit(page);
+  }
+
+  goToPage(page) {
+    if (this.config) {
+      this.dataCopy = this.service.goToPage(this.dataBK, page, this.config.paginator.elementsPerPage);
+    }
   }
 
   enableFilter() {
@@ -133,6 +147,10 @@ export class NgxTableComponent implements OnInit {
 
   enablePaginator() {
     return this.config && this.config.paginator.enable && this.data && this.data.length > 0;
+  }
+
+  getElementsPerPage() {
+    return this.config.paginator.elementsPerPage;
   }
 
   private initHeaders() {

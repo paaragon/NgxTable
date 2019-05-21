@@ -57,5 +57,5 @@ export interface NgxTableConfig {
         enable: boolean,
         elementsPerPage?: number,
         visiblePages?: number
-    }
+    };
 }

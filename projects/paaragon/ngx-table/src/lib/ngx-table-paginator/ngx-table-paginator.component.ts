@@ -10,9 +10,10 @@ export class NgxTablePaginatorComponent implements OnInit {
 
   @Input() config: NgxTableConfig;
 
-  totalElementsCopy: number
+  totalElementsCopy: number;
   @Input() set totalElements(totalElements: number) {
     this.totalElementsCopy = totalElements;
+    this.calculateTotalPages();
     this.calculateVisiblePages();
   }
 
@@ -22,6 +23,7 @@ export class NgxTablePaginatorComponent implements OnInit {
   elementsPerPageCopy: number;
   @Input() set elementsPerPage(elementsPerPage: number) {
     this.elementsPerPageCopy = elementsPerPage;
+    this.calculateTotalPages();
     this.calculateVisiblePages();
   }
 
@@ -31,9 +33,11 @@ export class NgxTablePaginatorComponent implements OnInit {
 
   @Output() page: EventEmitter<number> = new EventEmitter<number>();
 
-  currentPage: number = 0;
+  currentPage = 0;
 
   visiblePages = [];
+
+  totalPages: number;
 
   constructor() { }
 
@@ -41,15 +45,31 @@ export class NgxTablePaginatorComponent implements OnInit {
   }
 
   calculateVisiblePages() {
-    if (this.config && this.totalElements && this.elementsPerPage) {
+    if (this.config && this.totalPages && this.elementsPerPage && this.totalPages) {
       this.visiblePages = [];
       const visPages = this.config.paginator.visiblePages;
       const halfvisPages = Math.floor(visPages / 2);
-      const firstPage = this.currentPage < halfvisPages ? 0 : this.currentPage - halfvisPages;
-      const lastPage = firstPage + visPages;
-      for (let i = firstPage; i < lastPage; i++) {
+      let firstPage = this.currentPage < halfvisPages ? 0 : this.currentPage - halfvisPages;
+      let lastPage = firstPage + visPages;
+      if (lastPage > this.totalPages - 1) {
+        lastPage = this.totalPages - 1;
+        firstPage = lastPage - visPages;
+      }
+      if (firstPage < 0) {
+        this.visiblePages = [];
+        return;
+      }
+      for (let i = firstPage; i <= lastPage; i++) {
         this.visiblePages.push(i);
       }
+    }
+  }
+
+  calculateTotalPages() {
+    if (this.config && this.totalElements && this.elementsPerPage) {
+      const totalEl = this.totalElements;
+      const ePP = this.elementsPerPage;
+      this.totalPages = Math.ceil(totalEl / ePP);
     }
   }
 
@@ -58,35 +78,44 @@ export class NgxTablePaginatorComponent implements OnInit {
   }
 
   isLastPage() {
-    return this.currentPage === this.totalElements;
+    return this.currentPage === this.totalPages - 1;
   }
 
-  isCurrentPage(p: number){
+  isCurrentPage(p: number) {
     return this.currentPage === p;
   }
 
   goToFirstPage() {
-    this.currentPage = 0;
-    this.page.emit(this.currentPage);
+    if (this.currentPage > 0) {
+      this.currentPage = 0;
+      this.goToPage(this.currentPage);
+    }
   }
 
   goToPrevPage() {
-    this.currentPage--;
-    this.page.emit(this.currentPage);
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.goToPage(this.currentPage);
+    }
   }
 
   goToPage(p) {
     this.currentPage = p;
     this.page.emit(this.currentPage);
+    this.calculateVisiblePages();
   }
 
   goToNextPage() {
-    this.currentPage++;
-    this.page.emit(this.currentPage);
+    if (this.currentPage < this.totalPages - 1) {
+      this.currentPage++;
+      this.goToPage(this.currentPage);
+    }
   }
 
   goToLastPage() {
-    this.currentPage = this.totalElements;
-    this.page.emit(this.currentPage);
+    if (this.currentPage < this.totalPages - 1) {
+      this.currentPage = this.totalPages - 1;
+      this.goToPage(this.currentPage);
+    }
   }
 }

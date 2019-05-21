@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgxTableFilter, NgxTableOrder, NgxTableNew, NgxTableEdition } from './ngx-table.types';
+import { first } from '../../../../../node_modules/rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +51,11 @@ export class NgxTableService {
   edit(data: any[], edition: NgxTableEdition): any[] {
     data[edition.index] = edition.row;
     return data;
+  }
+
+  goToPage(data: any[], page: number, elementsPerPage: number) {
+    const firstElement = page * elementsPerPage;
+    const lastElement = firstElement + elementsPerPage;
+    return data.slice(firstElement, lastElement);
   }
 }
