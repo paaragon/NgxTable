@@ -6,7 +6,7 @@ This library offers an Angular component that allows you to display your data in
 
 ## DEMO
 
-![demo gif]()
+![demo gif](https://raw.githubusercontent.com/paaragon/NgxTable/master/doc-assets/ngx-table.gif)
 
 This table handles different events that can be implemented by the developers that use it.
 
