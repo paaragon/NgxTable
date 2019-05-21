@@ -13,6 +13,7 @@ export class NgxTableCreateComponent implements OnInit {
 
   errors: { [key: string]: { error: boolean, errorMsg: string } } = {};
   newObj: NgxTableNew = {};
+  pristine: NgxTableNew = {};
 
   buttonEnable = true;
 
@@ -52,36 +53,67 @@ export class NgxTableCreateComponent implements OnInit {
   ngOnInit() {
   }
 
-  validate() {
+  validate(pristine, header?) {
+    if (header) {
+      this.pristine[header] = true;
+    }
     this.errors = {};
     this.buttonEnable = true;
     if (!this.config.create.validations) {
       return true;
     }
     for (const attr in this.config.create.validations) {
-      if (!this.config.create.validations[attr]) {
+      if (pristine && !this.pristine[attr]) {
         continue;
       }
-      const validation = this.config.create.validations[attr];
-      const value = this.newObj[attr];
-      if (validation.optional === false && !value) {
-        this.errors[attr] = {
-          error: true,
-          errorMsg: 'Field cannot be empty'
-        };
-        this.buttonEnable = false;
-        return false;
-      }
-      const reg = new RegExp(validation.regex);
-      if (!reg.test(this.newObj[attr])) {
-        this.errors[attr] = {
-          error: true,
-          errorMsg: validation.errorMsg
-        };
-        this.buttonEnable = false;
+      if (!this.validateIput(attr)) {
         return false;
       }
     }
+    return true;
+  }
+
+  private validateIput(header) {
+    if (!this.config.create.validations[header]) {
+      return true;
+    }
+    console.log('validating input');
+    const validation = this.config.create.validations[header];
+    const value = this.newObj[header];
+    console.log(validation, value);
+
+    if (!this.validateOptional(validation, header, value) ||
+      !this.validateRegEx(validation, header)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  private validateOptional(validation, header, value) {
+    if (validation.optional === false && !value) {
+      this.errors[header] = {
+        error: true,
+        errorMsg: 'Field cannot be empty'
+      };
+      this.buttonEnable = false;
+      return false;
+    }
+
+    return true;
+  }
+
+  private validateRegEx(validation, header) {
+    const reg = new RegExp(validation.regex);
+    if (!reg.test(this.newObj[header])) {
+      this.errors[header] = {
+        error: true,
+        errorMsg: validation.errorMsg
+      };
+      this.buttonEnable = false;
+      return false;
+    }
+
     return true;
   }
 
@@ -90,12 +122,13 @@ export class NgxTableCreateComponent implements OnInit {
   }
 
   onCreate() {
-    if (!this.validate()) {
+    if (!this.validate(false)) {
       return;
     }
 
     this.create.emit(this.newObj);
     this.newObj = {};
+    this.pristine = {};
   }
 
   getPlaceHolder(idx: number) {
@@ -107,6 +140,7 @@ export class NgxTableCreateComponent implements OnInit {
   }
 
   private buildNewObj() {
+    this.newObj = {};
     for (const header of this.headers) {
       this.newObj[header] = null;
     }
