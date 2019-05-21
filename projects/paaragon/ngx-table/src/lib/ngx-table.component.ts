@@ -80,7 +80,8 @@ export class NgxTableComponent implements OnInit {
     edit: {
       enable: false,
       longContent: 20,
-      lock: null
+      lock: null,
+      validations: null
     },
     paginator: {
       enable: false,

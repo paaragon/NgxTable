@@ -52,7 +52,14 @@ export interface NgxTableConfig {
     edit?: {
         enable: boolean,
         longContent?: number,
-        lock?: string[]
+        lock?: string[],
+        validations?: {
+            [key: string]: {
+                regex: string,
+                errorMsg: string,
+                optional: boolean
+            }
+        },
     };
     paginator?: {
         enable: boolean,

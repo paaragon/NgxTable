@@ -60,7 +60,14 @@ export class AppComponent implements OnInit {
     edit: {
       enable: true,
       longContent: 30,
-      lock: ['salary']
+      lock: ['company'],
+      validations: {
+        salary: {
+          regex: '^\\d+$',
+          errorMsg: 'Salary must be a number',
+          optional: false
+        }
+      }
     },
     paginator: {
       enable: true,

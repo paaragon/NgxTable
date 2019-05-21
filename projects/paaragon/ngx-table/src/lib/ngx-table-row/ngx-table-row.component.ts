@@ -13,6 +13,9 @@ export class NgxTableRowComponent implements OnInit {
   faTimes = faTimes;
   faSave = faSave;
 
+  errors: { [key: string]: { error: boolean, errorMsg: string } } = {};
+  buttonEnable = true;
+
   editions: { [key: string]: boolean };
 
   rowCopy: any;
@@ -47,7 +50,9 @@ export class NgxTableRowComponent implements OnInit {
   }
 
   onEdit() {
-    this.edit.emit(this.row);
+    if (this.validate()) {
+      this.edit.emit(this.row);
+    }
   }
 
   isCellEditable(key: string) {
@@ -91,9 +96,44 @@ export class NgxTableRowComponent implements OnInit {
   cancelEdition(key: string) {
     this.editions[key] = false;
     this.row[key] = this.rowBK[key];
+    this.errors = {};
   }
 
   showLastColumn() {
     return this.config.create.enable || this.config.filter.enable || this.config.delete.enable;
+  }
+
+  hasValidationError(header: string) {
+    return this.errors && this.errors[header] && this.errors[header].error;
+  }
+
+  private validate() {
+    this.errors = {};
+    this.buttonEnable = true;
+    if (!this.config.create.validations) {
+      return true;
+    }
+    for (const attr in this.config.create.validations) {
+      const validation = this.config.create.validations[attr];
+      const value = this.row[attr];
+      if (validation.optional === false && !value) {
+        this.errors[attr] = {
+          error: true,
+          errorMsg: 'Field cannot be empty'
+        };
+        this.buttonEnable = false;
+        return false;
+      }
+      const reg = new RegExp(validation.regex);
+      if (!reg.test(this.row[attr])) {
+        this.errors[attr] = {
+          error: true,
+          errorMsg: validation.errorMsg
+        };
+        this.buttonEnable = false;
+        return false;
+      }
+    }
+    return true;
   }
 }
