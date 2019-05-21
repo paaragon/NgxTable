@@ -29,8 +29,9 @@ The events are the following:
 
 ## Usage
 
+Your component.ts
+
 ```typescript
-// component.ts
 const exampleData: any[] = [
     { name: 'Delbert', lastname: 'Keeling', birthdate: new Date(1990, 1, 21), company: 'Gislason, Braun and Kerluke', salary: 30432 },
     { name: 'Karine', lastname: 'Rice', birthdate: new Date(1982, 3, 1), company: 'Thiel - Connelly', salary: 29188 },
@@ -38,8 +39,9 @@ const exampleData: any[] = [
     { name: 'Gardner', lastname: 'Lindgren', birthdate: new Date(1982, 9, 20), company: 'Crist - Klein', salary: 52676 }
 ];
 ```
+
+Youe component.html
 ```html
-<!-- component.html -->
 <ngx-table [data]="exampleData"></ngx-table>
 ```
 
@@ -47,13 +49,13 @@ const exampleData: any[] = [
 
 #### Sort
 
+Your component.html
 ```html
-<!-- your component.html -->
 <ngx-table [data]="exampleData" (sort)="onSort($event)"></ngx-table>
 ```
 
+Your component.ts
 ```typescript
-// your component.ts
 onSort(order: NgxTableOrder) {
  // your sort logic
 }
@@ -70,8 +72,8 @@ interface NgxTableOrder {
 
 #### Filter
 
+Your component.html
 ```html
-<!-- your component.html -->
 <ngx-table [data]="exampleData" (filter)="onFilter($event)"></ngx-table>
 ```
 
@@ -92,8 +94,8 @@ interface NgxTableFilter {
 
 #### Create
 
+Your component.html
 ```html
-<!-- your component.html -->
 <ngx-table [data]="exampleData" (create)="onCreate($event)"></ngx-table>
 ```
 
@@ -114,8 +116,8 @@ interface NgxTableNew {
 
 #### Edit
 
+Your component.html
 ```html
-<!-- your component.html -->
 <ngx-table [data]="exampleData" (edit)="onEdit($event)"></ngx-table>
 ```
 
@@ -137,8 +139,8 @@ interface NgxTableEdition {
 
 #### Delete
 
+Your component.html
 ```html
-<!-- your component.html -->
 <ngx-table [data]="exampleData" (delete)="onDelete($event)"></ngx-table>
 ```
 
@@ -159,13 +161,14 @@ onSort(index: number) {
 
 You can provide a config object to customize your table.
 
+Your component.html
 ```html
-<!-- your component.html -->
 <ngx-table [data]="exampleData" [config]="config"></ngx-table>
 ```
 
+Config interface
+
 ```typescript
-// Config interface
 interface NgxTableConfig {
     placeholders?: NgxTablePlaceholders;
     sort?: {
