@@ -121,11 +121,27 @@ export class AppComponent implements OnInit {
       return data;
     }
     return data.filter(row =>
-      Object.keys(row).every(key =>
-        !this.filterObj[key] ||
-        row[key].toString().toLowerCase()
-          .indexOf(this.filterObj[key].value.toString().toLowerCase()) !== -1)
+      Object.keys(row).every((key) => {
+        const filter = this.filterObj[key];
+        if (!filter) {
+          return true;
+        }
+        if (filter.operator && filter.operator.name === 'eq') {
+          return this.filterEquals(filter, row[key]);
+        }
+        return this.filterContains(filter, row[key]);
+      })
     );
+  }
+
+  filterEquals(filter, value) {
+    return !filter || value === filter.value;
+  }
+
+  filterContains(filter, value) {
+    return !filter ||
+      value.toString().toLowerCase()
+        .indexOf(filter.value.toString().toLowerCase()) !== -1
   }
 
   sort(data: any[]): any[] {

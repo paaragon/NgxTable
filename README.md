@@ -4,6 +4,10 @@
 
 This library offers an Angular component that allows you to display your data in a table.
 
+## DEMO
+
+![demo gif]()
+
 This table handles different events that can be implemented by the developers that use it.
 
 The events are the following:
