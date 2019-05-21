@@ -61,6 +61,7 @@ onSort(order: NgxTableOrder) {
 }
 ```
 
+Event argument interface
 ```typescript
 interface NgxTableOrder {
     field: string;
@@ -77,13 +78,14 @@ Your component.html
 <ngx-table [data]="exampleData" (filter)="onFilter($event)"></ngx-table>
 ```
 
+Your component.ts
 ```typescript
-// your component.ts
-onSort(order: NgxTableFilter ) {
+onFilter(filterObj: NgxTableFilter ) {
  // your filter logic
 }
 ```
 
+Event argument interface
 ```typescript
 interface NgxTableFilter {
     [key: string]: { operator: NgxTableOperator, value: string };
@@ -99,13 +101,14 @@ Your component.html
 <ngx-table [data]="exampleData" (create)="onCreate($event)"></ngx-table>
 ```
 
+Your component.ts
 ```typescript
-// your component.ts
-onSort(order: NgxTableNew) {
+onCreate(newObj: NgxTableNew) {
  // your create logic
 }
 ```
 
+Event argument interface
 ```typescript
 interface NgxTableNew {
     [key: string]: any;
@@ -121,13 +124,14 @@ Your component.html
 <ngx-table [data]="exampleData" (edit)="onEdit($event)"></ngx-table>
 ```
 
+Your component.ts
 ```typescript
-// your component.ts
 onSort(order: NgxTableEdition) {
  // your edition logic
 }
 ```
 
+Event argument interface
 ```typescript
 interface NgxTableEdition {
     index: number;
@@ -144,8 +148,8 @@ Your component.html
 <ngx-table [data]="exampleData" (delete)="onDelete($event)"></ngx-table>
 ```
 
+Your component.ts
 ```typescript
-// your component.ts
 onSort(index: number) {
  // your delete logic
 }
