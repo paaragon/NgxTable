@@ -1,7 +1,7 @@
 export type NgxTableHeaders = string[];
 export type NgxTablePlaceholders = string[];
 export interface NgxTableEdition {
-    index: number;
+    numrow: number;
     row: any;
 }
 export interface NgxTableOrder {
@@ -17,6 +17,10 @@ export interface NgxTableFilter {
 }
 export interface NgxTableNew {
     [key: string]: any;
+}
+export interface NgxTableDelete {
+    numrow: number;
+    row: any;
 }
 export interface NgxTableConfig {
     placeholders?: NgxTablePlaceholders;

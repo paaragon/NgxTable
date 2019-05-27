@@ -36,7 +36,7 @@ export class NgxTableRowComponent implements OnInit {
 
   @Input() headers: NgxTableHeaders;
 
-  @Output() delete: EventEmitter<void> = new EventEmitter<void>();
+  @Output() delete: EventEmitter<any> = new EventEmitter<any>();
 
   @Output() edit: EventEmitter<any> = new EventEmitter<any>();
 
@@ -46,7 +46,7 @@ export class NgxTableRowComponent implements OnInit {
   }
 
   onDelete() {
-    this.delete.emit();
+    this.delete.emit(this.row);
   }
 
   onEdit() {

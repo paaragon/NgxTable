@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, QueryList, ViewChildren } from '@angular/core';
-import { NgxTableHeaders, NgxTableConfig, NgxTableEdition } from '../ngx-table.types';
+import { NgxTableHeaders, NgxTableConfig, NgxTableEdition, NgxTableDelete } from '../ngx-table.types';
 
 @Component({
   selector: '[ngx-table-body]',
@@ -24,7 +24,7 @@ export class NgxTableBodyComponent implements OnInit {
 
   @Input() headers: NgxTableHeaders;
 
-  @Output() delete: EventEmitter<number> = new EventEmitter<number>();
+  @Output() delete: EventEmitter<NgxTableDelete> = new EventEmitter<NgxTableDelete>();
 
   @Output() edit: EventEmitter<NgxTableEdition> = new EventEmitter<NgxTableEdition>();
 
@@ -33,12 +33,12 @@ export class NgxTableBodyComponent implements OnInit {
   ngOnInit() {
   }
 
-  onDelete(index: number) {
-    this.delete.emit(index);
+  onDelete(index: number, row: any) {
+    this.delete.emit({ numrow: index, row });
   }
 
   onEdit(i, row: any) {
-    this.edit.emit({ index: i, row });
+    this.edit.emit({ numrow: i, row });
   }
 
   reloadBody() {

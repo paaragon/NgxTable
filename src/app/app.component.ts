@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import mock, { MockObj } from './mock/table.mock';
-import { NgxTableOrder, NgxTableFilter, NgxTableHeaders, NgxTableConfig, NgxTableNew, NgxTableEdition } from 'projects/paaragon/ngx-table/src/projects';
+import { NgxTableOrder, NgxTableFilter, NgxTableHeaders, NgxTableConfig, NgxTableNew, NgxTableEdition, NgxTableDelete } from 'projects/paaragon/ngx-table/src/projects';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -11,17 +12,11 @@ export class AppComponent implements OnInit {
 
   title = 'ngx-table';
 
-  data: MockObj[] = mock;
-
-  dataBK: MockObj[] = Object.assign([], this.data);
+  data: MockObj[];
 
   elementsPerPage = 5;
-
   currentPage = 0;
-
-  ngOnInit(): void {
-    this.data = this.dataBK;
-  }
+  totalelements = 0;
 
   orderObj: NgxTableOrder;
   filterObj: NgxTableFilter;
@@ -75,6 +70,14 @@ export class AppComponent implements OnInit {
     }
   };
 
+  constructor(
+    private service: AppService
+  ) { }
+
+  ngOnInit(): void {
+    this.refresh();
+  }
+
   onSort(order: NgxTableOrder) {
     this.orderObj = order;
     this.refresh();
@@ -86,22 +89,19 @@ export class AppComponent implements OnInit {
   }
 
   onCreate(newObj: NgxTableNew) {
-    console.log(newObj);
-    this.dataBK.push(newObj as MockObj);
+    this.service.add(newObj);
     this.refresh();
   }
 
-  onDelete(index: number) {
-    const row = this.data[index];
-    const rowBKIndex = this.dataBK.findIndex(r =>
-      Object.keys(r).every(key => r[key] === row[key])
-    );
-    this.dataBK.splice(rowBKIndex, 1);
+  onDelete(delObj: NgxTableDelete) {
+    const id = delObj.row.id;
+    this.service.delete(id);
     this.refresh();
   }
 
   onEdit(edition: NgxTableEdition) {
-    this.dataBK[edition.index] = edition.row;
+    const id = edition.row.id;
+    this.service.edit(id, edition.row);
     this.refresh();
   }
 
@@ -111,58 +111,8 @@ export class AppComponent implements OnInit {
   }
 
   refresh() {
-    let dataTmp = this.filter(Object.assign([], this.dataBK));
-    dataTmp = this.sort(dataTmp);
-    this.data = this.goToPage(dataTmp, this.currentPage);
-  }
-
-  filter(data: any[]): any[] {
-    if (!this.filterObj) {
-      return data;
-    }
-    return data.filter(row =>
-      Object.keys(row).every((key) => {
-        const filter = this.filterObj[key];
-        if (!filter) {
-          return true;
-        }
-        if (filter.operator && filter.operator.name === 'eq') {
-          return this.filterEquals(filter, row[key]);
-        }
-        return this.filterContains(filter, row[key]);
-      })
-    );
-  }
-
-  filterEquals(filter, value) {
-    return !filter || value === filter.value;
-  }
-
-  filterContains(filter, value) {
-    return !filter ||
-      value.toString().toLowerCase()
-        .indexOf(filter.value.toString().toLowerCase()) !== -1
-  }
-
-  sort(data: any[]): any[] {
-    if (!this.orderObj) {
-      return data;
-    }
-    return data.sort((row1, row2) => {
-      if (row1[this.orderObj.field] < row2[this.orderObj.field]) {
-        return this.orderObj.direction * -1;
-      }
-      if (row1[this.orderObj.field] > row2[this.orderObj.field]) {
-        return this.orderObj.direction;
-      }
-
-      return 0;
-    });
-  }
-
-  goToPage(data, page: number): any[] {
-    const firstElement = page * this.elementsPerPage;
-    const lastElement = firstElement + this.elementsPerPage;
-    return data.slice(firstElement, lastElement);
+    const result = this.service.get(this.orderObj, this.filterObj, this.currentPage, this.elementsPerPage);
+    this.data = result.data;
+    this.totalelements = result.totalElements;
   }
 }

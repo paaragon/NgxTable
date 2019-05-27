@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import DeepMerge from './utils/DeepMerge';
-import { NgxTableHeaders, NgxTableConfig, NgxTableOrder, NgxTableFilter, NgxTableNew, NgxTableEdition } from './ngx-table.types';
-import { NgxTableService } from './ngx-table.service';
+import {
+  NgxTableHeaders, NgxTableConfig, NgxTableOrder,
+  NgxTableFilter, NgxTableNew, NgxTableEdition, NgxTableDelete
+} from './ngx-table.types';
 
 @Component({
   selector: 'ngx-table',
@@ -17,10 +19,8 @@ export class NgxTableComponent implements OnInit {
    * Data of the table. Array of content
    */
   dataCopy: any[];
-  dataBK: any[];
   @Input() set data(data: any[]) {
     this.dataCopy = data;
-    this.dataBK = Object.assign([], data);
     this.initHeaders();
   }
 
@@ -31,7 +31,6 @@ export class NgxTableComponent implements OnInit {
   mergedConfig: NgxTableConfig;
   @Input() set config(conf: NgxTableConfig) {
     this.mergedConfig = DeepMerge.deepmerge(this.configBK, conf);
-    this.goToPage(0);
   }
 
   get config(): NgxTableConfig {
@@ -46,7 +45,7 @@ export class NgxTableComponent implements OnInit {
 
   @Output() create: EventEmitter<NgxTableNew> = new EventEmitter<NgxTableNew>();
 
-  @Output() delete: EventEmitter<number> = new EventEmitter<number>();
+  @Output() delete: EventEmitter<NgxTableDelete> = new EventEmitter<NgxTableDelete>();
 
   @Output() edit: EventEmitter<NgxTableEdition> = new EventEmitter<NgxTableEdition>();
 
@@ -91,9 +90,9 @@ export class NgxTableComponent implements OnInit {
   };
 
   orderObj: NgxTableOrder;
+  currentPage: number;
 
   constructor(
-    private service: NgxTableService
   ) { }
 
   ngOnInit() {
@@ -111,8 +110,8 @@ export class NgxTableComponent implements OnInit {
     this.create.emit(newObj);
   }
 
-  onDelete(index: number) {
-    this.delete.emit(index);
+  onDelete(del: NgxTableDelete) {
+    this.delete.emit(del);
   }
 
   onEdit(edition: NgxTableEdition) {
@@ -120,17 +119,7 @@ export class NgxTableComponent implements OnInit {
   }
 
   onPage(page: number) {
-    if (this.page.observers.length === 0) {
-      console.log('nosotros llevamos la paginacion');
-      this.goToPage(page);
-    }
     this.page.emit(page);
-  }
-
-  goToPage(page) {
-    if (this.config) {
-      this.dataCopy = this.service.goToPage(this.dataBK, page, this.config.paginator.elementsPerPage);
-    }
   }
 
   enableFilter() {
