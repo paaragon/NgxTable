@@ -19,6 +19,12 @@ The events are the following:
 - [Delete](https://github.com/paaragon/NgxTable/wiki/Delete)
 - [Pagination](https://github.com/paaragon/NgxTable/wiki/Pagination)
 
+Other features:
+
+- Field validation
+- Filter operators
+- Autocomplete [WIP]
+
 ## Instalation
 
 `npm install --save @paaragon/ngx-table`
