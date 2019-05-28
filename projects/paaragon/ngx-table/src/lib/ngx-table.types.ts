@@ -4,7 +4,7 @@ export interface NgxTableEdition {
     numrow: number;
     row: any;
 }
-export interface NgxTableOrder {
+export interface NgxTableSort {
     field: string;
     direction: 1 | -1;
 }

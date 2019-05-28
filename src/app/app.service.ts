@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import mock, { MockObj } from './mock/table.mock';
-import { NgxTableNew, NgxTableFilter, NgxTableOrder } from 'projects/paaragon/ngx-table/src/projects';
+import { NgxTableNew, NgxTableFilter, NgxTableSort } from 'projects/paaragon/ngx-table/src/projects';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +11,10 @@ export class AppService {
 
   constructor() { }
 
-  public get(order: NgxTableOrder, filter: NgxTableFilter, page: number, elementsPerPage: number): { data: MockObj[], totalElements: number } {
+  public get(sort: NgxTableSort, filter: NgxTableFilter, page: number, elementsPerPage: number): { data: MockObj[], totalElements: number } {
     let data: MockObj[] = Object.assign([], this.dataRepository);
     data = this.filter(data, filter);
-    data = this.sort(data, order);
+    data = this.sort(data, sort);
     data = this.goToPage(data, page, elementsPerPage);
     return { data, totalElements: this.dataRepository.length };
   }
@@ -40,16 +40,16 @@ export class AppService {
     return data.slice(firstElement, lastElement);
   }
 
-  private sort(data: any[], orderObj: NgxTableOrder): any[] {
-    if (!orderObj) {
+  private sort(data: any[], sortObj: NgxTableSort): any[] {
+    if (!sortObj) {
       return data;
     }
     return data.sort((row1, row2) => {
-      if (row1[orderObj.field] < row2[orderObj.field]) {
-        return orderObj.direction * -1;
+      if (row1[sortObj.field] < row2[sortObj.field]) {
+        return sortObj.direction * -1;
       }
-      if (row1[orderObj.field] > row2[orderObj.field]) {
-        return orderObj.direction;
+      if (row1[sortObj.field] > row2[sortObj.field]) {
+        return sortObj.direction;
       }
 
       return 0;

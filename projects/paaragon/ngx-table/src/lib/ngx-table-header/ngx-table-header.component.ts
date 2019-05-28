@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NgxTableHeaders, NgxTableOrder, NgxTableConfig } from '../ngx-table.types';
+import { NgxTableHeaders, NgxTableSort, NgxTableConfig } from '../ngx-table.types';
 import { faHashtag, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -9,7 +9,7 @@ import { faHashtag, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-i
 })
 export class NgxTableHeaderComponent implements OnInit {
 
-  orderObj: NgxTableOrder;
+  sortObj: NgxTableSort;
 
   faHashtag = faHashtag;
   faCaretDown = faCaretDown;
@@ -21,7 +21,7 @@ export class NgxTableHeaderComponent implements OnInit {
 
   @Input() config: NgxTableConfig;
 
-  @Output() sort: EventEmitter<NgxTableOrder> = new EventEmitter<NgxTableOrder>();
+  @Output() sort: EventEmitter<NgxTableSort> = new EventEmitter<NgxTableSort>();
 
   constructor() { }
 
@@ -32,29 +32,29 @@ export class NgxTableHeaderComponent implements OnInit {
     if (!header || !this.config.sort.enable) {
       return;
     }
-    if (this.orderObj && this.orderObj.field === header && this.orderObj.direction === 1) {
-      this.orderObj = {
+    if (this.sortObj && this.sortObj.field === header && this.sortObj.direction === 1) {
+      this.sortObj = {
         field: header,
         direction: -1
       };
-    } else if (this.orderObj && this.orderObj.field === header && this.orderObj.direction === -1) {
-      this.orderObj = null;
+    } else if (this.sortObj && this.sortObj.field === header && this.sortObj.direction === -1) {
+      this.sortObj = null;
     } else {
-      this.orderObj = {
+      this.sortObj = {
         field: header,
         direction: 1
       };
     }
 
-    this.sort.emit(this.orderObj);
+    this.sort.emit(this.sortObj);
   }
 
   isAsc(header: string) {
-    return this.orderObj && this.orderObj.field === header && this.orderObj.direction === 1;
+    return this.sortObj && this.sortObj.field === header && this.sortObj.direction === 1;
   }
 
   isDesc(header: string) {
-    return this.orderObj && this.orderObj.field === header && this.orderObj.direction === -1;
+    return this.sortObj && this.sortObj.field === header && this.sortObj.direction === -1;
   }
 
   showLastColumn() {

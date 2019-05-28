@@ -56,14 +56,14 @@ Your component.html
 
 Your component.ts
 ```typescript
-onSort(order: NgxTableOrder) {
+onSort(sort: NgxTableSort) {
  // your sort logic
 }
 ```
 
 Event argument interface
 ```typescript
-interface NgxTableOrder {
+interface NgxTableSort {
     field: string;
     direction: 1 | -1;
 }
@@ -126,7 +126,7 @@ Your component.html
 
 Your component.ts
 ```typescript
-onSort(order: NgxTableEdition) {
+onSort(sort: NgxTableEdition) {
  // your edition logic
 }
 ```
@@ -150,8 +150,16 @@ Your component.html
 
 Your component.ts
 ```typescript
-onSort(index: number) {
+onDelete(delObj: NgxTableDelete) {
  // your delete logic
+}
+```
+
+Event argument interface
+```typescript
+interface NgxTableDelete {
+    numrow: number;
+    row: any;
 }
 ```
 

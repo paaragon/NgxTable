@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import mock, { MockObj } from './mock/table.mock';
-import { NgxTableOrder, NgxTableFilter, NgxTableHeaders, NgxTableConfig, NgxTableNew, NgxTableEdition, NgxTableDelete } from 'projects/paaragon/ngx-table/src/projects';
+import { NgxTableSort, NgxTableFilter, NgxTableHeaders, NgxTableConfig, NgxTableNew, NgxTableEdition, NgxTableDelete } from 'projects/paaragon/ngx-table/src/projects';
 import { AppService } from './app.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   currentPage = 0;
   totalelements = 0;
 
-  orderObj: NgxTableOrder;
+  sortObj: NgxTableSort;
   filterObj: NgxTableFilter;
   headers: NgxTableHeaders = ['Id', 'Name', 'Last Name', 'Birth Date', 'Company', 'Salary'];
   placeholders: NgxTableHeaders = ['Id', 'Name', 'Last Name', 'Birth Date (dd/mm/yyyy)', 'Company', 'Salary'];
@@ -78,8 +78,8 @@ export class AppComponent implements OnInit {
     this.refresh();
   }
 
-  onSort(order: NgxTableOrder) {
-    this.orderObj = order;
+  onSort(sort: NgxTableSort) {
+    this.sortObj = sort;
     this.refresh();
   }
 
@@ -111,7 +111,7 @@ export class AppComponent implements OnInit {
   }
 
   refresh() {
-    const result = this.service.get(this.orderObj, this.filterObj, this.currentPage, this.elementsPerPage);
+    const result = this.service.get(this.sortObj, this.filterObj, this.currentPage, this.elementsPerPage);
     this.data = result.data;
     this.totalelements = result.totalElements;
   }

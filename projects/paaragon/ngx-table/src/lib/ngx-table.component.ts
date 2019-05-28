@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import DeepMerge from './utils/DeepMerge';
 import {
-  NgxTableHeaders, NgxTableConfig, NgxTableOrder,
+  NgxTableHeaders, NgxTableConfig, NgxTableSort,
   NgxTableFilter, NgxTableNew, NgxTableEdition, NgxTableDelete
 } from './ngx-table.types';
 
@@ -39,7 +39,7 @@ export class NgxTableComponent implements OnInit {
 
   @Input() totalElements: number;
 
-  @Output() sort: EventEmitter<NgxTableOrder> = new EventEmitter<NgxTableOrder>();
+  @Output() sort: EventEmitter<NgxTableSort> = new EventEmitter<NgxTableSort>();
 
   @Output() filter: EventEmitter<NgxTableFilter> = new EventEmitter<NgxTableFilter>();
 
@@ -89,7 +89,7 @@ export class NgxTableComponent implements OnInit {
     }
   };
 
-  orderObj: NgxTableOrder;
+  sortObj: NgxTableSort;
   currentPage: number;
 
   constructor(
@@ -98,8 +98,8 @@ export class NgxTableComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSort(orderObj: NgxTableOrder) {
-    this.sort.emit(orderObj);
+  onSort(sortObj: NgxTableSort) {
+    this.sort.emit(sortObj);
   }
 
   onFilter(filterObj: NgxTableFilter) {
