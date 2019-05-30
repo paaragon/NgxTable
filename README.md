@@ -6,6 +6,8 @@ This library offers an Angular component that allows you to display your data in
 
 ## DEMO
 
+[Try it out!](https://paaragon.github.io/NgxTable/)
+
 ![demo gif](https://raw.githubusercontent.com/paaragon/NgxTable/master/doc-assets/ngx-table.gif)
 
 This table handles different events that can be implemented by the developers that use it.
@@ -32,6 +34,23 @@ Other features:
 ## Dependencies
 
 [WIP]
+
+## Include
+
+```typescript
+// ...
+import { NgxTableModule } from '@paaragon/ngx-table';
+
+@NgModule({
+  // ...
+  imports: [
+    // ...
+    NgxTableModule,
+  ],
+  // ...
+})
+export class AppModule { }
+```
 
 ## Usage
 

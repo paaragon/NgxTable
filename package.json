@@ -30,7 +30,9 @@
     "lint": "ng lint",
     "lint-ci": "ng lint @paaragon/ngx-table",
     "test-ci": "ng test @paaragon/ngx-table",
-    "build-ci": "ng build @paaragon/ngx-table"
+    "build-ci": "ng build @paaragon/ngx-table",
+    "build-demo": "ng build --base-href \"/NgxTable/\"",
+    "deploy-demo": "ngh --dir=dist/ngx-table"
   },
   "dependencies": {
     "@angular/animations": "~7.2.0",
@@ -61,6 +63,7 @@
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "angular-cli-ghpages": "^0.5.3",
     "bootstrap": "^4.3.1",
     "codelyzer": "~4.5.0",
     "cpx": "^1.5.0",
