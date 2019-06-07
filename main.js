@@ -2046,7 +2046,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
 
 
-var size = 20;
+var size = 100;
 var mock = [];
 for (var i = 0; i < size; i++) {
     var obj = {
