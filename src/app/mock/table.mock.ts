@@ -1,6 +1,6 @@
 import * as faker from 'faker';
 
-const size = 100;
+const size = 20;
 const mock = [];
 
 for (let i = 0; i < size; i++) {

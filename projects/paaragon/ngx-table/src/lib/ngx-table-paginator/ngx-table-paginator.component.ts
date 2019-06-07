@@ -45,15 +45,17 @@ export class NgxTablePaginatorComponent implements OnInit {
   }
 
   calculateVisiblePages() {
+    console.log('calculando paginas visibles');
     if (this.config && this.totalPages && this.elementsPerPage && this.totalPages) {
       this.visiblePages = [];
       const visPages = this.config.paginator.visiblePages;
       const halfvisPages = Math.floor(visPages / 2);
       let firstPage = this.currentPage < halfvisPages ? 0 : this.currentPage - halfvisPages;
       let lastPage = firstPage + visPages;
+      console.log(firstPage, lastPage, this.totalPages - 1, visPages);
       if (lastPage > this.totalPages - 1) {
         lastPage = this.totalPages - 1;
-        firstPage = lastPage - visPages;
+        firstPage = lastPage - visPages < 0 ? 0 : lastPage - visPages;
       }
       if (firstPage < 0) {
         this.visiblePages = [];
