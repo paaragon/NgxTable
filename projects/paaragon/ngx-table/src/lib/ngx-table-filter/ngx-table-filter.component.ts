@@ -1,7 +1,10 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { NgxTableHeaders, NgxTableFilter, NgxTableConfig, NgxTablePlaceholders, NgxTableOperator, NgxTableAutocomplete } from '../ngx-table.types';
+import {
+  NgxTableHeaders, NgxTableFilter, NgxTableConfig,
+  NgxTablePlaceholders, NgxTableOperator, NgxTableAutocomplete
+} from '../ngx-table.types';
 
 @Component({
   selector: '[ngx-table-filter]',
