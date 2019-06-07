@@ -12,7 +12,7 @@ export class NgxTableCreateComponent implements OnInit {
   newObj: NgxTableNew = {};
   pristine: NgxTableNew = {};
 
-  buttonEnable = true;
+  buttonEnable = false;
 
   headersCopy: NgxTableHeaders;
   @Input() set headers(headers: NgxTableHeaders) {
@@ -51,6 +51,7 @@ export class NgxTableCreateComponent implements OnInit {
   }
 
   validate(pristine, header?) {
+
     if (header) {
       this.pristine[header] = true;
     }
@@ -74,10 +75,8 @@ export class NgxTableCreateComponent implements OnInit {
     if (!this.config.create.validations[header]) {
       return true;
     }
-    console.log('validating input');
     const validation = this.config.create.validations[header];
     const value = this.newObj[header];
-    console.log(validation, value);
 
     if (!this.validateOptional(validation, header, value) ||
       !this.validateRegEx(validation, header)) {
@@ -101,6 +100,9 @@ export class NgxTableCreateComponent implements OnInit {
   }
 
   private validateRegEx(validation, header) {
+    if (!this.newObj[header]) {
+      return true;
+    }
     const reg = new RegExp(validation.regex);
     if (!reg.test(this.newObj[header])) {
       this.errors[header] = {

@@ -33,7 +33,7 @@ export interface NgxTableConfig {
         validations?: {
             [key: string]: {
                 regex: string,
-                errorMsg: string
+                errorMsg?: string
             }
         },
         lock?: string[],
@@ -44,8 +44,8 @@ export interface NgxTableConfig {
         validations?: {
             [key: string]: {
                 regex: string,
-                errorMsg: string,
-                optional: boolean
+                errorMsg?: string,
+                optional?: boolean
             }
         },
         lock?: string[]
@@ -60,8 +60,8 @@ export interface NgxTableConfig {
         validations?: {
             [key: string]: {
                 regex: string,
-                errorMsg: string,
-                optional: boolean
+                errorMsg?: string,
+                optional?: boolean
             }
         },
     };

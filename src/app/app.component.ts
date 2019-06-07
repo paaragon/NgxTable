@@ -48,6 +48,10 @@ export class AppComponent implements OnInit {
           regex: '^\\d+$',
           errorMsg: 'Salary must be a number',
           optional: false
+        },
+        birthdate: {
+          regex: '[0-9]{4}-[0-9]{2}-[0-9]{2}',
+          errorMsg: 'Birth date must be yyyy-mm-dd'
         }
       },
       lock: ['id']
@@ -84,6 +88,7 @@ export class AppComponent implements OnInit {
   }
 
   onFilter(filter: NgxTableFilter) {
+    console.log(filter);
     this.filterObj = filter;
     this.refresh();
   }
