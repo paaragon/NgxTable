@@ -1,9 +1,9 @@
 <th class="first-cell">
-    <fa-icon [icon]="faPlus"></fa-icon>
+    <span class="fa fa-plus"></span>
 </th>
 <th *ngFor="let header of headers;let i = index">
   <input class="form-control" [ngClass]="{'is-invalid': hasValidationError(header)}" placeholder="{{getPlaceHolder(i)}}"
     (keyup)="validate(true, header)" [(ngModel)]="newObj[header]" [disabled]="isLockedColumn(header)">
     <p class="validation-error text-danger" *ngIf="hasValidationError(header)">{{errors[header]?.errorMsg}}</p>
 </th>
-<th><button type="button" class="btn btn-success" (click)="onCreate()" [disabled]="!buttonEnable"><fa-icon [icon]="faPlus"></fa-icon></button></th>
+<th><button type="button" class="btn btn-success" (click)="onCreate()" [disabled]="!buttonEnable"><span class="fa fa-plus"></span></button></th>

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgxTableHeaders, NgxTableSort, NgxTableConfig } from '../ngx-table.types';
-import { faHashtag, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: '[ngx-table-header]',
@@ -10,10 +9,6 @@ import { faHashtag, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-i
 export class NgxTableHeaderComponent implements OnInit {
 
   sortObj: NgxTableSort;
-
-  faHashtag = faHashtag;
-  faCaretDown = faCaretDown;
-  faCaretUp = faCaretUp;
 
   @Input() headers: NgxTableHeaders = [];
 

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgxTableHeaders, NgxTableConfig } from '../ngx-table.types';
-import { faTrash, faTimes, faSave } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: '[ngx-table-row]',
@@ -8,10 +7,6 @@ import { faTrash, faTimes, faSave } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./ngx-table-row.component.scss']
 })
 export class NgxTableRowComponent implements OnInit {
-
-  faTrash = faTrash;
-  faTimes = faTimes;
-  faSave = faSave;
 
   errors: { [key: string]: { error: boolean, errorMsg: string } } = {};
   buttonEnable = true;

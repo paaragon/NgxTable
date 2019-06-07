@@ -33,7 +33,9 @@ Other features:
 
 ## Dependencies
 
-[WIP]
+- Font awesome:
+
+`npm i font-awesome`
 
 ## Include
 

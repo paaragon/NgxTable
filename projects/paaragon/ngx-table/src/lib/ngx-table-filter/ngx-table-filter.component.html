@@ -1,5 +1,5 @@
 <th class="first-cell">
-  <fa-icon [icon]="faFilter"></fa-icon>
+  <span class="fa fa-filter"></span>
 </th>
 <th *ngFor="let header of headers; let i = index">
   <div class="input-group">
@@ -21,4 +21,4 @@
   </div>
   <p class="validation-error text-danger" *ngIf="errors[header]?.error">{{errors[header]?.errorMsg}}</p>
 </th>
-<th><button type="button" class="btn btn-warning" (click)="cleanFilters()"><fa-icon [icon]="faBroom"></fa-icon></button></th>
+<th><button type="button" class="btn btn-warning" (click)="cleanFilters()"><span class="fa fa-times"></span></button></th>

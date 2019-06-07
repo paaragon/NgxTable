@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxTableComponent } from './ngx-table.component';
 import { NgxTableHeaderComponent } from './ngx-table-header/ngx-table-header.component';
 import { NgxTableBodyComponent } from './ngx-table-body/ngx-table-body.component';
@@ -22,7 +21,6 @@ import { NgxTablePaginatorComponent } from './ngx-table-paginator/ngx-table-pagi
   imports: [
     CommonModule,
     FormsModule,
-    FontAwesomeModule
   ],
   exports: [
     NgxTableComponent

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgxTableConfig, NgxTablePlaceholders, NgxTableHeaders, NgxTableNew } from '../ngx-table.types';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: '[ngx-table-create]',
@@ -8,8 +7,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./ngx-table-create.component.scss']
 })
 export class NgxTableCreateComponent implements OnInit {
-
-  faPlus = faPlus;
 
   errors: { [key: string]: { error: boolean, errorMsg: string } } = {};
   newObj: NgxTableNew = {};
