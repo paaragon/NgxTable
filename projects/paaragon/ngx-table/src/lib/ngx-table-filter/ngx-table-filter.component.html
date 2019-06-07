@@ -4,8 +4,11 @@
 <th *ngFor="let header of headers; let i = index">
   <div class="input-group">
     <input class="form-control" [ngClass]="{'is-invalid': hasValidationError(header)}"
-      placeholder="{{getPlaceHolder(i)}}" (keyup)="onFilter()" [(ngModel)]="filters[header].value"
+      placeholder="{{getPlaceHolder(i)}}" (keyup)="onKeyUp()" [(ngModel)]="filters[header].value"
       [disabled]="isLocked(header)">
+    <div class="autocomplete" *ngIf="showDropdown(header)">
+      <div *ngFor="let auto of autocomplete[header]" class="auto-item" (click)="onAutocomplete(header, auto)">{{auto}}</div>
+    </div>
     <div class="input-group-append" *ngIf="hasOperator(header)" (mouseenter)="openDropdown(header)"
       (mouseleave)="closeDropdown(header)">
       <button type="button" class="btn btn-outline-secondary" disabled>{{filters[header].operator.symbol}}</button>
@@ -21,4 +24,5 @@
   </div>
   <p class="validation-error text-danger" *ngIf="errors[header]?.error">{{errors[header]?.errorMsg}}</p>
 </th>
-<th><button type="button" class="btn btn-warning" (click)="cleanFilters()"><span class="fa fa-times"></span></button></th>
+<th><button type="button" class="btn btn-warning" (click)="cleanFilters()"><span class="fa fa-times"></span></button>
+</th>

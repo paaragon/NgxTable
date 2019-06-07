@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { NgxTableHeaders, NgxTableFilter, NgxTableConfig, NgxTablePlaceholders, NgxTableOperator } from '../ngx-table.types';
+import { NgxTableHeaders, NgxTableFilter, NgxTableConfig, NgxTablePlaceholders, NgxTableOperator, NgxTableAutocomplete } from '../ngx-table.types';
 
 @Component({
   selector: '[ngx-table-filter]',
@@ -50,10 +50,13 @@ export class NgxTableFilterComponent implements OnInit {
     return this.placeholders;
   }
 
+  @Input() autocomplete: NgxTableAutocomplete;
+
   @Output() filter: EventEmitter<NgxTableFilter> = new EventEmitter<NgxTableFilter>();
   debouncer: Subject<NgxTableFilter> = new Subject<NgxTableFilter>();
 
   dropdowns = {};
+  blockedDropdowns = {};
 
   constructor() {
   }
@@ -72,6 +75,27 @@ export class NgxTableFilterComponent implements OnInit {
       return;
     }
     this.debouncer.next(f);
+  }
+
+  onKeyUp() {
+    this.blockedDropdowns = {};
+    this.onFilter();
+  }
+
+  onAutocomplete(header, value) {
+    this.filters[header].value = value;
+    this.blockedDropdowns[header] = true;
+    this.onFilter();
+    this.removeAutocomplete(header);
+  }
+
+  removeAutocomplete(header) {
+    this.autocomplete[header] = null;
+    console.log(this.autocomplete);
+  }
+
+  showDropdown(header: string) {
+    return this.autocomplete[header] && !this.blockedDropdowns[header];
   }
 
   hasValidationError(header: string) {

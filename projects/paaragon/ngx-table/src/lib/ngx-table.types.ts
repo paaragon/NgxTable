@@ -1,5 +1,8 @@
 export type NgxTableHeaders = string[];
 export type NgxTablePlaceholders = string[];
+export type NgxTableAutocomplete = {
+    [key: string]: string[]
+}
 export interface NgxTableEdition {
     numrow: number;
     row: any;

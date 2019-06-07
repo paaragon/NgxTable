@@ -1,4 +1,4 @@
 <ngx-table [data]="data" [humanHeaders]="headers" [config]="config" [totalElements]="totalelements"
-  (sort)="onSort($event)" (filter)="onFilter($event)" (create)="onCreate($event)" (delete)="onDelete($event)"
-  (edit)="onEdit($event)" (page)="onPage($event)">
+  [autocomplete]="autocomplete" (sort)="onSort($event)" (filter)="onFilter($event)" (create)="onCreate($event)"
+  (delete)="onDelete($event)" (edit)="onEdit($event)" (page)="onPage($event)">
 </ngx-table>

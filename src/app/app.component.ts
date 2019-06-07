@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import mock, { MockObj } from './mock/table.mock';
-import { NgxTableSort, NgxTableFilter, NgxTableHeaders, NgxTableConfig, NgxTableNew, NgxTableEdition, NgxTableDelete } from 'projects/paaragon/ngx-table/src/projects';
+import { NgxTableSort, NgxTableFilter, NgxTableHeaders, NgxTableConfig, NgxTableNew, NgxTableEdition, NgxTableDelete, NgxTableAutocomplete } from 'projects/paaragon/ngx-table/src/projects';
 import { AppService } from './app.service';
 
 @Component({
@@ -22,6 +22,8 @@ export class AppComponent implements OnInit {
   filterObj: NgxTableFilter;
   headers: NgxTableHeaders = ['Id', 'Name', 'Last Name', 'Birth Date', 'Company', 'Salary'];
   placeholders: NgxTableHeaders = ['Id', 'Name', 'Last Name', 'Birth Date (dd/mm/yyyy)', 'Company', 'Salary'];
+
+  autocomplete: NgxTableAutocomplete = {};
 
   config: NgxTableConfig = {
     sort: {
@@ -88,9 +90,9 @@ export class AppComponent implements OnInit {
   }
 
   onFilter(filter: NgxTableFilter) {
-    console.log(filter);
     this.filterObj = filter;
     this.refresh();
+    this.refreshAutocomplete();
   }
 
   onCreate(newObj: NgxTableNew) {
@@ -119,5 +121,14 @@ export class AppComponent implements OnInit {
     const result = this.service.get(this.sortObj, this.filterObj, this.currentPage, this.elementsPerPage);
     this.data = result.data;
     this.totalelements = result.totalElements;
+  }
+
+  refreshAutocomplete() {
+    this.autocomplete = {};
+    const filterKeys = Object.keys(this.filterObj);
+
+    for (const key of filterKeys) {
+      this.autocomplete[key] = this.data.map(d => d[key]);
+    }
   }
 }

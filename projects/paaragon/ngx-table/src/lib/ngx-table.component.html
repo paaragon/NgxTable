@@ -1,13 +1,17 @@
 <div class="table-responsive">
   <table class="table">
     <thead>
-      <tr ngx-table-header [humanHeaders]="humanHeaders" [headers]="headers" (sort)="onSort($event)" [config]="config"></tr>
-      <tr ngx-table-filter *ngIf="enableFilter()" [humanHeaders]="humanHeaders" [headers]="headers" [config]="config" (filter)="onFilter($event)">
+      <tr ngx-table-header [humanHeaders]="humanHeaders" [headers]="headers" [config]="config" (sort)="onSort($event)">
       </tr>
-      <tr ngx-table-create *ngIf="enableCreate()" [humanHeaders]="humanHeaders" [headers]="headers" [config]="config" (create)="onCreate($event)">
+      <tr ngx-table-filter *ngIf="enableFilter()" [humanHeaders]="humanHeaders" [headers]="headers" [config]="config"
+        [autocomplete]="autocomplete" (filter)="onFilter($event)">
+      </tr>
+      <tr ngx-table-create *ngIf="enableCreate()" [humanHeaders]="humanHeaders" [headers]="headers" [config]="config"
+        (create)="onCreate($event)">
       </tr>
     </thead>
-    <tbody ngx-table-body [data]="dataCopy" [headers]="headers" *ngIf="enableBody()" [config]="config" (delete)="onDelete($event)" (edit)="onEdit($event)"></tbody>
+    <tbody ngx-table-body [data]="dataCopy" [headers]="headers" *ngIf="enableBody()" [config]="config"
+      (delete)="onDelete($event)" (edit)="onEdit($event)"></tbody>
   </table>
 </div>
 <div class="row" *ngIf="!enableBody()">
@@ -20,5 +24,6 @@
   </div>
 </div>
 <div *ngIf="enablePaginator()">
-  <ngx-table-paginator [totalElements]="totalElements" [elementsPerPage]="getElementsPerPage()" [config]="config" (page)="onPage($event)"></ngx-table-paginator>
+  <ngx-table-paginator [totalElements]="totalElements" [elementsPerPage]="getElementsPerPage()" [config]="config"
+    (page)="onPage($event)"></ngx-table-paginator>
 </div>

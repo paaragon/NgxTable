@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } fro
 import DeepMerge from './utils/DeepMerge';
 import {
   NgxTableHeaders, NgxTableConfig, NgxTableSort,
-  NgxTableFilter, NgxTableNew, NgxTableEdition, NgxTableDelete
+  NgxTableFilter, NgxTableNew, NgxTableEdition, NgxTableDelete, NgxTableAutocomplete
 } from './ngx-table.types';
 
 @Component({
@@ -38,6 +38,8 @@ export class NgxTableComponent implements OnInit {
   }
 
   @Input() totalElements: number;
+
+  @Input() autocomplete: NgxTableAutocomplete;
 
   @Output() sort: EventEmitter<NgxTableSort> = new EventEmitter<NgxTableSort>();
 
