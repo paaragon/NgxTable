@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgxTableHeaders, NgxTableConfig } from '../ngx-table.types';
+import RowUtils from './row.utils';
 
 @Component({
   selector: '[ngx-table-row]',
@@ -114,22 +115,9 @@ export class NgxTableRowComponent implements OnInit {
       }
       const validation = this.config.create.validations[attr];
       const value = this.row[attr];
-      if (validation.optional === false && !value) {
-        this.errors[attr] = {
-          error: true,
-          errorMsg: 'Field cannot be empty'
-        };
-        this.buttonEnable = false;
-        return false;
-      }
-      const reg = new RegExp(validation.regex);
-      if (!reg.test(this.row[attr])) {
-        this.errors[attr] = {
-          error: true,
-          errorMsg: validation.errorMsg
-        };
-        this.buttonEnable = false;
-        return false;
+      const error = RowUtils.validateOneAttr(validation, attr, value);
+      if (error) {
+        this.errors[attr] = error;
       }
     }
     return true;
