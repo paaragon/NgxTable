@@ -50,7 +50,12 @@ export class NgxTablePaginatorComponent implements OnInit {
       return;
     }
     this.visiblePages = [];
-    const { firstPage, lastPage } = PaginatorUtils.getPagesBoundaries(this.config.paginator.visiblePages, this.currentPage, this.totalPages);
+    const { firstPage, lastPage } =
+      PaginatorUtils.getPagesBoundaries(
+        this.config.paginator.visiblePages,
+        this.currentPage,
+        this.totalPages
+      );
     for (let i = firstPage; i <= lastPage; i++) {
       this.visiblePages.push(i);
     }
