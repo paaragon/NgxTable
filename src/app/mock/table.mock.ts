@@ -1,7 +1,7 @@
 import * as faker from 'faker';
 import * as moment from 'moment';
 
-const size = 20;
+const size = 100;
 const mock = [];
 
 for (let i = 0; i < size; i++) {

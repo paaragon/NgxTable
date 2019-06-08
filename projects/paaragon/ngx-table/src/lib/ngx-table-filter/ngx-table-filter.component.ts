@@ -5,13 +5,14 @@ import {
   NgxTableHeaders, NgxTableFilter, NgxTableConfig,
   NgxTablePlaceholders, NgxTableOperator, NgxTableAutocomplete
 } from '../ngx-table.types';
+import FilterUtils from './filter.utils';
 
 @Component({
   selector: '[ngx-table-filter]',
   templateUrl: './ngx-table-filter.component.html',
   styleUrls: ['./ngx-table-filter.component.scss']
 })
-export class NgxTableFilterComponent implements OnInit {
+export class NgxTableFilterComponent {
 
   /**
    * Filter debounce subscription
@@ -20,7 +21,6 @@ export class NgxTableFilterComponent implements OnInit {
 
   filters: NgxTableFilter = {};
   errors: { [key: string]: { error: boolean, errorMsg: string } } = {};
-  placeholders: NgxTablePlaceholders;
 
   private configCopy: NgxTableConfig;
   @Input() set config(config: NgxTableConfig) {
@@ -36,8 +36,7 @@ export class NgxTableFilterComponent implements OnInit {
   @Input() set headers(headers: NgxTableHeaders) {
     this.headersBK = headers;
     if (this.headersBK) {
-      this.initFilters();
-      this.buildPlaceholders();
+      FilterUtils.initFilters(this.filters, this.headers, this.config);
     }
   }
 
@@ -45,13 +44,7 @@ export class NgxTableFilterComponent implements OnInit {
     return this.headersBK;
   }
 
-  @Input() set humanHeaders(headers: NgxTableHeaders) {
-    this.placeholders = headers;
-  }
-
-  get humanHeaders() {
-    return this.placeholders;
-  }
+  @Input() humanHeaders: NgxTableHeaders;
 
   @Input() autocomplete: NgxTableAutocomplete;
 
@@ -64,9 +57,6 @@ export class NgxTableFilterComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit() {
-  }
-
   onFilter() {
     const f: NgxTableFilter = {};
     for (const attr in this.filters) {
@@ -74,7 +64,8 @@ export class NgxTableFilterComponent implements OnInit {
         f[attr] = this.filters[attr];
       }
     }
-    if (!this.validateFilters(f)) {
+    this.errors = FilterUtils.validateFilters(f, this.config.filter.validations);
+    if (Object.keys(this.errors).length > 0) {
       return;
     }
     this.debouncer.next(f);
@@ -94,11 +85,10 @@ export class NgxTableFilterComponent implements OnInit {
 
   removeAutocomplete(header) {
     this.autocomplete[header] = null;
-    console.log(this.autocomplete);
   }
 
   showDropdown(header: string) {
-    return this.autocomplete[header] && !this.blockedDropdowns[header];
+    return this.autocomplete[header] && this.autocomplete[header].length > 0 && !this.blockedDropdowns[header];
   }
 
   hasValidationError(header: string) {
@@ -127,10 +117,6 @@ export class NgxTableFilterComponent implements OnInit {
     this.onFilter();
   }
 
-  getPlaceHolder(idx: number) {
-    return this.placeholders ? this.placeholders[idx] : null;
-  }
-
   setOperator(header: string, operator: NgxTableOperator) {
     this.filters[header].operator = operator;
     this.closeDropdown(header);
@@ -149,50 +135,6 @@ export class NgxTableFilterComponent implements OnInit {
     return this.dropdowns[header];
   }
 
-  private validateFilters(f: NgxTableFilter): boolean {
-
-    this.errors = {};
-    const validations = this.config.filter.validations;
-
-    if (Object.keys(validations).length === 0) {
-      return true;
-    }
-
-    for (const attr in f) {
-      if (!validations[attr]) {
-        continue;
-      }
-      const text = f[attr].value;
-
-      const regex = new RegExp(validations[attr].regex);
-
-      if (!regex.test(text)) {
-        this.errors[attr] = {
-          error: true,
-          errorMsg: validations[attr].errorMsg
-        };
-        return false;
-      }
-    }
-    return true;
-  }
-
-  private initFilters() {
-    for (const header of this.headers) {
-      if (this.filters[header]) {
-        continue;
-      }
-      let operator = null;
-      if (this.config && this.config.filter.operators && this.config.filter.operators.length > 0) {
-        operator = this.config.filter.operators[0];
-      }
-      this.filters[header] = {
-        operator,
-        value: null
-      };
-    }
-  }
-
   private subscribeDebounce() {
     if (this.sub) {
       this.sub.unsubscribe();
@@ -200,11 +142,5 @@ export class NgxTableFilterComponent implements OnInit {
     this.sub = this.debouncer
       .pipe(debounceTime(this.config.filter.debounceTime))
       .subscribe((val) => this.filter.emit(val));
-  }
-
-  private buildPlaceholders() {
-    if (!this.placeholders && this.headers) {
-      this.placeholders = this.headers;
-    }
   }
 }

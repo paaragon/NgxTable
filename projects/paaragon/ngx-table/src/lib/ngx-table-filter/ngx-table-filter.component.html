@@ -4,7 +4,7 @@
 <th *ngFor="let header of headers; let i = index">
   <div class="input-group">
     <input class="form-control" [ngClass]="{'is-invalid': hasValidationError(header)}"
-      placeholder="{{getPlaceHolder(i)}}" (keyup)="onKeyUp()" [(ngModel)]="filters[header].value"
+      placeholder="{{this.humanHeaders[i]}}" (keyup)="onKeyUp()" [(ngModel)]="filters[header].value"
       [disabled]="isLocked(header)">
     <div class="autocomplete" *ngIf="showDropdown(header)">
       <div *ngFor="let auto of autocomplete[header]" class="auto-item" (click)="onAutocomplete(header, auto)">{{auto}}</div>

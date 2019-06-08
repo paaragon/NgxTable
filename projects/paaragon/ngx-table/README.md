@@ -37,6 +37,15 @@ Other features:
 
 `npm i font-awesome`
 
+On your `angular.json`
+
+```json
+"styles": [
+  "node_modules/font-awesome/css/font-awesome.min.css",
+  "src/styles.scss"
+],
+```
+
 ## Include
 
 ```typescript
