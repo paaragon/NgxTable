@@ -51,15 +51,14 @@ export class NgxTableCreateComponent implements OnInit {
   }
 
   validate(pristine, header?) {
-
+    if (!this.config.create.validations) {
+      return true;
+    }
     if (header) {
       this.pristine[header] = true;
     }
     this.errors = {};
     this.buttonEnable = true;
-    if (!this.config.create.validations) {
-      return true;
-    }
     for (const attr in this.config.create.validations) {
       if (pristine && !this.pristine[attr]) {
         continue;

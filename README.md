@@ -1,6 +1,7 @@
 # NgxTable
 
 ![build status](https://api.travis-ci.org/paaragon/NgxTable.svg?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/cba69b0a419e34a804da/maintainability)](https://codeclimate.com/github/paaragon/NgxTable/maintainability)
 
 This library offers an Angular component that allows you to display your data in a table.
 
