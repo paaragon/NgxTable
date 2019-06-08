@@ -14,9 +14,9 @@
       (delete)="onDelete($event)" (edit)="onEdit($event)"></tbody>
   </table>
 </div>
-<div class="row" *ngIf="!enableBody()">
-  <div class="container-fluid">
-    <div class="col-xs">
+<div class="container-fluid" *ngIf="!enableBody()">
+  <div class="row">
+    <div class="col">
       <div class="alert alert-warning" role="alert">
         No data available
       </div>

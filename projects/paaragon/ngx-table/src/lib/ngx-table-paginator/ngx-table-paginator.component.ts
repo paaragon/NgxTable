@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgxTableConfig } from '../ngx-table.types';
+import PaginatorUtils from './paginator.utils';
 
 @Component({
   selector: 'ngx-table-paginator',
@@ -45,23 +46,13 @@ export class NgxTablePaginatorComponent implements OnInit {
   }
 
   calculateVisiblePages() {
-    if (this.config && this.totalPages && this.elementsPerPage && this.totalPages) {
-      this.visiblePages = [];
-      const visPages = this.config.paginator.visiblePages;
-      const halfvisPages = Math.floor(visPages / 2);
-      let firstPage = this.currentPage < halfvisPages ? 0 : this.currentPage - halfvisPages;
-      let lastPage = firstPage + visPages;
-      if (lastPage > this.totalPages - 1) {
-        lastPage = this.totalPages - 1;
-        firstPage = lastPage - visPages < 0 ? 0 : lastPage - visPages;
-      }
-      if (firstPage < 0) {
-        this.visiblePages = [];
-        return;
-      }
-      for (let i = firstPage; i <= lastPage; i++) {
-        this.visiblePages.push(i);
-      }
+    if (!this.config || !this.totalPages || !this.elementsPerPage || !this.totalPages) {
+      return;
+    }
+    this.visiblePages = [];
+    const { firstPage, lastPage } = PaginatorUtils.getPagesBoundaries(this.config.paginator.visiblePages, this.currentPage, this.totalPages);
+    for (let i = firstPage; i <= lastPage; i++) {
+      this.visiblePages.push(i);
     }
   }
 
