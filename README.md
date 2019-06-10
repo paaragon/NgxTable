@@ -193,7 +193,27 @@ interface NgxTableDelete {
 
 #### Pagination
 
-[WIP]
+Your component.html
+```html
+<ngx-table [data]="exampleData" [totalElements]="totalelements" (page)="onPage($event)"></ngx-table>
+```
+
+Your component.ts
+```typescript
+onPage(page: number) {
+    // your pagination logic here
+}
+```
+
+Event argument interface
+```typescript
+interface NgxTableDelete {
+    numrow: number;
+    row: any;
+}
+```
+
+*TODO - Create and link wiki page*
 
 ## Config
 
@@ -218,7 +238,7 @@ interface NgxTableConfig {
         validations?: {
             [key: string]: {
                 regex: string,
-                errorMsg: string
+                errorMsg?: string
             }
         },
         lock?: string[],
@@ -229,7 +249,8 @@ interface NgxTableConfig {
         validations?: {
             [key: string]: {
                 regex: string,
-                errorMsg: string
+                errorMsg?: string,
+                optional?: boolean
             }
         },
         lock?: string[]
@@ -240,7 +261,19 @@ interface NgxTableConfig {
     edit?: {
         enable: boolean,
         longContent?: number,
-        lock?: string[]
+        lock?: string[],
+        validations?: {
+            [key: string]: {
+                regex: string,
+                errorMsg?: string,
+                optional?: boolean
+            }
+        },
+    };
+    paginator?: {
+        enable: boolean,
+        elementsPerPage?: number,
+        visiblePages?: number
     };
 }
 ```
