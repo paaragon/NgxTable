@@ -80,5 +80,5 @@ export interface NgxTableConfig {
     };
     click?: {
         enable: boolean
-    }
+    };
 }
