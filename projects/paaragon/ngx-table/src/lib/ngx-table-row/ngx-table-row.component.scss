@@ -18,8 +18,24 @@ button {
 
 td.cell {
 
-  &>span>span.editable {
-    cursor: pointer;
+  &>span>span {
+    &.editable {
+      &:hover {
+        &::after {
+          margin-left: 0.25rem;
+          content: '\f040';
+          font: normal normal normal 14px/1 FontAwesome;
+        }
+      }
+    }
+
+    &.pointable {
+      cursor: pointer;
+
+      &:hover {
+        color: lighten(#212529, 30%);
+      }
+    }
   }
 
   &>span {

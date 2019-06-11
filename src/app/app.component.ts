@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import mock, { MockObj } from './mock/table.mock';
-import { NgxTableSort, NgxTableFilter, NgxTableHeaders, NgxTableConfig, NgxTableNew, NgxTableEdition, NgxTableDelete, NgxTableAutocomplete } from 'projects/paaragon/ngx-table/src/projects';
+import { NgxTableSort, NgxTableFilter, NgxTableHeaders, NgxTableConfig, NgxTableNew, NgxTableEdition, NgxTableDelete, NgxTableAutocomplete, NgxTableClick } from 'projects/paaragon/ngx-table/src/projects';
 import { AppService } from './app.service';
 
 @Component({
@@ -11,6 +11,11 @@ import { AppService } from './app.service';
 export class AppComponent implements OnInit {
 
   title = 'ngx-table';
+
+  showAlert = false;
+  alertMsg1 = '';
+  alertMsg2 = '';
+  alertTimeout = null;
 
   data: MockObj[];
 
@@ -61,7 +66,7 @@ export class AppComponent implements OnInit {
     edit: {
       enable: true,
       longContent: 30,
-      lock: ['company'],
+      lock: ['id'],
       validations: {
         salary: {
           regex: '^\\d+$',
@@ -73,6 +78,9 @@ export class AppComponent implements OnInit {
     paginator: {
       enable: true,
       elementsPerPage: this.elementsPerPage
+    },
+    click: {
+      enable: true,
     }
   };
 
@@ -110,6 +118,19 @@ export class AppComponent implements OnInit {
     const id = edition.row.id;
     this.service.edit(id, edition.row);
     this.refresh();
+  }
+
+  onClick(clickObj: NgxTableClick) {
+
+    if (this.alertTimeout) {
+      clearTimeout(this.alertTimeout);
+    }
+
+    const rowStr = JSON.stringify(clickObj.row);
+    this.alertMsg1 = `${clickObj.key}: ${clickObj.value}`;
+    this.alertMsg2 = `${rowStr}`;
+    this.showAlert = true;
+    this.alertTimeout = setTimeout(() => this.showAlert = false, 2000);
   }
 
   onPage(page: number) {

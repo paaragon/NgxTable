@@ -1,8 +1,8 @@
 <td class="first-cell">{{index + 1}}</td>
-<td *ngFor="let header of headers" class="cell">
+<td *ngFor="let header of headers; let i = index" class="cell">
   <span>
     <ng-container *ngIf="!showInput(header)">
-      <span (click)="enableEdition(header)" [ngClass]="{'editable': isCellEditable(header)}">{{row[header]}}</span>
+      <span (click)="onClick(header)" [ngClass]="{'pointable': isPointable(header), 'editable': isCellEditable(header)}">{{row[header]}}</span>
     </ng-container>
     <ng-container *ngIf="showInput(header)">
       <div class="input-group mb-3">

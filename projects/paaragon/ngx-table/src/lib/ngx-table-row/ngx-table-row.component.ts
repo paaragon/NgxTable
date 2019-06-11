@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NgxTableHeaders, NgxTableConfig } from '../ngx-table.types';
+import { NgxTableHeaders, NgxTableConfig, NgxTableClick, NgxTableEdition } from '../ngx-table.types';
 import RowUtils from './row.utils';
 
 @Component({
@@ -36,6 +36,8 @@ export class NgxTableRowComponent implements OnInit {
 
   @Output() edit: EventEmitter<any> = new EventEmitter<any>();
 
+  @Output() tableClick: EventEmitter<NgxTableClick> = new EventEmitter<NgxTableClick>();
+
   constructor() { }
 
   ngOnInit() {
@@ -51,8 +53,24 @@ export class NgxTableRowComponent implements OnInit {
     }
   }
 
+  onClick(key: string) {
+    if (this.isCellEditable(key) && !this.isLockedColumn(key)) {
+      this.editions[key] = true;
+    } else {
+      this.tableClick.emit({
+        key,
+        value: this.row[key],
+        row: this.row
+      });
+    }
+  }
+
   isCellEditable(key: string) {
     return this.config && this.config.edit.enable && !this.isLockedColumn(key);
+  }
+
+  isPointable(key: string) {
+    return this.isCellEditable(key) || this.config.click.enable;
   }
 
   showInput(key: string) {
@@ -80,12 +98,6 @@ export class NgxTableRowComponent implements OnInit {
       if (this.editions[key]) {
         this.editions[key] = false;
       }
-    }
-  }
-
-  enableEdition(key: string) {
-    if (!this.isLockedColumn(key)) {
-      this.editions[key] = true;
     }
   }
 

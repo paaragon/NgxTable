@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } fro
 import DeepMerge from './utils/DeepMerge';
 import {
   NgxTableHeaders, NgxTableConfig, NgxTableSort,
-  NgxTableFilter, NgxTableNew, NgxTableEdition, NgxTableDelete, NgxTableAutocomplete
+  NgxTableFilter, NgxTableNew, NgxTableEdition, NgxTableDelete, NgxTableAutocomplete, NgxTableClick
 } from './ngx-table.types';
 
 @Component({
@@ -52,6 +52,8 @@ export class NgxTableComponent implements OnInit {
   @Output() edit: EventEmitter<NgxTableEdition> = new EventEmitter<NgxTableEdition>();
 
   @Output() page: EventEmitter<number> = new EventEmitter<number>();
+
+  @Output() tableClick: EventEmitter<NgxTableClick> = new EventEmitter<NgxTableClick>();
 
   headers: NgxTableHeaders;
 
@@ -118,6 +120,10 @@ export class NgxTableComponent implements OnInit {
 
   onEdit(edition: NgxTableEdition) {
     this.edit.emit(edition);
+  }
+
+  onClick(clickObj: NgxTableClick) {
+    this.tableClick.emit(clickObj);
   }
 
   onPage(page: number) {

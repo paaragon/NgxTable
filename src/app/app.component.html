@@ -1,4 +1,10 @@
 <ngx-table [data]="data" [humanHeaders]="headers" [config]="config" [totalElements]="totalelements"
   [autocomplete]="autocomplete" (sort)="onSort($event)" (filter)="onFilter($event)" (create)="onCreate($event)"
-  (delete)="onDelete($event)" (edit)="onEdit($event)" (page)="onPage($event)">
+  (delete)="onDelete($event)" (edit)="onEdit($event)" (tableClick)="onClick($event)" (page)="onPage($event)">
 </ngx-table>
+<div id="alert-wrapper" *ngIf="showAlert">
+  <div class="alert alert-info" role="alert">
+    <p class="text-center"><strong>{{alertMsg1}}</strong></p>
+    <pre>{{alertMsg2}}</pre>
+  </div>
+</div>

@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody ngx-table-body [data]="dataCopy" [headers]="headers" *ngIf="enableBody()" [config]="config"
-      (delete)="onDelete($event)" (edit)="onEdit($event)"></tbody>
+      (delete)="onDelete($event)" (edit)="onEdit($event)" (tableClick)="onClick($event)"></tbody>
   </table>
 </div>
 <div class="container-fluid" *ngIf="!enableBody()">

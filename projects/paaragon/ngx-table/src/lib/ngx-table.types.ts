@@ -25,6 +25,11 @@ export interface NgxTableDelete {
     numrow: number;
     row: any;
 }
+export interface NgxTableClick {
+    key: string;
+    value: any;
+    row: any;
+}
 export interface NgxTableConfig {
     placeholders?: NgxTablePlaceholders;
     sort?: {
@@ -73,4 +78,7 @@ export interface NgxTableConfig {
         elementsPerPage?: number,
         visiblePages?: number
     };
+    click?: {
+        enable: boolean
+    }
 }
