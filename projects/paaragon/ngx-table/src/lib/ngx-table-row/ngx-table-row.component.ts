@@ -41,6 +41,8 @@ export class NgxTableRowComponent implements OnInit {
 
   private showLastColumnAux = NgxTableUtils.showLastColumn;
 
+  private isLockedColumnAux = NgxTableUtils.isLockedColumn;
+
   constructor() { }
 
   ngOnInit() {
@@ -81,7 +83,7 @@ export class NgxTableRowComponent implements OnInit {
   }
 
   isLockedColumn(key: string) {
-    return this.config && this.config.edit.lock && this.config.edit.lock.indexOf(key) !== -1;
+    return this.isLockedColumnAux(this.config, key);
   }
 
   isRowEditting() {
