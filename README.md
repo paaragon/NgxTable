@@ -26,7 +26,7 @@ Other features:
 
 - Field validation
 - Filter operators
-- Autocomplete [WIP]
+- Autocomplete
 
 ## Instalation
 
@@ -284,6 +284,9 @@ interface NgxTableConfig {
         enable: boolean,
         elementsPerPage?: number,
         visiblePages?: number
+    };
+    click?: {
+        enable: boolean
     };
 }
 ```
