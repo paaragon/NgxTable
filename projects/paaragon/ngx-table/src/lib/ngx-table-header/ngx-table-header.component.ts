@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgxTableHeaders, NgxTableSort, NgxTableConfig } from '../ngx-table.types';
+import NgxTableUtils from '../ngx-table.utils';
 
 @Component({
   selector: '[ngx-table-header]',
@@ -17,6 +18,8 @@ export class NgxTableHeaderComponent implements OnInit {
   @Input() config: NgxTableConfig;
 
   @Output() sort: EventEmitter<NgxTableSort> = new EventEmitter<NgxTableSort>();
+
+  private showLastColumnAux = NgxTableUtils.showLastColumn;
 
   constructor() { }
 
@@ -57,6 +60,6 @@ export class NgxTableHeaderComponent implements OnInit {
   }
 
   showLastColumn() {
-    return this.config && (this.config.create && this.config.create.enable || this.config.filter && this.config.filter.enable || this.config.delete && this.config.delete.enable);
+    this.showLastColumnAux(this.config);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgxTableHeaders, NgxTableConfig, NgxTableClick, NgxTableEdition } from '../ngx-table.types';
 import RowUtils from './row.utils';
+import NgxTableUtils from '../ngx-table.utils';
 
 @Component({
   selector: '[ngx-table-row]',
@@ -37,6 +38,8 @@ export class NgxTableRowComponent implements OnInit {
   @Output() edit: EventEmitter<any> = new EventEmitter<any>();
 
   @Output() tableClick: EventEmitter<NgxTableClick> = new EventEmitter<NgxTableClick>();
+
+  private showLastColumnAux = NgxTableUtils.showLastColumn;
 
   constructor() { }
 
@@ -108,7 +111,7 @@ export class NgxTableRowComponent implements OnInit {
   }
 
   showLastColumn() {
-    return this.config && (this.config.create && this.config.create.enable || this.config.filter && this.config.filter.enable || this.config.delete && this.config.delete.enable);
+    return this.showLastColumnAux(this.config);
   }
 
   hasValidationError(header: string) {
