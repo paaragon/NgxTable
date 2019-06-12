@@ -9,4 +9,8 @@ export default class NgxTableUtils {
     public static isLockedColumn(config: NgxTableConfig, header: string) {
         return config && config.create.lock && config.create.lock.indexOf(header) !== -1;
     }
+
+    public static hasValidationError(errors: { [key: string]: { error: boolean, errorMsg: string } }, header: string) {
+        return errors && errors[header] && errors[header].error;
+    }
 }

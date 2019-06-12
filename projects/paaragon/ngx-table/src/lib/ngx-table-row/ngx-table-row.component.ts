@@ -117,7 +117,7 @@ export class NgxTableRowComponent implements OnInit {
   }
 
   hasValidationError(header: string) {
-    return this.errors && this.errors[header] && this.errors[header].error;
+    return NgxTableUtils.hasValidationError(this.errors, header);
   }
 
   validate() {
