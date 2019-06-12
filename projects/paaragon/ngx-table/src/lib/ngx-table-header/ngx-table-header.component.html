@@ -1,12 +1,12 @@
 <th class="first-cell">
   <span class="fa fa-hashtag"></span>
 </th>
-<ng-container *ngIf="!config.sort.enable">
+<ng-container *ngIf="!isSortable()">
   <th *ngFor="let header of humanHeaders">
     {{header}}
   </th>
 </ng-container>
-<ng-container *ngIf="config.sort.enable">
+<ng-container *ngIf="isSortable()">
   <th *ngFor="let header of headers; let i = index" (click)="onSort(header)" class="sortable">
     {{humanHeaders[i]}}
     <span class="fa fa-caret-up" *ngIf="isAsc(header)"></span>

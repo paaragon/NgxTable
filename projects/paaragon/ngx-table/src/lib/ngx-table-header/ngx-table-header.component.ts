@@ -52,7 +52,11 @@ export class NgxTableHeaderComponent implements OnInit {
     return this.sortObj && this.sortObj.field === header && this.sortObj.direction === -1;
   }
 
+  isSortable() {
+    return this.config && this.config.sort && !this.config.sort.enable;
+  }
+
   showLastColumn() {
-    return this.config.create.enable || this.config.filter.enable || this.config.delete.enable;
+    return this.config && (this.config.create && this.config.create.enable || this.config.filter && this.config.filter.enable || this.config.delete && this.config.delete.enable);
   }
 }

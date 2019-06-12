@@ -70,11 +70,11 @@ export class NgxTableRowComponent implements OnInit {
   }
 
   isPointable(key: string) {
-    return this.isCellEditable(key) || this.config.click.enable;
+    return this.isCellEditable(key) || this.config && this.config.click && this.config.click.enable;
   }
 
   showInput(key: string) {
-    return this.config.edit.enable && this.editions && this.editions[key] === true;
+    return this.config && this.config.edit && this.config.edit.enable && this.editions && this.editions[key] === true;
   }
 
   isLockedColumn(key: string) {
@@ -108,7 +108,7 @@ export class NgxTableRowComponent implements OnInit {
   }
 
   showLastColumn() {
-    return this.config.create.enable || this.config.filter.enable || this.config.delete.enable;
+    return this.config && (this.config.create && this.config.create.enable || this.config.filter && this.config.filter.enable || this.config.delete && this.config.delete.enable);
   }
 
   hasValidationError(header: string) {

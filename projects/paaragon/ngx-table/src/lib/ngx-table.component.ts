@@ -131,11 +131,11 @@ export class NgxTableComponent implements OnInit {
   }
 
   enableFilter() {
-    return this.headers && this.config.filter.enable;
+    return this.headers && this.config && this.config.filter.enable;
   }
 
   enableCreate() {
-    return this.headers && this.config.create.enable;
+    return this.headers && this.config && this.config.create.enable;
   }
 
   enableBody() {
