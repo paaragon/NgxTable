@@ -1,13 +1,18 @@
-<td class="first-cell">{{index + 1}}</td>
+<td class="first-cell" *ngIf="showEnumerateColumn()">
+  {{index + 1}}
+</td>
 <td *ngFor="let header of headers; let i = index" class="cell">
   <span>
     <ng-container *ngIf="!showInput(header)">
-      <span (click)="onClick(header)" [ngClass]="{'pointable': isPointable(header), 'editable': isCellEditable(header)}">{{row[header]}}</span>
+      <span (click)="onClick(header)"
+        [ngClass]="{'pointable': isPointable(header), 'editable': isCellEditable(header)}">{{row[header]}}</span>
     </ng-container>
     <ng-container *ngIf="showInput(header)">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="{{rowBK[header]}}" [(ngModel)]="row[header]" (keyup)="validate()" *ngIf="!isLongContent(row[header])">
-        <textarea class="form-control" placeholder="{{rowBK[header]}}" [(ngModel)]="row[header]" (keyup)="validate()" *ngIf="isLongContent(row[header])"></textarea>
+        <input type="text" class="form-control" placeholder="{{rowBK[header]}}" [(ngModel)]="row[header]"
+          (keyup)="validate()" *ngIf="!isLongContent(row[header])">
+        <textarea class="form-control" placeholder="{{rowBK[header]}}" [(ngModel)]="row[header]" (keyup)="validate()"
+          *ngIf="isLongContent(row[header])"></textarea>
         <div class="input-group-append">
           <button type="button" class="btn btn-outline-secondary" (click)="cancelEdition(header)">
             <span class="fa fa-times"></span>
@@ -19,7 +24,8 @@
   <p class="validation-error text-danger" *ngIf="hasValidationError(header)">{{errors[header]?.errorMsg}}</p>
 </td>
 <td *ngIf="showLastColumn()" class="last-cell">
-  <button type="button" class="btn btn-warning save" (click)="onEdit()" *ngIf="isRowEditting()" [disabled]="!buttonEnable">
+  <button type="button" class="btn btn-warning save" (click)="onEdit()" *ngIf="isRowEditting()"
+    [disabled]="!buttonEnable">
     <span class="fa fa-save"></span>
   </button>
   <button type="button" class="btn btn-danger" (click)="onDelete()">

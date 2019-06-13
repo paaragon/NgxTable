@@ -1,4 +1,4 @@
-import { NgxTableConfig } from './ngx-table.types';
+import { NgxTableConfig } from '../ngx-table.types';
 
 export default class NgxTableUtils {
 
@@ -13,5 +13,9 @@ export default class NgxTableUtils {
 
     public static hasValidationError(errors: { [key: string]: { error: boolean, errorMsg: string } }, header: string) {
         return errors && errors[header] && errors[header].error;
+    }
+
+    public static showEnumerateColumn(config: NgxTableConfig){
+        return config && config.enumerate;
     }
 }

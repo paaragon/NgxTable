@@ -6,7 +6,7 @@ import {
   NgxTablePlaceholders, NgxTableOperator, NgxTableAutocomplete
 } from '../ngx-table.types';
 import FilterUtils from './filter.utils';
-import NgxTableUtils from '../ngx-table.utils';
+import NgxTableUtils from '../utils/ngx-table.utils';
 
 @Component({
   selector: '[ngx-table-filter]',
@@ -56,6 +56,7 @@ export class NgxTableFilterComponent {
   blockedDropdowns = {};
 
   private isLockedColumnAux = NgxTableUtils.isLockedColumn;
+  private showEnumerateColumnAux = NgxTableUtils.showEnumerateColumn;
 
   constructor() {
   }
@@ -136,6 +137,10 @@ export class NgxTableFilterComponent {
 
   isDropdownOpen(header: string) {
     return this.dropdowns[header];
+  }
+
+  showEnumerateColumn() {
+    return this.showEnumerateColumnAux(this.config);
   }
 
   private subscribeDebounce() {

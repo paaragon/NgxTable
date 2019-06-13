@@ -1,4 +1,4 @@
-<th class="first-cell">
+<th class="first-cell" *ngIf="showEnumerateColumn()">
   <span class="fa fa-filter"></span>
 </th>
 <th *ngFor="let header of headers; let i = index">

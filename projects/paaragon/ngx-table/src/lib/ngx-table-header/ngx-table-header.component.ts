@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgxTableHeaders, NgxTableSort, NgxTableConfig } from '../ngx-table.types';
-import NgxTableUtils from '../ngx-table.utils';
+import NgxTableUtils from '../utils/ngx-table.utils';
 
 @Component({
   selector: '[ngx-table-header]',
@@ -20,6 +20,7 @@ export class NgxTableHeaderComponent implements OnInit {
   @Output() sort: EventEmitter<NgxTableSort> = new EventEmitter<NgxTableSort>();
 
   private showLastColumnAux = NgxTableUtils.showLastColumn;
+  private showEnumerateColumnAux = NgxTableUtils.showEnumerateColumn;
 
   constructor() { }
 
@@ -61,5 +62,9 @@ export class NgxTableHeaderComponent implements OnInit {
 
   showLastColumn() {
     this.showLastColumnAux(this.config);
+  }
+
+  showEnumerateColumn() {
+    return this.showEnumerateColumnAux(this.config);
   }
 }

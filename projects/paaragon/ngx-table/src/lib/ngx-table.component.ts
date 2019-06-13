@@ -62,6 +62,7 @@ export class NgxTableComponent implements OnInit {
    */
   configBK: NgxTableConfig = {
     placeholders: null,
+    enumerate: true,
     sort: {
       enable: false
     },
@@ -90,6 +91,9 @@ export class NgxTableComponent implements OnInit {
       enable: false,
       elementsPerPage: 10,
       visiblePages: 5
+    },
+    click: {
+      enable: false
     }
   };
 

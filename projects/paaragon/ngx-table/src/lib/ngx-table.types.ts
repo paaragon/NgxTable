@@ -32,6 +32,7 @@ export interface NgxTableClick {
 }
 export interface NgxTableConfig {
     placeholders?: NgxTablePlaceholders;
+    enumerate?: boolean;
     sort?: {
         enable?: boolean
     };

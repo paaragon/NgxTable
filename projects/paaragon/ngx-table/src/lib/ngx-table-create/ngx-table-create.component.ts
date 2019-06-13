@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgxTableConfig, NgxTablePlaceholders, NgxTableHeaders, NgxTableNew } from '../ngx-table.types';
-import NgxTableUtils from '../ngx-table.utils';
+import NgxTableUtils from '../utils/ngx-table.utils';
 
 @Component({
   selector: '[ngx-table-create]',
@@ -47,6 +47,8 @@ export class NgxTableCreateComponent implements OnInit {
   create: EventEmitter<NgxTableNew> = new EventEmitter<NgxTableNew>();
 
   private isLockedColumnAux = NgxTableUtils.isLockedColumn;
+  
+  private showEnumerateColumnAux = NgxTableUtils.showEnumerateColumn;
 
   constructor() { }
 
@@ -138,6 +140,10 @@ export class NgxTableCreateComponent implements OnInit {
 
   isLockedColumn(header: string) {
     return this.isLockedColumnAux(this.config, header);
+  }
+
+  showEnumerateColumn() {
+    return this.showEnumerateColumnAux(this.config);
   }
 
   private buildNewObj() {

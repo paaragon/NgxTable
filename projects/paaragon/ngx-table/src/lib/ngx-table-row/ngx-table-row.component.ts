@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgxTableHeaders, NgxTableConfig, NgxTableClick, NgxTableEdition } from '../ngx-table.types';
 import RowUtils from './row.utils';
-import NgxTableUtils from '../ngx-table.utils';
+import NgxTableUtils from '../utils/ngx-table.utils';
 
 @Component({
   selector: '[ngx-table-row]',
@@ -42,6 +42,8 @@ export class NgxTableRowComponent implements OnInit {
   private showLastColumnAux = NgxTableUtils.showLastColumn;
 
   private isLockedColumnAux = NgxTableUtils.isLockedColumn;
+
+  private showEnumerateColumnAux = NgxTableUtils.showEnumerateColumn;
 
   constructor() { }
 
@@ -84,6 +86,10 @@ export class NgxTableRowComponent implements OnInit {
 
   isLockedColumn(key: string) {
     return this.isLockedColumnAux(this.config, key);
+  }
+
+  showEnumerateColumn() {
+    return this.showEnumerateColumnAux(this.config);
   }
 
   isRowEditting() {

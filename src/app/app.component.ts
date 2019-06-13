@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
   autocomplete: NgxTableAutocomplete = {};
 
   config: NgxTableConfig = {
+    enumerate: true,
     sort: {
       enable: true
     },
