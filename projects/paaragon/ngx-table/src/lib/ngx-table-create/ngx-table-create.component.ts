@@ -47,7 +47,7 @@ export class NgxTableCreateComponent implements OnInit {
   create: EventEmitter<NgxTableNew> = new EventEmitter<NgxTableNew>();
 
   private isLockedColumnAux = NgxTableUtils.isLockedColumn;
-  
+
   private showEnumerateColumnAux = NgxTableUtils.showEnumerateColumn;
 
   constructor() { }

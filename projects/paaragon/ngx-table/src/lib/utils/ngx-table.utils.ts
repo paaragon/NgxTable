@@ -15,7 +15,7 @@ export default class NgxTableUtils {
         return errors && errors[header] && errors[header].error;
     }
 
-    public static showEnumerateColumn(config: NgxTableConfig){
+    public static showEnumerateColumn(config: NgxTableConfig) {
         return config && config.enumerate;
     }
 }
